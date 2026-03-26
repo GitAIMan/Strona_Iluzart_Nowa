@@ -1,0 +1,154 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    color: #f5f0e8;
+    background: #0a0a0a;
+  }
+
+  ::selection {
+    background-color: rgba(201, 168, 76, 0.3);
+    color: #f5f0e8;
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #0a0a0a;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #1a1a1a;
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #2a2a7e;
+  }
+
+  /* Headings default to serif */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-playfair), "Playfair Display", Georgia, serif;
+  }
+}
+
+@layer components {
+  .text-gradient-gold {
+    @apply bg-clip-text text-transparent bg-gold-gradient;
+  }
+
+  .text-gradient-navy {
+    @apply bg-clip-text text-transparent bg-navy-gradient;
+  }
+
+  .glass {
+    @apply bg-surface/80 backdrop-blur-md border border-white/5;
+  }
+
+  .glass-hover {
+    @apply glass hover:border-navy/50 hover:shadow-[0_0_30px_rgba(26,26,94,0.3)] transition-all duration-500;
+  }
+
+  /* Navy ambient backgrounds */
+  .bg-navy-radial {
+    background: radial-gradient(ellipse at center, rgba(26,26,94,0.12) 0%, transparent 70%);
+  }
+
+  .bg-navy-spotlight {
+    background: radial-gradient(ellipse at top center, rgba(26,26,94,0.18) 0%, transparent 60%);
+  }
+
+  .bg-navy-mesh {
+    background:
+      radial-gradient(at 20% 30%, rgba(26,26,94,0.15) 0%, transparent 50%),
+      radial-gradient(at 80% 70%, rgba(18,18,62,0.12) 0%, transparent 50%),
+      radial-gradient(at 50% 50%, rgba(42,42,126,0.06) 0%, transparent 60%);
+  }
+
+  /* Navy card with gradient border */
+  .card-navy {
+    @apply relative rounded-xl overflow-hidden;
+    background: #111111;
+  }
+
+  .card-navy::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(135deg, rgba(26,26,94,0.4), rgba(42,42,126,0.1), rgba(26,26,94,0.3));
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+    transition: all 0.5s ease;
+  }
+
+  .card-navy:hover::before {
+    padding: 1.5px;
+    background: linear-gradient(135deg, rgba(42,42,126,0.8), rgba(26,26,94,0.3), rgba(201,168,76,0.4));
+  }
+
+  .card-navy:hover {
+    box-shadow: 0 0 40px rgba(26,26,94,0.25), 0 0 80px rgba(26,26,94,0.1);
+  }
+
+  /* Tiptap editor styles */
+  .tiptap-content h2 {
+    @apply text-2xl font-serif text-cream mt-8 mb-4;
+  }
+
+  .tiptap-content h3 {
+    @apply text-xl font-serif text-cream mt-6 mb-3;
+  }
+
+  .tiptap-content p {
+    @apply text-foreground/80 leading-relaxed mb-4;
+  }
+
+  .tiptap-content ul {
+    @apply list-disc list-inside space-y-2 mb-4 text-foreground/80;
+  }
+
+  .tiptap-content ol {
+    @apply list-decimal list-inside space-y-2 mb-4 text-foreground/80;
+  }
+
+  .tiptap-content a {
+    @apply text-gold hover:text-gold-light underline underline-offset-4 transition-colors;
+  }
+
+  .tiptap-content img {
+    @apply rounded-lg my-8 max-w-full h-auto max-h-[500px] object-contain mx-auto block;
+  }
+
+  .tiptap-content strong {
+    @apply font-semibold text-cream;
+  }
+
+  .tiptap-content em {
+    @apply italic;
+  }
+
+  .tiptap-content blockquote {
+    @apply border-l-2 border-gold/50 pl-4 italic text-foreground/60 my-4;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
