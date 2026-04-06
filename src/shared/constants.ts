@@ -1,11 +1,11 @@
 export const SITE = {
   name: "IluzArt",
-  title: "Magik - Iluzjonista Premium",
+  title: "Iluzjonista Katowice – Pokazy Magii i Mentalizmu | IluzArt",
   description:
-    "Iluzjonista Katowice i Śląsk – Grzegorz Pawleta. Pokazy iluzji, mentalizm, close-up magic na eventy, wesela i urodziny. Zadzwoń: +48 882 011 161",
-  ogTitle: "IluzArt – Iluzjonista Premium",
+    "Iluzjonista Katowice i Śląsk – Grzegorz Pawleta. Dekada doświadczenia, magia połączona ze standup comedy. Pokazy na wesela, eventy firmowe, urodziny. Znany z Bajki Pana Kleksa i Nibylandii. Zadzwoń: +48 882 011 161",
+  ogTitle: "IluzArt – Iluzjonista Katowice | Magia i Standup Comedy",
   ogDescription:
-    "Pokazy iluzji i warsztaty. Skontaktuj się i stwórzmy magię na Twoim wydarzeniu.",
+    "Grzegorz Pawleta – iluzjonista z Katowic łączący magię ze standup comedy. Dekada na scenie, setki wydarzeń na Śląsku. Sprawdź dostępność terminu.",
   url: process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000",
   locale: "pl_PL",
 } as const;
@@ -29,8 +29,7 @@ export const NAV_LINKS = [
   { label: "Kontakt", href: "/kontakt" },
 ] as const;
 
+/** @deprecated Nie używane na stronie — StatsSection jest wyłączony */
 export const STATS = [
-  { value: 200, suffix: "+", label: "Wykonanych pokazów" },
-  { value: 100, suffix: "%", label: "Zadowolonych klientów" },
-  { value: 9, suffix: "+", label: "Lat doświadczenia" },
+  { value: 10, suffix: "+", label: "Lat doświadczenia" },
 ] as const;

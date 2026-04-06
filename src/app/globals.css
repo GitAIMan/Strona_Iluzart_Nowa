@@ -12,6 +12,7 @@
   body {
     color: #f5f0e8;
     background: #0a0a0a;
+    padding-bottom: env(safe-area-inset-bottom);
   }
 
   ::selection {

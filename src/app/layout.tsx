@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import dynamic from "next/dynamic";
 import { Playfair_Display, Inter } from "next/font/google";
 import { SITE } from "@shared/constants";
 import LenisProvider from "@frontend/components/shared/LenisProvider";
@@ -6,8 +7,12 @@ import Navbar from "@frontend/components/layout/Navbar";
 import Footer from "@frontend/components/layout/Footer";
 import SchemaOrg from "@frontend/components/shared/SchemaOrg";
 import AuthProvider from "@frontend/components/shared/AuthProvider";
-import Preloader from "@frontend/components/shared/Preloader";
 import "./globals.css";
+
+const Preloader = dynamic(
+  () => import("@frontend/components/shared/Preloader"),
+  { ssr: false }
+);
 
 const playfair = Playfair_Display({
   subsets: ["latin", "latin-ext"],

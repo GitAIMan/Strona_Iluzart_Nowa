@@ -6,7 +6,9 @@ import ScrollReveal from "@frontend/components/shared/ScrollReveal";
 import { services } from "@shared/data/services";
 
 export const metadata = generatePageMetadata({
-  title: "Oferta - Pokazy Iluzji i Warsztaty",
+  title: "Pokazy Iluzji Katowice – Wesela, Eventy, Urodziny",
+  description:
+    "Pokazy magii i mentalizmu w Katowicach i na Śląsku. Wesela, eventy firmowe, urodziny, close-up magic. Iluzjonista łączący magię ze standup comedy.",
 });
 
 function ServiceIcon({
@@ -148,15 +150,15 @@ export default function OfertaPage() {
           <div className="max-w-2xl mx-auto text-center space-y-4">
             <ScrollReveal delay={0.1}>
               <p className="text-lg text-cream/80 leading-relaxed font-sans">
-                Czy marzysz, by Twoje wydarzenie było wyjątkowe? A może chcesz,
-                by Twoje dziecko odkryło swój talent lub po prostu przeżyło
-                niezapomnianą przygodę?
+                Dekada na scenach Katowic i Śląska — od Bajki Pana Kleksa po
+                kameralne wesela. Każdy pokaz łączy iluzję ze standup comedy,
+                bo magia, przy której się śmiejesz, zapada w pamięć na dłużej.
               </p>
             </ScrollReveal>
             <ScrollReveal delay={0.2}>
               <p className="text-lg text-cream/80 leading-relaxed font-sans">
-                Moje pokazy i warsztaty iluzji to coś więcej niż sztuczki – to
-                emocje, które zostają w pamięci na zawsze.
+                Wybierz typ pokazu, który pasuje do Twojego wydarzenia —
+                resztę dopasujemy razem.
               </p>
             </ScrollReveal>
           </div>

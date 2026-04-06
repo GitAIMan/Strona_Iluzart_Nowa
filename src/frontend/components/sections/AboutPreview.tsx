@@ -1,6 +1,7 @@
 import ScrollReveal from "@frontend/components/shared/ScrollReveal";
 import SectionHeading from "@frontend/components/ui/SectionHeading";
 import ImagePlaceholder from "@frontend/components/ui/ImagePlaceholder";
+import ParallaxImage from "@frontend/components/shared/ParallaxImage";
 import Button from "@frontend/components/ui/Button";
 
 export default function AboutPreview() {
@@ -20,10 +21,10 @@ export default function AboutPreview() {
               align="left"
             />
             <p className="text-cream/70 font-sans leading-relaxed mb-8">
-              W wieku 15 lat po raz pierwszy zetknąłem się z magią, oglądając w
-              telewizji iluzjonistę, który w ułamku sekundy sprawił, że moneta
-              zniknęła, a następnie pojawiła się za uchem. To niezwykłe
-              zdarzenie, widziane oczami dziecka, było po prostu… zachwycające.
+              Dekada na scenach całego Śląska — od Bajki Pana Kleksa, przez
+              Nibylandię i Strefę Bajtla, po setki wesel i eventów firmowych.
+              Łączę iluzję z humorem, bo magia nie musi być poważna, żeby
+              robiła wrażenie.
             </p>
             <Button variant="secondary" href="/o-mnie">
               Czytaj więcej
@@ -33,9 +34,11 @@ export default function AboutPreview() {
 
           {/* Right Column - Image */}
           <ScrollReveal direction="right" delay={0.2}>
-            <div className="relative after:absolute after:inset-0 after:translate-x-3 after:translate-y-3 after:border after:border-gold/30 after:rounded-lg">
-              <ImagePlaceholder aspectRatio="3/4" />
-            </div>
+            <ParallaxImage speed={0.2}>
+              <div className="relative after:absolute after:inset-0 after:translate-x-3 after:translate-y-3 after:border after:border-gold/30 after:rounded-lg">
+                <ImagePlaceholder aspectRatio="3/4" />
+              </div>
+            </ParallaxImage>
           </ScrollReveal>
         </div>
       </div>

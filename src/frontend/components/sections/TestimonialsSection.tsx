@@ -13,7 +13,7 @@ export default function TestimonialsSection() {
           <SectionHeading title="Co mówią klienci" subtitle="Opinie" />
         </ScrollReveal>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
           {testimonials.map((testimonial, index) => (
             <ScrollReveal key={index} delay={index * 0.1}>
               <div className="rounded-lg p-6 h-full flex flex-col bg-white/[0.03] backdrop-blur-sm border border-navy/20 hover:border-navy/40 hover:shadow-[0_0_25px_rgba(26,26,94,0.2)] transition-all duration-300">

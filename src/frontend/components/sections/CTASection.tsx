@@ -12,15 +12,15 @@ export default function CTASection() {
 
       <div className="relative z-10 max-w-3xl mx-auto px-6 text-center">
         <ScrollReveal>
-          <h2 className="text-5xl md:text-6xl lg:text-7xl font-serif text-cream mb-6">
-            Gotowy na magię?
+          <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-serif text-cream mb-6">
+            Zróbmy coś magicznego
           </h2>
         </ScrollReveal>
 
         <ScrollReveal delay={0.15}>
           <p className="text-cream/60 font-sans text-lg md:text-xl mb-10 leading-relaxed">
-            Skontaktuj się ze mną i stwórzmy niezapomniane chwile na Twoim
-            wydarzeniu
+            Twoi goście zasługują na coś, o czym będą opowiadać latami.
+            Sprawdź, czy mam wolny termin
           </p>
         </ScrollReveal>
 

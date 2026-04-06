@@ -1,5 +1,6 @@
 import { CONTACT, SITE } from "@shared/constants";
 import { services } from "@shared/data/services";
+import { faqItems } from "@shared/data/faq";
 
 export default function SchemaOrg() {
   const organizationId = `${SITE.url}#organization`;
@@ -29,7 +30,7 @@ export default function SchemaOrg() {
       },
     ],
     priceRange: "400-2500 PLN",
-    knowsAbout: ["iluzja", "mentalizm", "close-up magic"],
+    knowsAbout: ["iluzja", "mentalizm", "close-up magic", "standup comedy", "pokazy dla dzieci", "magia sceniczna"],
     hasOfferCatalog: {
       "@type": "OfferCatalog",
       name: "Pokazy iluzji",
@@ -60,40 +61,14 @@ export default function SchemaOrg() {
 
   const faqSchema = {
     "@type": "FAQPage",
-    mainEntity: [
-      {
-        "@type": "Question",
-        name: "Ile kosztuje pokaz iluzji?",
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: "Ceny zaczynają się od 400 zł za pokazy dla dzieci. Koszt zależy od rodzaju pokazu, czasu trwania i liczby gości. Skontaktuj się po indywidualną wycenę.",
-        },
+    mainEntity: faqItems.map((item) => ({
+      "@type": "Question",
+      name: item.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: item.answer,
       },
-      {
-        "@type": "Question",
-        name: "Jak długo trwa pokaz?",
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: "W zależności od typu, od 30 do 120 minut. Pokazy dla dzieci trwają zwykle 30-45 minut, a eventy firmowe i wesela 45-120 minut.",
-        },
-      },
-      {
-        "@type": "Question",
-        name: "Do ilu osób mogę zamówić pokaz?",
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: "Od kameralnych spotkań po eventy dla 500+ osób. Każdy pokaz jest dostosowany do wielkości grupy i charakteru wydarzenia.",
-        },
-      },
-      {
-        "@type": "Question",
-        name: "Czy dojeżdżasz poza Katowice?",
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: "Tak, działam na terenie całego Śląska i całej Polski. Dojazd poza Katowice jest możliwy po wcześniejszym uzgodnieniu szczegółów.",
-        },
-      },
-    ],
+    })),
   };
 
   const schema = {

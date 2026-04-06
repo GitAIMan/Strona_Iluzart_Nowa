@@ -8,7 +8,7 @@ const ITEMS = [
   "Close-up Magic",
   "Warsztaty",
   "Festiwale",
-  "Gale",
+  "Standup & Magia",
   "Konferencje",
   "Pokazy sceniczne",
 ];

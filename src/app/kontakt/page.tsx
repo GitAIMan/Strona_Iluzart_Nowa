@@ -6,26 +6,28 @@ import ContactForm from "@frontend/components/contact/ContactForm";
 import { CONTACT } from "@shared/constants";
 
 export const metadata = generatePageMetadata({
-  title: "Kontakt",
+  title: "Kontakt – Zarezerwuj Iluzjonistę Katowice",
+  description:
+    "Zarezerwuj pokaz magii w Katowicach i na Śląsku. Zadzwoń, napisz lub wypełnij formularz — odpowiadam tego samego dnia.",
 });
 
 const steps = [
   {
     number: "1",
-    title: "Umów konsultację",
-    description: "Wybierz dogodną formę – telefon, e-mail lub czat.",
+    title: "Napisz lub zadzwoń",
+    description: "WhatsApp, telefon, e-mail lub formularz obok — jak Ci wygodnie.",
   },
   {
     number: "2",
-    title: "Omów szczegóły",
+    title: "Ustalamy szczegóły",
     description:
-      "Ustalimy rodzaj pokazu, termin i miejsce do Twoich potrzeb.",
+      "Typ pokazu, termin, miejsce, liczba gości — dopasuję ofertę do Twojego wydarzenia.",
   },
   {
     number: "3",
-    title: "Ciesz się magią",
+    title: "Ty się bawisz, ja czaruję",
     description:
-      "Ja zajmę się resztą, a Ty możesz skupić się na zabawie!",
+      "Resztą zajmę się sam. Ty skupiasz się na gościach i dobrej zabawie.",
   },
 ];
 
