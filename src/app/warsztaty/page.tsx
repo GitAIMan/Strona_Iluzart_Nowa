@@ -2,7 +2,6 @@ import Image from "next/image";
 import { generatePageMetadata } from "@shared/metadata";
 import PageTransition from "@frontend/components/layout/PageTransition";
 import SectionHeading from "@frontend/components/ui/SectionHeading";
-import ImagePlaceholder from "@frontend/components/ui/ImagePlaceholder";
 import Button from "@frontend/components/ui/Button";
 import ScrollReveal from "@frontend/components/shared/ScrollReveal";
 
