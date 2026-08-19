@@ -37,6 +37,9 @@ export default function BlogCard({ post }: BlogCardProps) {
               src={post.coverImageUrl}
               alt={post.title}
               fill
+              sizes="320px"
+              quality={85}
+              loading="lazy"
               className="object-cover group-hover:scale-105 transition-transform duration-500"
             />
           ) : (

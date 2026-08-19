@@ -3,6 +3,7 @@ import { generatePageMetadata } from "@shared/metadata";
 import PageTransition from "@frontend/components/layout/PageTransition";
 import SectionHeading from "@frontend/components/ui/SectionHeading";
 import ScrollReveal from "@frontend/components/shared/ScrollReveal";
+import ServiceEmoji from "@frontend/components/ui/ServiceEmoji";
 import { services } from "@shared/data/services";
 
 export const metadata = generatePageMetadata({
@@ -10,133 +11,6 @@ export const metadata = generatePageMetadata({
   description:
     "Pokazy magii i mentalizmu w Katowicach i na Śląsku. Wesela, eventy firmowe, urodziny, close-up magic. Iluzjonista łączący magię ze standup comedy.",
 });
-
-function ServiceIcon({
-  icon,
-  className,
-}: {
-  icon: string;
-  className?: string;
-}) {
-  const icons: Record<string, JSX.Element> = {
-    sparkles: (
-      <svg
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <path d="M12 3l1.912 5.813a2 2 0 001.275 1.275L21 12l-5.813 1.912a2 2 0 00-1.275 1.275L12 21l-1.912-5.813a2 2 0 00-1.275-1.275L3 12l5.813-1.912a2 2 0 001.275-1.275L12 3z" />
-        <path d="M5 3v2" />
-        <path d="M19 19v2" />
-        <path d="M4 4l1 1" />
-        <path d="M20 20l-1-1" />
-      </svg>
-    ),
-    building: (
-      <svg
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <rect x="4" y="2" width="16" height="20" rx="2" />
-        <path d="M9 22v-4h6v4" />
-        <path d="M8 6h.01" />
-        <path d="M16 6h.01" />
-        <path d="M12 6h.01" />
-        <path d="M12 10h.01" />
-        <path d="M12 14h.01" />
-        <path d="M16 10h.01" />
-        <path d="M16 14h.01" />
-        <path d="M8 10h.01" />
-        <path d="M8 14h.01" />
-      </svg>
-    ),
-    hand: (
-      <svg
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <path d="M18 11V6a2 2 0 00-2-2 2 2 0 00-2 2v0" />
-        <path d="M14 10V4a2 2 0 00-2-2 2 2 0 00-2 2v2" />
-        <path d="M10 10.5V6a2 2 0 00-2-2 2 2 0 00-2 2v8" />
-        <path d="M18 8a2 2 0 012 2v7.1a2 2 0 01-.6 1.4l-3 2.9a2 2 0 01-1.4.6H9a2 2 0 01-1.5-.7l-3.3-3.8A2 2 0 016 14.5V14" />
-      </svg>
-    ),
-    brain: (
-      <svg
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <path d="M12 22V12" />
-        <path d="M9.5 8a3.5 3.5 0 10-2.83 6.86L12 12" />
-        <path d="M14.5 8a3.5 3.5 0 112.83 6.86L12 12" />
-        <path d="M7.17 14.86A4 4 0 009 21h6a4 4 0 001.83-6.14" />
-        <path d="M12 2a3 3 0 00-2.83 2H9.5" />
-        <path d="M12 2a3 3 0 012.83 2h-.33" />
-      </svg>
-    ),
-    rings: (
-      <svg
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <circle cx="9" cy="12" r="5" />
-        <circle cx="15" cy="12" r="5" />
-      </svg>
-    ),
-    cake: (
-      <svg
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <path d="M20 21v-8a2 2 0 00-2-2H6a2 2 0 00-2 2v8" />
-        <path d="M4 16s.5-1 2-1 2.5 2 4 2 2.5-2 4-2 2.5 2 4 2 2-1 2-1" />
-        <path d="M2 21h20" />
-        <path d="M7 8v3" />
-        <path d="M12 8v3" />
-        <path d="M17 8v3" />
-        <path d="M7 4h.01" />
-        <path d="M12 4h.01" />
-        <path d="M17 4h.01" />
-      </svg>
-    ),
-  };
-  return <span className={className}>{icons[icon] || icons.sparkles}</span>;
-}
 
 export default function OfertaPage() {
   return (
@@ -150,15 +24,17 @@ export default function OfertaPage() {
           <div className="max-w-2xl mx-auto text-center space-y-4">
             <ScrollReveal delay={0.1}>
               <p className="text-lg text-cream/80 leading-relaxed font-sans">
-                Dekada na scenach Katowic i Śląska — od Bajki Pana Kleksa po
-                kameralne wesela. Każdy pokaz łączy iluzję ze standup comedy,
-                bo magia, przy której się śmiejesz, zapada w pamięć na dłużej.
+                Nie robię dwóch takich samych pokazów. Co innego sprawdza się
+                przy kameralnej kolacji, co innego na weselu, a jeszcze co
+                innego na scenie przed kilkuset osobami. Styl, tempo i dawka
+                humoru zależą od tego, kogo mam przed sobą.
               </p>
             </ScrollReveal>
             <ScrollReveal delay={0.2}>
               <p className="text-lg text-cream/80 leading-relaxed font-sans">
-                Wybierz typ pokazu, który pasuje do Twojego wydarzenia —
-                resztę dopasujemy razem.
+                Poniżej znajdziesz kierunki, w których pracuję najczęściej.
+                Potraktuj je jako punkt wyjścia — szczegóły zawsze ustalamy
+                pod konkretne wydarzenie.
               </p>
             </ScrollReveal>
           </div>
@@ -179,8 +55,8 @@ export default function OfertaPage() {
                   <div className="card-navy rounded-xl overflow-hidden h-full flex flex-col p-6">
                     {/* Icon */}
                     <div className="mb-5 flex justify-center">
-                      <div className="w-14 h-14 rounded-full bg-gradient-to-br from-navy to-navy-dark flex items-center justify-center text-gold shadow-[0_0_20px_rgba(26,26,94,0.4)] group-hover:shadow-[0_0_30px_rgba(201,168,76,0.2)] transition-shadow duration-500">
-                        <ServiceIcon icon={service.icon} />
+                      <div className="w-14 h-14 rounded-full bg-gradient-to-br from-navy to-navy-dark flex items-center justify-center shadow-[0_0_20px_rgba(26,26,94,0.4)] group-hover:shadow-[0_0_30px_rgba(201,168,76,0.2)] transition-shadow duration-500">
+                        <ServiceEmoji icon={service.icon} size={40} alt={service.name} />
                       </div>
                     </div>
 

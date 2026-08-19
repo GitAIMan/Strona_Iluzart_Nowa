@@ -21,12 +21,10 @@ export default function HeroSection() {
   const parallaxY = useTransform(scrollYProgress, [0, 1], [0, -60]);
 
   useEffect(() => {
-    // Wait for preloader to finish before animating hero
     const check = () => {
       if (sessionStorage.getItem("iluzart-visited")) {
         setReady(true);
       } else {
-        // Preloader still running — poll
         const interval = setInterval(() => {
           if (sessionStorage.getItem("iluzart-visited")) {
             setReady(true);
@@ -46,58 +44,52 @@ export default function HeroSection() {
         initial={{ scale: 1.15, opacity: 0 }}
         animate={ready ? { scale: 1, opacity: 1 } : {}}
         transition={{ duration: 2, ease: [0.25, 0.1, 0.25, 1] }}
-        style={{ y: parallaxY }}
+        style={{ y: parallaxY, willChange: "transform" }}
         className="relative w-full h-[65vh] md:h-[80vh] flex-shrink-0"
       >
         <Image
           src="/images/hero_elo.jpeg"
           alt="Iluzjonista Katowice - Grzegorz Pawleta IluzArt"
           fill
+          sizes="100vw"
           className="object-cover object-[center_20%]"
           priority
           quality={90}
         />
-        {/* Overlays on image */}
         <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-transparent to-background" />
         <div className="absolute inset-0 bg-gradient-to-r from-background/30 via-transparent to-background/30" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(26,26,94,0.12)_0%,_transparent_70%)]" />
       </motion.div>
 
       {/* Content — staggered cascade */}
-      <div className="relative z-10 max-w-5xl mx-auto px-6 text-center -mt-24 md:-mt-32 flex-grow flex flex-col justify-center">
-        {/* Typing effect h1 */}
+      <div className={`relative z-10 max-w-5xl mx-auto px-6 text-center -mt-24 md:-mt-32 flex-grow flex flex-col justify-center ${ready ? "hero-typing-ready" : ""}`}>
+        {/* Typing effect h1 — CSS-driven, word-wrapped for line breaks */}
         <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-serif text-cream leading-tight mb-6">
-          {HERO_TITLE.split("").map((char, i) => (
-            <motion.span
-              key={i}
-              initial={{ opacity: 0 }}
-              animate={ready ? { opacity: 1 } : {}}
-              transition={{
-                delay: TYPING_START + i * CHAR_DELAY,
-                duration: 0.05,
-              }}
-            >
-              {char}
-            </motion.span>
-          ))}
-          <motion.span
-            initial={{ opacity: 0 }}
-            animate={
-              ready
-                ? { opacity: [0, 1, 1, 0] }
-                : {}
-            }
-            transition={{
-              delay: TYPING_START + TYPING_DURATION,
-              duration: 1,
-              repeat: Infinity,
-              repeatDelay: 0,
-              times: [0, 0.1, 0.5, 1],
-            }}
-            className="text-gold"
+          {HERO_TITLE.split(" ").map((word, wi, words) => {
+            const offset = words.slice(0, wi).reduce((a, w) => a + w.length + 1, 0);
+            return (
+              <span key={wi}>
+                <span className="inline-block whitespace-nowrap">
+                  {word.split("").map((char, ci) => (
+                    <span
+                      key={ci}
+                      className="hero-char"
+                      style={{ animationDelay: `${TYPING_START + (offset + ci) * CHAR_DELAY}s` }}
+                    >
+                      {char}
+                    </span>
+                  ))}
+                </span>
+                {wi < words.length - 1 ? " " : null}
+              </span>
+            );
+          })}
+          <span
+            className="hero-caret text-gold"
+            style={{ animationDelay: `${TYPING_START + TYPING_DURATION}s` }}
           >
             |
-          </motion.span>
+          </span>
         </h1>
 
         <motion.h2
@@ -106,7 +98,7 @@ export default function HeroSection() {
           transition={{ delay: CASCADE_START, duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
           className="text-cream/70 font-sans text-lg md:text-xl mb-6"
         >
-          Grzegorz Pawleta • Dekada na scenie • Iluzjonista Katowice i Śląsk
+          Grzegorz Pawleta • Ponad dekada na scenie • Iluzjonista Katowice i Śląsk
         </motion.h2>
 
         <motion.p
@@ -124,13 +116,10 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={ready ? { opacity: 1, y: 0 } : {}}
           transition={{ delay: CASCADE_START + 0.6, duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4"
+          className="flex items-center justify-center"
         >
           <Button variant="primary" size="lg" href="https://wa.me/48882011161">
             Sprawdź dostępność terminu
-          </Button>
-          <Button variant="secondary" size="lg" href="/oferta">
-            Zobacz ofertę
           </Button>
         </motion.div>
       </div>

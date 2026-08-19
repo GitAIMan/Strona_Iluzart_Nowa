@@ -8,7 +8,7 @@ export default function LenisProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     const lenis = new Lenis({
-      lerp: 0.1,
+      lerp: 0.08,
       duration: 1.2,
       smoothWheel: true,
     });

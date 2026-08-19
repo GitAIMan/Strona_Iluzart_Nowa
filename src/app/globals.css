@@ -61,6 +61,11 @@
     @apply glass hover:border-navy/50 hover:shadow-[0_0_30px_rgba(26,26,94,0.3)] transition-all duration-500;
   }
 
+  .glass-hover:hover,
+  .card-navy:hover {
+    will-change: transform, box-shadow;
+  }
+
   /* Navy ambient backgrounds */
   .bg-navy-radial {
     background: radial-gradient(ellipse at center, rgba(26,26,94,0.12) 0%, transparent 70%);
@@ -151,5 +156,31 @@
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+
+  @keyframes hero-char-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes hero-caret-blink {
+    0%, 50% { opacity: 1; }
+    50.01%, 100% { opacity: 0; }
+  }
+
+  .hero-char {
+    opacity: 0;
+  }
+
+  .hero-typing-ready .hero-char {
+    animation: hero-char-in 0.05s linear forwards;
+  }
+
+  .hero-caret {
+    opacity: 0;
+  }
+
+  .hero-typing-ready .hero-caret {
+    animation: hero-caret-blink 1s steps(2, end) infinite;
   }
 }

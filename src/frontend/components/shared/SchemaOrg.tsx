@@ -14,9 +14,7 @@ export default function SchemaOrg() {
     email: CONTACT.email,
     address: {
       "@type": "PostalAddress",
-      streetAddress: "Związkowa 5",
       addressLocality: "Katowice",
-      postalCode: "40-730",
       addressCountry: "PL",
     },
     areaServed: [

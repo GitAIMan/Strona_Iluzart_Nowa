@@ -38,9 +38,6 @@ export default function PostEditor({ initialData, onSave }: PostEditorProps) {
   const [coverImageUrl, setCoverImageUrl] = useState(
     initialData?.coverImageUrl || ""
   );
-  const [isPublished, setIsPublished] = useState(
-    initialData?.isPublished || false
-  );
   const [isSaving, setIsSaving] = useState(false);
   const [showImageUploader, setShowImageUploader] = useState(false);
 
@@ -98,7 +95,7 @@ export default function PostEditor({ initialData, onSave }: PostEditorProps) {
         content: JSON.stringify(editor.getJSON()),
         excerpt: excerpt || undefined,
         coverImageUrl: coverImageUrl || undefined,
-        isPublished,
+        isPublished: true,
       });
     } catch (error) {
       console.error("Save failed:", error);
@@ -261,29 +258,9 @@ export default function PostEditor({ initialData, onSave }: PostEditorProps) {
       )}
 
       {/* Footer */}
-      <div className="flex items-center justify-between pt-4 border-t border-white/10">
-        <label className="flex items-center gap-3 cursor-pointer">
-          <div
-            className={cn(
-              "relative w-11 h-6 rounded-full transition-colors duration-200",
-              isPublished ? "bg-navy" : "bg-surface-light"
-            )}
-            onClick={() => setIsPublished(!isPublished)}
-          >
-            <div
-              className={cn(
-                "absolute top-0.5 left-0.5 w-5 h-5 bg-cream rounded-full transition-transform duration-200",
-                isPublished && "translate-x-5"
-              )}
-            />
-          </div>
-          <span className="text-sm text-cream/70">
-            {isPublished ? "Opublikowany" : "Szkic"}
-          </span>
-        </label>
-
+      <div className="flex items-center justify-end pt-4 border-t border-white/10">
         <Button onClick={handleSave} isLoading={isSaving}>
-          Zapisz
+          Zapisz i opublikuj
         </Button>
       </div>
     </div>

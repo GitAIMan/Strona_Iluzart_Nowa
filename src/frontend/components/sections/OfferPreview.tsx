@@ -4,7 +4,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import ScrollReveal from "@frontend/components/shared/ScrollReveal";
 import SectionHeading from "@frontend/components/ui/SectionHeading";
-import ImagePlaceholder from "@frontend/components/ui/ImagePlaceholder";
+import ServiceEmoji from "@frontend/components/ui/ServiceEmoji";
 import Button from "@frontend/components/ui/Button";
 import { services, type ServiceData } from "@shared/data/services";
 
@@ -20,7 +20,15 @@ function ServiceCard({ service }: { service: ServiceData }) {
         href={`/oferta/${service.slug}`}
         className="block card-navy rounded-lg overflow-hidden group"
       >
-        <ImagePlaceholder aspectRatio="16/9" />
+        <div className="relative aspect-[16/9] bg-gradient-to-br from-navy-dark to-navy flex items-center justify-center overflow-hidden">
+          <div className="absolute inset-0 bg-navy-radial opacity-40" />
+          <ServiceEmoji
+            icon={service.icon}
+            size={140}
+            alt={service.name}
+            className="relative z-10 drop-shadow-[0_0_30px_rgba(201,168,76,0.25)] group-hover:scale-110 transition-transform duration-500"
+          />
+        </div>
         <div className="p-6">
           <h3 className="font-serif text-xl text-cream mb-3 group-hover:text-gold transition-colors duration-300">
             {service.name}

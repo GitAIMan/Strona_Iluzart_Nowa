@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { generatePageMetadata } from "@shared/metadata";
 import PageTransition from "@frontend/components/layout/PageTransition";
 import SectionHeading from "@frontend/components/ui/SectionHeading";
@@ -77,7 +78,17 @@ export default function WarsztatyPage() {
             </ScrollReveal>
 
             <ScrollReveal delay={0.2}>
-              <ImagePlaceholder aspectRatio="4/3" />
+              <div className="relative overflow-hidden rounded-lg" style={{ aspectRatio: "4/3" }}>
+                <Image
+                  src="https://pub-461768aab8564907a3f677968018aa28.r2.dev/warsztaty-ataa.jpeg"
+                  alt="Warsztaty magii dla dzieci Katowice"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  quality={90}
+                  loading="lazy"
+                  className="object-cover"
+                />
+              </div>
             </ScrollReveal>
           </div>
         </div>
@@ -112,7 +123,17 @@ export default function WarsztatyPage() {
       <section className="pb-16">
         <div className="max-w-4xl mx-auto px-6">
           <ScrollReveal>
-            <ImagePlaceholder aspectRatio="16/9" />
+            <div className="relative overflow-hidden rounded-lg" style={{ aspectRatio: "16/9" }}>
+              <Image
+                src="https://pub-461768aab8564907a3f677968018aa28.r2.dev/warsztaty-bara.jpeg"
+                alt="Warsztaty magii - indywidualna nauka"
+                fill
+                sizes="(max-width: 768px) 100vw, 800px"
+                quality={90}
+                loading="lazy"
+                className="object-cover"
+              />
+            </div>
           </ScrollReveal>
         </div>
       </section>

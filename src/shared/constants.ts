@@ -15,7 +15,7 @@ export const CONTACT = {
   company: "IluzArt",
   phone: "+48 882 011 161",
   email: "grzegorziluzart@gmail.com",
-  address: "Związkowa 5, 40-730 Katowice",
+  address: "Katowice",
   instagram: "https://www.instagram.com/grzegorz_pawleta_iluzart/",
   instagramHandle: "@grzegorz_pawleta_iluzart",
   whatsapp: "https://wa.me/48882011161",

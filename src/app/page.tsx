@@ -2,16 +2,11 @@ import dynamic from "next/dynamic";
 import { prisma } from "@backend/lib/prisma";
 import HeroSection from "@frontend/components/sections/HeroSection";
 import MarqueeSection from "@frontend/components/sections/MarqueeSection";
-import AboutPreview from "@frontend/components/sections/AboutPreview";
 import SectionDivider from "@frontend/components/ui/SectionDivider";
 import SectionSkeleton from "@frontend/components/ui/SectionSkeleton";
 
 const OfferPreview = dynamic(
   () => import("@frontend/components/sections/OfferPreview"),
-  { loading: () => <SectionSkeleton /> }
-);
-const TestimonialsSection = dynamic(
-  () => import("@frontend/components/sections/TestimonialsSection"),
   { loading: () => <SectionSkeleton /> }
 );
 const FAQSection = dynamic(
@@ -55,11 +50,7 @@ export default async function HomePage() {
       <HeroSection />
       <MarqueeSection />
       <SectionDivider variant="glow" />
-      <AboutPreview />
-      <SectionDivider variant="line" />
       <OfferPreview />
-      <SectionDivider variant="glow" />
-      <TestimonialsSection />
       <SectionDivider variant="line" />
       <FAQSection />
       <SectionDivider variant="glow" />

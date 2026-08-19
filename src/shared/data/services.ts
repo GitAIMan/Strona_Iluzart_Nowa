@@ -134,3 +134,15 @@ export const services: ServiceData[] = [
     priceRange: "od 500 zł",
   },
 ];
+
+export const SERVICE_EMOJI_HEX: Record<string, string> = {
+  sparkles: "2728",   // ✨ Magia dla dzieci
+  building: "1f3e2",  // 🏢 Eventy firmowe
+  hand:     "1f3a9",  // 🎩 Close-up magic
+  brain:    "1f9e0",  // 🧠 Mentalizm
+  rings:    "1f48d",  // 💍 Wesela
+  cake:     "1f382",  // 🎂 Urodziny
+};
+
+export const getServiceEmojiUrl = (icon: string) =>
+  `https://fonts.gstatic.com/s/e/notoemoji/latest/${SERVICE_EMOJI_HEX[icon] ?? SERVICE_EMOJI_HEX.sparkles}/512.png`;

@@ -4,6 +4,7 @@ import Link from "next/link";
 import PageTransition from "@frontend/components/layout/PageTransition";
 import Button from "@frontend/components/ui/Button";
 import ScrollReveal from "@frontend/components/shared/ScrollReveal";
+import ServiceEmoji from "@frontend/components/ui/ServiceEmoji";
 import { services } from "@shared/data/services";
 
 interface Props {
@@ -28,133 +29,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: `${service.name} | Iluzjonista Śląsk - IluzArt`,
     description: `${service.description} Iluzjonista Katowice i Śląsk. ${service.audience}, czas trwania: ${service.duration}.`,
   };
-}
-
-function ServiceIcon({
-  icon,
-  className,
-}: {
-  icon: string;
-  className?: string;
-}) {
-  const icons: Record<string, JSX.Element> = {
-    sparkles: (
-      <svg
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <path d="M12 3l1.912 5.813a2 2 0 001.275 1.275L21 12l-5.813 1.912a2 2 0 00-1.275 1.275L12 21l-1.912-5.813a2 2 0 00-1.275-1.275L3 12l5.813-1.912a2 2 0 001.275-1.275L12 3z" />
-        <path d="M5 3v2" />
-        <path d="M19 19v2" />
-        <path d="M4 4l1 1" />
-        <path d="M20 20l-1-1" />
-      </svg>
-    ),
-    building: (
-      <svg
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <rect x="4" y="2" width="16" height="20" rx="2" />
-        <path d="M9 22v-4h6v4" />
-        <path d="M8 6h.01" />
-        <path d="M16 6h.01" />
-        <path d="M12 6h.01" />
-        <path d="M12 10h.01" />
-        <path d="M12 14h.01" />
-        <path d="M16 10h.01" />
-        <path d="M16 14h.01" />
-        <path d="M8 10h.01" />
-        <path d="M8 14h.01" />
-      </svg>
-    ),
-    hand: (
-      <svg
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <path d="M18 11V6a2 2 0 00-2-2 2 2 0 00-2 2v0" />
-        <path d="M14 10V4a2 2 0 00-2-2 2 2 0 00-2 2v2" />
-        <path d="M10 10.5V6a2 2 0 00-2-2 2 2 0 00-2 2v8" />
-        <path d="M18 8a2 2 0 012 2v7.1a2 2 0 01-.6 1.4l-3 2.9a2 2 0 01-1.4.6H9a2 2 0 01-1.5-.7l-3.3-3.8A2 2 0 016 14.5V14" />
-      </svg>
-    ),
-    brain: (
-      <svg
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <path d="M12 22V12" />
-        <path d="M9.5 8a3.5 3.5 0 10-2.83 6.86L12 12" />
-        <path d="M14.5 8a3.5 3.5 0 112.83 6.86L12 12" />
-        <path d="M7.17 14.86A4 4 0 009 21h6a4 4 0 001.83-6.14" />
-        <path d="M12 2a3 3 0 00-2.83 2H9.5" />
-        <path d="M12 2a3 3 0 012.83 2h-.33" />
-      </svg>
-    ),
-    rings: (
-      <svg
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <circle cx="9" cy="12" r="5" />
-        <circle cx="15" cy="12" r="5" />
-      </svg>
-    ),
-    cake: (
-      <svg
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <path d="M20 21v-8a2 2 0 00-2-2H6a2 2 0 00-2 2v8" />
-        <path d="M4 16s.5-1 2-1 2.5 2 4 2 2.5-2 4-2 2.5 2 4 2 2-1 2-1" />
-        <path d="M2 21h20" />
-        <path d="M7 8v3" />
-        <path d="M12 8v3" />
-        <path d="M17 8v3" />
-        <path d="M7 4h.01" />
-        <path d="M12 4h.01" />
-        <path d="M17 4h.01" />
-      </svg>
-    ),
-  };
-  return <span className={className}>{icons[icon] || icons.sparkles}</span>;
 }
 
 export default async function ServiceDetailPage({ params }: Props) {
@@ -183,11 +57,8 @@ export default async function ServiceDetailPage({ params }: Props) {
 
             {/* Icon in gold circle */}
             <div className="mb-8 flex justify-center">
-              <div className="w-20 h-20 rounded-full bg-gradient-to-br from-gold/20 to-gold/5 border border-gold/30 flex items-center justify-center text-gold shadow-[0_0_40px_rgba(201,168,76,0.15)]">
-                <ServiceIcon
-                  icon={service.icon}
-                  className="[&_svg]:w-8 [&_svg]:h-8"
-                />
+              <div className="w-20 h-20 rounded-full bg-gradient-to-br from-gold/20 to-gold/5 border border-gold/30 flex items-center justify-center shadow-[0_0_40px_rgba(201,168,76,0.15)]">
+                <ServiceEmoji icon={service.icon} size={56} alt={service.name} />
               </div>
             </div>
 
@@ -407,8 +278,8 @@ export default async function ServiceDetailPage({ params }: Props) {
                   className="group block h-full"
                 >
                   <div className="card-navy rounded-xl p-6 h-full flex flex-col items-center text-center">
-                    <div className="w-12 h-12 rounded-full bg-gradient-to-br from-navy to-navy-dark flex items-center justify-center text-gold mb-4 group-hover:shadow-[0_0_20px_rgba(201,168,76,0.15)] transition-shadow duration-500">
-                      <ServiceIcon icon={related.icon} />
+                    <div className="w-12 h-12 rounded-full bg-gradient-to-br from-navy to-navy-dark flex items-center justify-center mb-4 group-hover:shadow-[0_0_20px_rgba(201,168,76,0.15)] transition-shadow duration-500">
+                      <ServiceEmoji icon={related.icon} size={32} alt={related.name} />
                     </div>
                     <h3 className="text-lg font-serif text-cream group-hover:text-gold transition-colors duration-300 mb-2">
                       {related.name}
