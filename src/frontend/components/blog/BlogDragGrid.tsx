@@ -14,7 +14,7 @@ export default function BlogDragGrid({ posts }: { posts: Post[] }) {
   return (
     <DraggableContainer variant="masonry">
       <GridBody>
-        {posts.map((post, index) => (
+        {posts.map((post) => (
           <GridItem
             key={post.id}
             className="relative h-40 w-28 md:h-64 md:w-44"
