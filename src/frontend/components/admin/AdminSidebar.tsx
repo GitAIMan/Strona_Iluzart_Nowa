@@ -32,7 +32,7 @@ const navLinks = [
   },
 ];
 
-export default function AdminSidebar() {
+export default function AdminSidebar({ unreadCount = 0 }: { unreadCount?: number }) {
   const pathname = usePathname();
 
   return (
@@ -66,6 +66,11 @@ export default function AdminSidebar() {
             >
               {link.icon}
               {link.label}
+              {link.href === "/admin/contacts" && unreadCount > 0 && (
+                <span className="ml-auto flex items-center justify-center min-w-[20px] h-5 px-1.5 text-xs font-semibold bg-gold text-background rounded-full">
+                  {unreadCount}
+                </span>
+              )}
             </Link>
           );
         })}
