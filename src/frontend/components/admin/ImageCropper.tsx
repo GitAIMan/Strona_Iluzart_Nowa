@@ -74,29 +74,31 @@ export default function ImageCropper({
   }, [crop, onCrop]);
 
   return (
-    <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/80">
-      <div className="bg-surface border border-white/10 rounded-xl p-6 w-full max-w-2xl max-h-[90vh] overflow-y-auto">
-        <h3 className="text-lg font-serif text-cream mb-4">Przytnij zdjęcie</h3>
+    <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/80 p-4">
+      <div className="bg-surface border border-white/10 rounded-xl w-full max-w-2xl max-h-[85vh] flex flex-col overflow-hidden">
+        <div className="p-6 pb-4 shrink-0">
+          <h3 className="text-lg font-serif text-cream mb-4">Przytnij zdjęcie</h3>
 
-        {/* Aspect ratio presets */}
-        <div className="flex gap-2 mb-4">
-          {PRESETS.map((preset) => (
-            <button
-              key={preset.label}
-              onClick={() => setAspect(preset.aspect)}
-              className={`px-3 py-1.5 text-sm rounded-lg transition-colors ${
-                aspect === preset.aspect
-                  ? "bg-navy text-cream"
-                  : "bg-surface-light text-cream/50 hover:text-cream"
-              }`}
-            >
-              {preset.label}
-            </button>
-          ))}
+          {/* Aspect ratio presets */}
+          <div className="flex gap-2">
+            {PRESETS.map((preset) => (
+              <button
+                key={preset.label}
+                onClick={() => setAspect(preset.aspect)}
+                className={`px-3 py-1.5 text-sm rounded-lg transition-colors ${
+                  aspect === preset.aspect
+                    ? "bg-navy text-cream"
+                    : "bg-surface-light text-cream/50 hover:text-cream"
+                }`}
+              >
+                {preset.label}
+              </button>
+            ))}
+          </div>
         </div>
 
         {/* Crop area */}
-        <div className="flex justify-center bg-black/40 rounded-lg overflow-hidden">
+        <div className="flex-1 min-h-0 overflow-auto flex justify-center items-start bg-black/40 mx-6 rounded-lg">
           <ReactCrop
             crop={crop}
             onChange={(_, percentCrop) => setCrop(percentCrop)}
@@ -106,13 +108,13 @@ export default function ImageCropper({
               ref={imgRef}
               src={imageSrc}
               alt="Crop"
-              className="max-h-[60vh]"
+              className="max-h-[50vh] max-w-full"
             />
           </ReactCrop>
         </div>
 
         {/* Actions */}
-        <div className="flex justify-end gap-3 mt-4">
+        <div className="flex justify-end gap-3 p-6 pt-4 shrink-0">
           <button
             onClick={onCancel}
             className="px-4 py-2 text-sm text-cream/50 hover:text-cream transition-colors"

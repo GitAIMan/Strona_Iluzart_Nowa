@@ -1,7 +1,6 @@
 "use client";
 
 import {
-  animate,
   cubicBezier,
   motion,
   useMotionValue,
@@ -12,7 +11,6 @@ import {
   useContext,
   useEffect,
   useRef,
-  useState,
   createContext,
   type ReactNode,
 } from "react";
@@ -50,10 +48,6 @@ export const DraggableContainer = ({
   const x = useMotionValue(0);
   const y = useMotionValue(0);
 
-  const [isDragging, setIsDragging] = useState(false);
-  const handleIsDragging = () => setIsDragging(true);
-  const handleIsNotDragging = () => setIsDragging(false);
-
   useEffect(() => {
     const container = ref.current?.getBoundingClientRect();
     if (!container) return;
@@ -70,29 +64,16 @@ export const DraggableContainer = ({
       y.set(wrappedY);
     });
 
-    const handleWheelScroll = (event: WheelEvent) => {
-      if (!isDragging) {
-        animate(y, y.get() - event.deltaY * 2.7, {
-          type: "tween",
-          duration: 1.2,
-          ease: cubicBezier(0.18, 0.71, 0.11, 1),
-        });
-      }
-    };
-
-    const el = ref.current;
-    el?.addEventListener("wheel", handleWheelScroll, { passive: true });
     return () => {
       xDrag();
       yDrag();
-      el?.removeEventListener("wheel", handleWheelScroll);
     };
-  }, [x, y, isDragging]);
+  }, [x, y]);
 
   return (
     <GridVariantContext.Provider value={variant}>
-      <div className="h-[70vh] min-h-[420px] overflow-hidden rounded-2xl relative">
-        <motion.div className="h-full overflow-hidden">
+      <div className="h-[85vh] overflow-hidden">
+        <motion.div className="h-[85vh] overflow-hidden">
           <motion.div
             className={cn(
               "grid h-fit w-fit cursor-grab grid-cols-[repeat(2,1fr)] bg-surface active:cursor-grabbing will-change-transform",
@@ -106,11 +87,6 @@ export const DraggableContainer = ({
               restDelta: 0,
               bounceStiffness: 0,
             }}
-            onMouseDown={handleIsDragging}
-            onMouseUp={handleIsNotDragging}
-            onMouseLeave={handleIsNotDragging}
-            onTouchStart={handleIsDragging}
-            onTouchEnd={handleIsNotDragging}
             style={{ x, y }}
             ref={ref}
           >
@@ -137,9 +113,9 @@ export const GridItem = ({
       variants: {
         variant: {
           default: "rounded-lg",
-          masonry: "even:mt-[15%] rounded-lg",
+          masonry: "even:mt-[60%] rounded-lg",
           polaroid:
-            "border-8 border-b-20 border-cream shadow-xl even:rotate-3 odd:-rotate-2 hover:rotate-0 transition-transform ease-out duration-300 even:mt-[15%]",
+            "border-8 border-b-20 border-cream shadow-xl even:rotate-3 odd:-rotate-2 hover:rotate-0 transition-transform ease-out duration-300 even:mt-[60%]",
         },
       },
       defaultVariants: {
@@ -170,12 +146,12 @@ export const GridBody = memo(
   }) => {
     const variant = useContext(GridVariantContext);
 
-    const gridBodyStyles = cva("grid grid-cols-[repeat(4,1fr)] h-fit w-fit", {
+    const gridBodyStyles = cva("grid grid-cols-[repeat(6,1fr)] h-fit w-fit", {
       variants: {
         variant: {
-          default: "gap-6 p-6 md:gap-10 md:p-10",
-          masonry: "gap-x-6 px-6 md:gap-x-10 md:px-10",
-          polaroid: "gap-x-6 px-6 md:gap-x-10 md:px-10",
+          default: "gap-36 p-16 md:gap-72 md:p-32",
+          masonry: "gap-x-14 px-7 md:gap-x-28 md:px-14",
+          polaroid: "gap-x-14 px-7 md:gap-x-28 md:px-14",
         },
       },
       defaultVariants: {
@@ -185,7 +161,7 @@ export const GridBody = memo(
 
     return (
       <>
-        {Array.from({ length: 2 }).map((_, index) => (
+        {Array.from({ length: 4 }).map((_, index) => (
           <div key={index} className={cn(gridBodyStyles({ variant, className }))}>
             {children}
           </div>

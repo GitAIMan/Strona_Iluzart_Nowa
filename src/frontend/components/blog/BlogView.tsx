@@ -22,7 +22,7 @@ export default function BlogView({ posts }: { posts: Post[] }) {
 
   return (
     <div>
-      <div className="flex justify-end mb-8">
+      <div className="max-w-6xl mx-auto px-6 flex justify-end mb-6">
         <div className="inline-flex glass rounded-full p-1 gap-1">
           <button
             onClick={() => setView("drag")}
@@ -57,7 +57,7 @@ export default function BlogView({ posts }: { posts: Post[] }) {
           </p>
         </div>
       ) : (
-        <div className="grid grid-cols-2 md:grid-cols-3 auto-rows-[220px] gap-4">
+        <div className="max-w-6xl mx-auto px-6 grid grid-cols-2 md:grid-cols-3 auto-rows-[220px] gap-4">
           {posts.map((post, index) => {
             const big = index % 5 === 0;
             return (

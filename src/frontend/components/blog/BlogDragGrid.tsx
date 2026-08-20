@@ -1,6 +1,7 @@
 "use client";
 
-import Link from "next/link";
+import { useRef } from "react";
+import { useRouter } from "next/navigation";
 import { DraggableContainer, GridBody, GridItem } from "@frontend/components/blog/InfiniteDragScroll";
 
 interface Post {
@@ -10,16 +11,47 @@ interface Post {
   coverImageUrl: string | null;
 }
 
+const COLUMNS = 6;
+const DRAG_THRESHOLD = 8;
+
 export default function BlogDragGrid({ posts }: { posts: Post[] }) {
+  const router = useRouter();
+  const filledCount = Math.ceil(posts.length / COLUMNS) * COLUMNS || COLUMNS;
+  const tiles = Array.from(
+    { length: filledCount },
+    (_, i) => posts[i % posts.length]
+  );
+
+  const pointerStart = useRef<{ x: number; y: number } | null>(null);
+
+  const handlePointerDown = (e: React.PointerEvent) => {
+    pointerStart.current = { x: e.clientX, y: e.clientY };
+  };
+
+  const handlePointerUp = (e: React.PointerEvent, slug: string) => {
+    const start = pointerStart.current;
+    pointerStart.current = null;
+    if (!start) return;
+    const dx = Math.abs(e.clientX - start.x);
+    const dy = Math.abs(e.clientY - start.y);
+    if (dx <= DRAG_THRESHOLD && dy <= DRAG_THRESHOLD) {
+      router.push(`/blog/${slug}`);
+    }
+  };
+
   return (
-    <DraggableContainer variant="masonry">
+    <DraggableContainer variant="default">
       <GridBody>
-        {posts.map((post) => (
+        {tiles.map((post, i) => (
           <GridItem
-            key={post.id}
-            className="relative h-40 w-28 md:h-64 md:w-44"
+            key={`${post.id}-${i}`}
+            className="relative h-56 w-40 md:h-96 md:w-64"
           >
-            <Link href={`/blog/${post.slug}`} className="block h-full w-full">
+            <div
+              className="block h-full w-full cursor-pointer"
+              onPointerDown={handlePointerDown}
+              onPointerUp={(e) => handlePointerUp(e, post.slug)}
+            >
               {post.coverImageUrl ? (
                 <img
                   src={post.coverImageUrl}
@@ -32,7 +64,7 @@ export default function BlogDragGrid({ posts }: { posts: Post[] }) {
                   {post.title}
                 </div>
               )}
-            </Link>
+            </div>
           </GridItem>
         ))}
       </GridBody>
