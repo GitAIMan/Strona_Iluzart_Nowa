@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@backend/lib/auth";
 import { prisma } from "@backend/lib/prisma";
@@ -46,6 +47,9 @@ export async function POST(request: NextRequest) {
         publishedAt: validated.isPublished ? new Date() : null,
       },
     });
+
+    revalidatePath("/blog");
+    revalidatePath("/");
 
     return NextResponse.json(post, { status: 201 });
   } catch (error) {

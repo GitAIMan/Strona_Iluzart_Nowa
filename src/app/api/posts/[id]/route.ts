@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@backend/lib/auth";
 import { prisma } from "@backend/lib/prisma";
@@ -64,6 +65,10 @@ export async function PUT(
       data: updateData,
     });
 
+    revalidatePath("/blog");
+    revalidatePath(`/blog/${post.slug}`);
+    revalidatePath("/");
+
     return NextResponse.json(post);
   } catch {
     return NextResponse.json(
@@ -87,6 +92,9 @@ export async function DELETE(
     await prisma.post.delete({
       where: { id: params.id },
     });
+
+    revalidatePath("/blog");
+    revalidatePath("/");
 
     return NextResponse.json({ success: true });
   } catch {
