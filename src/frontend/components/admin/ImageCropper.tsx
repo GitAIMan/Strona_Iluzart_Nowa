@@ -31,6 +31,32 @@ export default function ImageCropper({
   const [aspect, setAspect] = useState<number>(16 / 9);
   const imgRef = useRef<HTMLImageElement>(null);
 
+  const applyAspect = useCallback((nextAspect: number) => {
+    setAspect(nextAspect);
+
+    const image = imgRef.current;
+    const containerWidth = image?.width || 1;
+    const containerHeight = image?.height || 1;
+
+    let width = 80;
+    let height = (width / 100) * containerWidth * (1 / nextAspect);
+    height = (height / containerHeight) * 100;
+
+    if (height > 90) {
+      height = 90;
+      width = (height / 100) * containerHeight * nextAspect;
+      width = (width / containerWidth) * 100;
+    }
+
+    setCrop({
+      unit: "%",
+      x: (100 - width) / 2,
+      y: (100 - height) / 2,
+      width,
+      height,
+    });
+  }, []);
+
   const handleConfirm = useCallback(async () => {
     const image = imgRef.current;
     if (!image || !crop.width || !crop.height) return;
@@ -80,12 +106,13 @@ export default function ImageCropper({
           <h3 className="text-lg font-serif text-cream mb-4">Przytnij zdjęcie</h3>
 
           {/* Aspect ratio presets */}
-          <div className="flex gap-2">
+          <div className="flex gap-2 flex-wrap">
             {PRESETS.map((preset) => (
               <button
                 key={preset.label}
-                onClick={() => setAspect(preset.aspect)}
-                className={`px-3 py-1.5 text-sm rounded-lg transition-colors ${
+                type="button"
+                onClick={() => applyAspect(preset.aspect)}
+                className={`px-3 py-1.5 text-sm rounded-lg transition-colors touch-manipulation ${
                   aspect === preset.aspect
                     ? "bg-navy text-cream"
                     : "bg-surface-light text-cream/50 hover:text-cream"
@@ -98,7 +125,7 @@ export default function ImageCropper({
         </div>
 
         {/* Crop area */}
-        <div className="flex-1 min-h-0 overflow-auto flex justify-center items-start bg-black/40 mx-6 rounded-lg">
+        <div className="flex-1 min-h-0 overflow-auto flex justify-center items-start bg-black/40 mx-4 md:mx-6 rounded-lg touch-none">
           <ReactCrop
             crop={crop}
             onChange={(_, percentCrop) => setCrop(percentCrop)}
@@ -108,7 +135,7 @@ export default function ImageCropper({
               ref={imgRef}
               src={imageSrc}
               alt="Crop"
-              className="max-h-[50vh] max-w-full"
+              className="max-h-[45vh] md:max-h-[50vh] max-w-full"
             />
           </ReactCrop>
         </div>
