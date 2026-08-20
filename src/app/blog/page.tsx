@@ -1,11 +1,8 @@
-import Link from "next/link";
 import { generatePageMetadata } from "@shared/metadata";
 import PageTransition from "@frontend/components/layout/PageTransition";
 import SectionHeading from "@frontend/components/ui/SectionHeading";
-import ImagePlaceholder from "@frontend/components/ui/ImagePlaceholder";
-import ScrollReveal from "@frontend/components/shared/ScrollReveal";
+import BlogView from "@frontend/components/blog/BlogView";
 import { prisma } from "@backend/lib/prisma";
-import { formatDate } from "@shared/utils";
 
 export const metadata = generatePageMetadata({
   title: "Blog",
@@ -75,46 +72,7 @@ export default async function BlogPage() {
               </p>
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {posts.map((post, index) => (
-                <ScrollReveal key={post.id} delay={index * 0.1}>
-                  <Link
-                    href={`/blog/${post.slug}`}
-                    className="group block glass-hover rounded-xl overflow-hidden h-full"
-                  >
-                    {post.coverImageUrl ? (
-                      <div
-                        className="relative overflow-hidden"
-                        style={{ aspectRatio: "16/9" }}
-                      >
-                        <img
-                          src={post.coverImageUrl}
-                          alt={post.title}
-                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                        />
-                      </div>
-                    ) : (
-                      <ImagePlaceholder aspectRatio="16/9" />
-                    )}
-                    <div className="p-6 space-y-3">
-                      <h3 className="text-xl font-serif text-cream group-hover:text-gold transition-colors duration-300">
-                        {post.title}
-                      </h3>
-                      {post.excerpt && (
-                        <p className="text-sm text-cream/60 leading-relaxed font-sans line-clamp-2">
-                          {post.excerpt}
-                        </p>
-                      )}
-                      {post.publishedAt && (
-                        <p className="text-xs text-cream/40 font-sans">
-                          {formatDate(post.publishedAt)}
-                        </p>
-                      )}
-                    </div>
-                  </Link>
-                </ScrollReveal>
-              ))}
-            </div>
+            <BlogView posts={posts} />
           )}
         </div>
       </section>
