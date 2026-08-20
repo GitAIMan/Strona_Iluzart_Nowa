@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { signOut } from "next-auth/react";
@@ -32,11 +33,17 @@ const navLinks = [
   },
 ];
 
-export default function AdminSidebar({ unreadCount = 0 }: { unreadCount?: number }) {
-  const pathname = usePathname();
-
+function SidebarContent({
+  unreadCount,
+  pathname,
+  onNavigate,
+}: {
+  unreadCount: number;
+  pathname: string;
+  onNavigate?: () => void;
+}) {
   return (
-    <aside className="w-64 bg-surface border-r border-white/5 flex flex-col min-h-screen">
+    <>
       <div className="p-6 border-b border-white/5">
         <div className="flex items-center gap-3">
           <span className="text-xl font-serif text-cream">IluzArt</span>
@@ -57,6 +64,7 @@ export default function AdminSidebar({ unreadCount = 0 }: { unreadCount?: number
             <Link
               key={link.href}
               href={link.href}
+              onClick={onNavigate}
               className={cn(
                 "flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all duration-200",
                 isActive
@@ -79,6 +87,7 @@ export default function AdminSidebar({ unreadCount = 0 }: { unreadCount?: number
       <div className="p-4 border-t border-white/5 space-y-1">
         <Link
           href="/"
+          onClick={onNavigate}
           className="flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium text-cream/50 hover:text-cream hover:bg-white/5 transition-all duration-200"
         >
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -99,6 +108,72 @@ export default function AdminSidebar({ unreadCount = 0 }: { unreadCount?: number
           Wyloguj
         </button>
       </div>
-    </aside>
+    </>
+  );
+}
+
+export default function AdminSidebar({ unreadCount = 0 }: { unreadCount?: number }) {
+  const pathname = usePathname();
+  const [mobileOpen, setMobileOpen] = useState(false);
+
+  return (
+    <>
+      {/* Mobile topbar */}
+      <div className="md:hidden sticky top-0 z-40 flex items-center justify-between px-4 py-3 bg-surface border-b border-white/5">
+        <div className="flex items-center gap-2">
+          <span className="text-lg font-serif text-cream">IluzArt</span>
+          <span className="px-2 py-0.5 text-xs font-medium bg-navy/50 text-cream/70 rounded-md border border-navy-light/30">
+            Admin
+          </span>
+        </div>
+        <button
+          onClick={() => setMobileOpen(true)}
+          className="p-2 -mr-2 text-cream/70 hover:text-cream relative"
+          aria-label="Otwórz menu"
+        >
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <line x1="4" y1="7" x2="20" y2="7" />
+            <line x1="4" y1="12" x2="20" y2="12" />
+            <line x1="4" y1="17" x2="20" y2="17" />
+          </svg>
+          {unreadCount > 0 && (
+            <span className="absolute top-0 right-0 flex items-center justify-center min-w-[16px] h-4 px-1 text-[10px] font-semibold bg-gold text-background rounded-full">
+              {unreadCount}
+            </span>
+          )}
+        </button>
+      </div>
+
+      {/* Mobile drawer */}
+      {mobileOpen && (
+        <div className="md:hidden fixed inset-0 z-50 flex">
+          <div
+            className="absolute inset-0 bg-black/70"
+            onClick={() => setMobileOpen(false)}
+          />
+          <aside className="relative w-64 max-w-[80vw] bg-surface border-r border-white/5 flex flex-col h-full">
+            <button
+              onClick={() => setMobileOpen(false)}
+              className="absolute top-4 right-4 p-2 text-cream/50 hover:text-cream"
+              aria-label="Zamknij menu"
+            >
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M18 6L6 18M6 6l12 12" />
+              </svg>
+            </button>
+            <SidebarContent
+              unreadCount={unreadCount}
+              pathname={pathname}
+              onNavigate={() => setMobileOpen(false)}
+            />
+          </aside>
+        </div>
+      )}
+
+      {/* Desktop sidebar */}
+      <aside className="hidden md:flex w-64 bg-surface border-r border-white/5 flex-col min-h-screen">
+        <SidebarContent unreadCount={unreadCount} pathname={pathname} />
+      </aside>
+    </>
   );
 }

@@ -8,7 +8,7 @@ export default async function ContactsPage() {
 
   return (
     <div>
-      <h1 className="text-3xl font-serif text-cream mb-8">Wiadomości</h1>
+      <h1 className="text-2xl md:text-3xl font-serif text-cream mb-8">Wiadomości</h1>
       <ContactsTable
         submissions={submissions.map((s) => ({
           id: s.id,

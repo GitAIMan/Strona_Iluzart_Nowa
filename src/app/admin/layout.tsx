@@ -20,9 +20,9 @@ export default async function AdminLayout({
   });
 
   return (
-    <div className="flex min-h-screen bg-background">
+    <div className="flex flex-col md:flex-row min-h-screen bg-background">
       <AdminSidebar unreadCount={unreadCount} />
-      <main className="flex-1 p-8">{children}</main>
+      <main className="flex-1 p-4 md:p-8 min-w-0">{children}</main>
     </div>
   );
 }

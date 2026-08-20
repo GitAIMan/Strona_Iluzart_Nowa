@@ -22,7 +22,7 @@ export default function BlogView({ posts }: { posts: Post[] }) {
 
   return (
     <div>
-      <div className="max-w-6xl mx-auto px-6 flex justify-end mb-6">
+      <div className="max-w-6xl mx-auto px-6 flex justify-center sm:justify-end mb-6">
         <div className="inline-flex glass rounded-full p-1 gap-1">
           <button
             onClick={() => setView("drag")}

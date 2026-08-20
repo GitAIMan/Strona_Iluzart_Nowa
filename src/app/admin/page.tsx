@@ -16,8 +16,8 @@ export default async function AdminDashboard() {
 
   return (
     <div>
-      <div className="flex items-center justify-between mb-8">
-        <h1 className="text-3xl font-serif text-cream">Wpisy blogowe</h1>
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
+        <h1 className="text-2xl md:text-3xl font-serif text-cream">Wpisy blogowe</h1>
         <Button href="/admin/posts/new" size="sm">
           Nowy wpis
         </Button>
