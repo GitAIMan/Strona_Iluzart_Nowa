@@ -12,10 +12,10 @@ export const metadata = generatePageMetadata({
 });
 
 const benefits = [
-  "2 godziny — bo dobra magia potrzebuje czasu",
+  "2 godziny, bo dobra magia potrzebuje czasu",
   "Każde dziecko wychodzi z własnymi sztuczkami",
   "Sprawdzone na Strefie Bajtla i w Nibylandii",
-  "Śmiech gwarantowany — nauka przez zabawę",
+  "Śmiech gwarantowany, nauka przez zabawę",
 ];
 
 function GoldCheckmark() {
@@ -102,16 +102,16 @@ export default function WarsztatyPage() {
                 Dlaczego akurat ja?
               </h2>
               <p className="text-lg text-cream/80 leading-relaxed font-sans">
-                Dekada doświadczenia z dziećmi — od Strefy Bajtla i Nibylandii
+                Dekada doświadczenia z dziećmi, od Strefy Bajtla i Nibylandii
                 po setki prywatnych imprez w Katowicach. Wiem, co bawi
                 4-latka, a co robi wrażenie na 12-latku. Uczyłem się magii
-                latami metodą prób i błędów — dziś pokażę Twojemu dziecku
+                latami metodą prób i błędów. Dziś pokażę Twojemu dziecku
                 skróty, które sam chciałbym znać na początku.
               </p>
               <p className="text-lg text-cream/80 leading-relaxed font-sans">
                 To nie tylko nauka trików. To pewność siebie, zaskakiwanie
                 kolegów w szkole i umiejętność, która zostaje na lata. A przy
-                okazji — świetna zabawa.
+                okazji świetna zabawa.
               </p>
             </div>
           </ScrollReveal>
@@ -125,7 +125,7 @@ export default function WarsztatyPage() {
             <div className="relative overflow-hidden rounded-lg" style={{ aspectRatio: "16/9" }}>
               <Image
                 src="https://pub-461768aab8564907a3f677968018aa28.r2.dev/warsztaty-bara.jpeg"
-                alt="Warsztaty magii - indywidualna nauka"
+                alt="Warsztaty magii, indywidualna nauka"
                 fill
                 sizes="(max-width: 768px) 100vw, 800px"
                 quality={90}
@@ -142,7 +142,7 @@ export default function WarsztatyPage() {
         <div className="max-w-4xl mx-auto px-6 text-center">
           <ScrollReveal>
             <p className="text-xl md:text-2xl font-serif text-cream mb-8">
-              Zarezerwuj warsztaty w Katowicach — wolne terminy znikają szybko
+              Zarezerwuj warsztaty w Katowicach. Wolne terminy znikają szybko
             </p>
             <Button href="https://wa.me/48882011161" size="lg">
               Zarezerwuj warsztaty

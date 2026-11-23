@@ -5,7 +5,7 @@ import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Button from "@frontend/components/ui/Button";
 
-const HERO_TITLE = "Magia i Humor Które Zachwycą Twoich Gości";
+const HERO_TITLE = "Magia i humor, które zachwycą Twoich gości";
 const CHAR_DELAY = 0.04;
 const TYPING_START = 0.6;
 const TYPING_DURATION = HERO_TITLE.length * CHAR_DELAY;
@@ -39,7 +39,7 @@ export default function HeroSection() {
 
   return (
     <section ref={sectionRef} className="relative min-h-screen flex flex-col overflow-hidden">
-      {/* Background Image — zoom-in reveal */}
+      {/* Background Image - zoom-in reveal */}
       <motion.div
         initial={{ scale: 1.15, opacity: 0 }}
         animate={ready ? { scale: 1, opacity: 1 } : {}}
@@ -49,7 +49,7 @@ export default function HeroSection() {
       >
         <Image
           src="/images/hero_elo.jpeg"
-          alt="Iluzjonista Katowice - Grzegorz Pawleta IluzArt"
+          alt="Iluzjonista Katowice Grzegorz Pawleta, IluzArt"
           fill
           sizes="100vw"
           className="object-cover object-[center_20%]"
@@ -61,10 +61,18 @@ export default function HeroSection() {
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(26,26,94,0.12)_0%,_transparent_70%)]" />
       </motion.div>
 
-      {/* Content — staggered cascade */}
+      {/* Content - staggered cascade */}
       <div className={`relative z-10 max-w-5xl mx-auto px-6 text-center -mt-24 md:-mt-32 flex-grow flex flex-col justify-center ${ready ? "hero-typing-ready" : ""}`}>
-        {/* Typing effect h1 — CSS-driven, word-wrapped for line breaks */}
+        {/* Typing effect h1 - CSS-driven, word-wrapped for line breaks */}
         <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-serif text-cream leading-tight mb-6">
+          <motion.span
+            initial={{ opacity: 0, y: 10 }}
+            animate={ready ? { opacity: 1, y: 0 } : {}}
+            transition={{ delay: 0.2, duration: 0.6 }}
+            className="block font-sans text-gold text-xs sm:text-sm md:text-base uppercase tracking-[0.3em] mb-4"
+          >
+            Iluzjonista Katowice
+          </motion.span>
           {HERO_TITLE.split(" ").map((word, wi, words) => {
             const offset = words.slice(0, wi).reduce((a, w) => a + w.length + 1, 0);
             return (
@@ -84,12 +92,6 @@ export default function HeroSection() {
               </span>
             );
           })}
-          <span
-            className="hero-caret text-gold"
-            style={{ animationDelay: `${TYPING_START + TYPING_DURATION}s` }}
-          >
-            |
-          </span>
         </h1>
 
         <motion.h2
@@ -107,19 +109,22 @@ export default function HeroSection() {
           transition={{ delay: CASCADE_START + 0.3, duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
           className="text-cream/60 font-sans text-base md:text-lg max-w-3xl mx-auto mb-10 leading-relaxed"
         >
-          Od Bajki Pana Kleksa po kameralne wesela na Śląsku — łączę
-          iluzję ze standup comedy, tworząc pokazy, o których Twoi goście
-          będą opowiadać jeszcze długo po wydarzeniu.
+          Występowałem od Bajki Pana Kleksa po kameralne wesela na Śląsku.
+          Łączę iluzję ze standup comedy i tworzę pokazy, o których Twoi
+          goście będą opowiadać jeszcze długo po wydarzeniu.
         </motion.p>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={ready ? { opacity: 1, y: 0 } : {}}
           transition={{ delay: CASCADE_START + 0.6, duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
-          className="flex items-center justify-center"
+          className="flex flex-col sm:flex-row items-center justify-center gap-4"
         >
           <Button variant="primary" size="lg" href="https://wa.me/48882011161">
             Sprawdź dostępność terminu
+          </Button>
+          <Button variant="secondary" size="lg" href="tel:+48882011161">
+            Zadzwoń: 882 011 161
           </Button>
         </motion.div>
       </div>

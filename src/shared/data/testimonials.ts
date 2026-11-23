@@ -6,7 +6,7 @@ export interface Testimonial {
 
 export const testimonials: Testimonial[] = [
   {
-    text: "Zamówiliśmy Grzegorza na integrację firmową w Katowicach i szczerze — nie spodziewaliśmy się, że mentalizm może tak rozruszać ludzi w garniturach. Połowa biura do dziś próbuje zgadnąć, jak to zrobił.",
+    text: "Zamówiliśmy Grzegorza na integrację firmową w Katowicach i szczerze? Nie spodziewaliśmy się, że mentalizm może tak rozruszać ludzi w garniturach. Połowa biura do dziś próbuje zgadnąć, jak to zrobił.",
     author: "A.K.",
     role: "Event firmowy, Katowice",
   },
@@ -21,7 +21,7 @@ export const testimonials: Testimonial[] = [
     role: "Urodziny dziecka, Katowice",
   },
   {
-    text: "Współpracuję z Grzegorzem regularnie — trzy eventy, za każdym razem inny program, za każdym razem klienci zachwyceni. To nie jest \u201Ekolejny magik z katalogu\u201D.",
+    text: "Współpracuję z Grzegorzem regularnie. Trzy eventy, za każdym razem inny program, za każdym razem klienci zachwyceni. To nie jest \u201Ekolejny magik z katalogu\u201D.",
     author: "M.W.",
     role: "Event manager, Śląsk",
   },

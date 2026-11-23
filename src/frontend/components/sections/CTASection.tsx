@@ -19,7 +19,7 @@ export default function CTASection() {
 
         <ScrollReveal delay={0.15}>
           <p className="text-cream/60 font-sans text-lg md:text-xl mb-10 leading-relaxed">
-            Napisz lub zadzwoń — ustalimy szczegóły i sprawdzimy dostępność terminu.
+            Napisz lub zadzwoń, a ustalimy szczegóły i sprawdzimy dostępność terminu.
           </p>
         </ScrollReveal>
 

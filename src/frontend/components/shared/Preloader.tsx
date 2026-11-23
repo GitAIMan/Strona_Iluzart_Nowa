@@ -15,7 +15,7 @@ function CurtainPanel({ side }: { side: "left" | "right" }) {
       {/* Base deep red */}
       <div className="absolute inset-0" style={{ background: "#2a0606" }} />
 
-      {/* Velvet folds — multiple layered gradients for 3D depth */}
+      {/* Velvet folds - multiple layered gradients for 3D depth */}
       <div
         className="absolute inset-0"
         style={{
@@ -34,7 +34,7 @@ function CurtainPanel({ side }: { side: "left" | "right" }) {
         }}
       />
 
-      {/* Radial highlights on each fold — simulates light hitting convex surfaces */}
+      {/* Radial highlights on each fold - simulates light hitting convex surfaces */}
       <div
         className="absolute inset-0"
         style={{
@@ -52,7 +52,7 @@ function CurtainPanel({ side }: { side: "left" | "right" }) {
         }}
       />
 
-      {/* Vertical shading — darker at bottom, warm highlight at top */}
+      {/* Vertical shading - darker at bottom, warm highlight at top */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
@@ -67,7 +67,7 @@ function CurtainPanel({ side }: { side: "left" | "right" }) {
         }}
       />
 
-      {/* Gold trim at top — theatrical curtain rod highlight */}
+      {/* Gold trim at top - theatrical curtain rod highlight */}
       <div
         className="absolute top-0 left-0 right-0 h-3 pointer-events-none"
         style={{
@@ -88,7 +88,7 @@ function CurtainPanel({ side }: { side: "left" | "right" }) {
         }}
       />
 
-      {/* Outer edge shadow — fold gathers at the side */}
+      {/* Outer edge shadow - fold gathers at the side */}
       <div
         className={`absolute top-0 bottom-0 w-12 pointer-events-none ${
           side === "left" ? "left-0" : "right-0"
@@ -101,7 +101,7 @@ function CurtainPanel({ side }: { side: "left" | "right" }) {
         }}
       />
 
-      {/* SVG wavy edge — breathing folds */}
+      {/* SVG wavy edge - breathing folds */}
       <svg
         className={`absolute top-0 h-full w-[20px] ${
           side === "left" ? "-right-[10px]" : "-left-[10px]"
@@ -290,10 +290,10 @@ export default function Preloader() {
           transition={{ duration: 1.2, ease: "easeInOut" }}
           className="fixed inset-0 z-[200]"
         >
-          {/* Background — always dark */}
+          {/* Background - always dark */}
           <div className="absolute inset-0 bg-background" />
 
-          {/* Magic portal loading — centered */}
+          {/* Magic portal loading - centered */}
           {(phase === "show" || phase === "curtain-closed") && (
             <div className="absolute inset-0 flex items-center justify-center z-50">
               {/* Outer rotating ring */}
@@ -426,7 +426,7 @@ export default function Preloader() {
                 <CurtainPanel side="right" />
               </motion.div>
 
-              {/* Rope — visible when waiting for pull */}
+              {/* Rope - visible when waiting for pull */}
               {phase === "rope" && (
                 <motion.div
                   className="absolute left-1/2 top-[12%] -translate-x-1/2 z-30 cursor-grab active:cursor-grabbing touch-none"
@@ -463,7 +463,7 @@ export default function Preloader() {
             </motion.div>
           )}
 
-          {/* ── Fadeout — logo blurs away, page emerges ── */}
+          {/* ── Fadeout - logo blurs away, page emerges ── */}
           {phase === "fadeout" && (
             <motion.div
               initial={{ opacity: 1, filter: "blur(0px)", scale: 1 }}

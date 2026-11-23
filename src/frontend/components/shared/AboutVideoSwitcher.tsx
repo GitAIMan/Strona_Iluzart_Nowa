@@ -17,7 +17,7 @@ export default function AboutVideoSwitcher() {
   const handleEnded = useCallback(
     (who: "A" | "B") => {
       if (who === "A" && activeA) {
-        // A skończyło — przełącz na B, A dostaje kolejny src
+        // A skończyło - przełącz na B, A dostaje kolejny src
         setActiveA(false);
         setIndexA((i) => (i + 2) % VIDEOS.length);
         refB.current?.play().catch(() => {});

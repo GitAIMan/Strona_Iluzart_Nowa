@@ -8,5 +8,5 @@ export const prisma = globalForPrisma.prisma ?? new PrismaClient();
 
 if (process.env.NODE_ENV !== "production") globalForPrisma.prisma = prisma;
 
-// Eager connect — eliminates cold start delay on first query
+// Eager connect - eliminates cold start delay on first query
 prisma.$connect().catch(() => {});

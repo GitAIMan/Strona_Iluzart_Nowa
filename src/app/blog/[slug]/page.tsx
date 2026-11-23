@@ -57,7 +57,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 
   return {
-    title: `${post.title} - IluzArt Blog`,
+    title: `${post.title} | Blog`,
     description: post.excerpt || undefined,
   };
 }

@@ -18,7 +18,7 @@ interface Post {
 }
 
 export default function BlogView({ posts }: { posts: Post[] }) {
-  const [view, setView] = useState<"drag" | "grid">("drag");
+  const [view, setView] = useState<"drag" | "grid">("grid");
 
   return (
     <div>

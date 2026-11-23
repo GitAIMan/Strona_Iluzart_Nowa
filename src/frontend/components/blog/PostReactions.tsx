@@ -55,7 +55,7 @@ export default function PostReactions({ postId }: PostReactionsProps) {
         body: JSON.stringify({ emoji, visitorId }),
       }).catch(() => null);
 
-      // If conflict (already reacted) — revert optimistic update
+      // If conflict (already reacted) - revert optimistic update
       if (res && res.status === 409) {
         setCounts((prev) => ({
           ...prev,

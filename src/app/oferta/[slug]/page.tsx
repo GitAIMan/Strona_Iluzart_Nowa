@@ -26,7 +26,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 
   return {
-    title: `${service.name} | Iluzjonista Śląsk - IluzArt`,
+    title: `${service.name} | Iluzjonista Śląsk`,
     description: `${service.description} Iluzjonista Katowice i Śląsk. ${service.audience}, czas trwania: ${service.duration}.`,
   };
 }

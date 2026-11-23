@@ -7,7 +7,7 @@ import ServiceEmoji from "@frontend/components/ui/ServiceEmoji";
 import { services } from "@shared/data/services";
 
 export const metadata = generatePageMetadata({
-  title: "Pokazy Iluzji Katowice – Wesela, Eventy, Urodziny",
+  title: "Pokazy Iluzji Katowice | Wesela, Eventy, Urodziny",
   description:
     "Pokazy magii i mentalizmu w Katowicach i na Śląsku. Wesela, eventy firmowe, urodziny, close-up magic. Iluzjonista łączący magię ze standup comedy.",
 });
@@ -33,7 +33,7 @@ export default function OfertaPage() {
             <ScrollReveal delay={0.2}>
               <p className="text-lg text-cream/80 leading-relaxed font-sans">
                 Poniżej znajdziesz kierunki, w których pracuję najczęściej.
-                Potraktuj je jako punkt wyjścia — szczegóły zawsze ustalamy
+                Potraktuj je jako punkt wyjścia, a szczegóły zawsze ustalamy
                 pod konkretne wydarzenie.
               </p>
             </ScrollReveal>

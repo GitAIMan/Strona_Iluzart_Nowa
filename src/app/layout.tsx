@@ -5,6 +5,7 @@ import { SITE } from "@shared/constants";
 import LenisProvider from "@frontend/components/shared/LenisProvider";
 import Navbar from "@frontend/components/layout/Navbar";
 import Footer from "@frontend/components/layout/Footer";
+import MobileCallBar from "@frontend/components/layout/MobileCallBar";
 import SchemaOrg from "@frontend/components/shared/SchemaOrg";
 import AuthProvider from "@frontend/components/shared/AuthProvider";
 import "./globals.css";
@@ -60,6 +61,7 @@ export default function RootLayout({
             <Navbar />
             <main className="relative z-10">{children}</main>
             <Footer />
+            <MobileCallBar />
           </LenisProvider>
         </AuthProvider>
       </body>
