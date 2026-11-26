@@ -2,7 +2,7 @@ import { generatePageMetadata } from "@shared/metadata";
 import PageTransition from "@frontend/components/layout/PageTransition";
 import BlogDeck, { type DeckPost } from "@frontend/components/blog/BlogDeck";
 import { prisma } from "@backend/lib/prisma";
-import { readingTime } from "@shared/utils";
+import { readingTime, contentSnippet } from "@shared/utils";
 
 export const metadata = generatePageMetadata({
   title: "Blog | Iluzjonista Katowice",
@@ -29,7 +29,7 @@ async function getPosts(): Promise<DeckPost[]> {
         content: true,
       },
     });
-    return posts.map(({ content, ...p }) => ({ ...p, minutes: readingTime(content) }));
+    return posts.map(({ content, ...p }) => ({ ...p, minutes: readingTime(content), snippet: p.excerpt || contentSnippet(content) }));
   } catch {
     return [];
   }

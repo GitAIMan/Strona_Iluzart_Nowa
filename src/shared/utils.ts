@@ -52,3 +52,14 @@ function extractText(node: unknown): string {
   }
   return "";
 }
+
+/** Początek treści wpisu jako zwykły tekst (do kart na blogu, gdy brak zajawki) */
+export function contentSnippet(content: string, max = 220): string {
+  try {
+    const text = extractText(JSON.parse(content)).replace(/\s+/g, " ").trim();
+    if (text.length <= max) return text;
+    return text.slice(0, text.lastIndexOf(" ", max)) + "…";
+  } catch {
+    return "";
+  }
+}

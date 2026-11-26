@@ -11,6 +11,8 @@ export interface DeckPost {
   coverImageUrl: string | null;
   publishedAt: Date | string | null;
   minutes: number;
+  /** Zajawka albo początek treści */
+  snippet: string;
 }
 
 /* Rogi karty: figura + kolor (np. A ♠) */
@@ -77,9 +79,17 @@ export default function BlogDeck({ posts }: { posts: DeckPost[] }) {
                   <h3 className="font-serif text-cream text-[22px] leading-[1.2] group-hover:text-gold-light transition-colors">
                     {p.title}
                   </h3>
-                  <span className="mt-auto pt-3 font-sans text-xs text-cream/40">
-                    {p.publishedAt ? `${formatDate(p.publishedAt)} · ` : ""}{p.minutes} min
-                  </span>
+                  {p.snippet && (
+                    <p className="font-sans text-[15px] leading-relaxed text-cream/60 line-clamp-4">{p.snippet}</p>
+                  )}
+                  <div className="mt-auto pt-4 flex items-end justify-between gap-3">
+                    <span className="font-sans text-xs text-cream/40">
+                      {p.publishedAt ? `${formatDate(p.publishedAt)} · ` : ""}{p.minutes} min
+                    </span>
+                    <span className="mr-6 font-sans text-sm text-cream border-b border-cream/40 pb-0.5 group-hover:border-gold transition-colors">
+                      Czytaj wpis →
+                    </span>
+                  </div>
                 </div>
               </Link>
             );
