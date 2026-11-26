@@ -7,7 +7,6 @@ import {
   AudiencePaths,
   QuoteSteps,
 } from "@frontend/components/sections/HomeSections";
-import AvailabilitySection from "@frontend/components/sections/AvailabilitySection";
 import SectionSkeleton from "@frontend/components/ui/SectionSkeleton";
 
 const FAQSection = dynamic(
@@ -49,7 +48,6 @@ export default async function HomePage() {
       <ShowreelSection />
       <AudiencePaths />
       <QuoteSteps />
-      <AvailabilitySection />
       <FAQSection />
       {posts.length > 0 && <BlogPreview posts={posts} />}
     </>

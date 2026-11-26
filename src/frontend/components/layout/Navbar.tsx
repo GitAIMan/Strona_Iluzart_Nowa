@@ -71,7 +71,7 @@ export default function Navbar() {
             <Button
               variant="primary"
               size="sm"
-              href="/#termin"
+              href="/kontakt"
             >
               Sprawdź termin
             </Button>

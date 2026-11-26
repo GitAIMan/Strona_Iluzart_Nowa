@@ -140,9 +140,9 @@ export default function OmniePage() {
       {/* Rozdział 4 */}
       <section className="grain bg-lvl2">
         <div className={`${WRAP} py-20 md:py-24`}>
-          <div className="md:ml-auto md:max-w-3xl md:text-right">
+          <div className="mx-auto max-w-3xl text-center">
             <h2 className="font-serif text-cream text-3xl md:text-5xl leading-[1.1] mb-6">Każdy pokaz osobno</h2>
-            <p className="font-sans text-cream/80 text-lg leading-relaxed max-w-2xl md:ml-auto">
+            <p className="font-sans text-cream/80 text-lg leading-relaxed max-w-2xl mx-auto">
               Inaczej pracuję na weselu, inaczej na evencie firmowym, a jeszcze
               inaczej przy kameralnych urodzinach. Zawsze zależy mi na jednym:
               żeby po pokazie ktoś podszedł i powiedział: &bdquo;to było
@@ -154,7 +154,7 @@ export default function OmniePage() {
                 ["Firma", "pod branżę, logo, przekaz"],
                 ["Urodziny", "dzieci na scenie, jubilat w roli głównej"],
               ].map(([t, d]) => (
-                <div key={t} className="py-4 pr-5 md:pr-0 md:pl-5 border-b border-white/10">
+                <div key={t} className="py-4 px-3 border-b border-white/10">
                   <b className="block font-serif text-cream text-xl mb-1">{t}</b>
                   <span className="font-sans text-sm text-cream/55">{d}</span>
                 </div>
@@ -243,7 +243,7 @@ export default function OmniePage() {
               882 011 161
             </a>
             <Link
-              href="/#termin"
+              href="/kontakt"
               className="inline-flex items-center justify-center rounded-md bg-gold px-7 py-4 font-sans font-semibold text-background transition-colors hover:bg-gold-light"
             >
               Sprawdź wolny termin

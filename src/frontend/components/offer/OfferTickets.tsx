@@ -125,7 +125,7 @@ export default function OfferTickets({ tickets }: { tickets: Ticket[] }) {
                 {t.duration}
               </div>
               <Link
-                href="/#termin"
+                href="/kontakt"
                 className="w-full rounded-md bg-gold px-3 py-2 font-sans text-[13px] font-semibold text-background hover:bg-gold-light transition-colors"
               >
                 Rezerwuj

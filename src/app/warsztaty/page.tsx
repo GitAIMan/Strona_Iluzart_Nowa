@@ -32,7 +32,7 @@ const skills = [
 function AskLink() {
   return (
     <Link
-      href="/#termin"
+      href="/kontakt"
       className="inline-flex items-center justify-center rounded-md bg-gold px-6 py-3 font-sans font-semibold text-background transition-colors hover:bg-gold-light"
     >
       Zapytaj o termin

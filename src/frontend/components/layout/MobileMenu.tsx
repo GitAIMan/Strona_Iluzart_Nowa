@@ -42,7 +42,7 @@ export default function MobileMenu({ onClose }: MobileMenuProps) {
           transition={{ delay: 0.3, duration: 0.3 }}
           className="mt-4"
         >
-          <Button variant="primary" size="lg" href="/#termin">
+          <Button variant="primary" size="lg" href="/kontakt">
             Sprawdź termin
           </Button>
         </motion.div>

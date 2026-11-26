@@ -110,7 +110,7 @@ export default function HeroSection() {
             className="mt-8 flex flex-wrap items-center gap-x-7 gap-y-4"
           >
             <a
-              href="#termin"
+              href="/kontakt"
               className="inline-flex items-center justify-center rounded-md bg-gold px-7 py-4 font-sans font-semibold text-background transition-colors hover:bg-gold-light"
             >
               Sprawdź wolny termin

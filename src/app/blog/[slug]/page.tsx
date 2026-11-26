@@ -145,7 +145,7 @@ export default async function BlogPostPage({ params }: Props) {
               <h2 className="font-serif text-cream text-2xl leading-tight mt-2 mb-2">Sprawdź, czy jestem wolny</h2>
               <p className="font-sans text-sm text-cream/60 mb-5">Podaj datę i miejsce. Odpowiadam tego samego dnia.</p>
               <Link
-                href="/#termin"
+                href="/kontakt"
                 className="inline-flex items-center justify-center rounded-md bg-gold px-5 py-3 font-sans font-semibold text-background transition-colors hover:bg-gold-light"
               >
                 Sprawdź wolny termin

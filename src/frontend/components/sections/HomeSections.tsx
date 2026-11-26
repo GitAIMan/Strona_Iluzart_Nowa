@@ -7,7 +7,7 @@ const WRAP = "max-w-7xl mx-auto px-5 sm:px-8 lg:px-10";
 function CheckDateLink() {
   return (
     <a
-      href="#termin"
+      href="/kontakt"
       className="inline-flex items-center justify-center rounded-md bg-gold px-6 py-3 font-sans font-semibold text-background transition-colors hover:bg-gold-light"
     >
       Sprawdź wolny termin
