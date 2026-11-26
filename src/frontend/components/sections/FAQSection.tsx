@@ -15,7 +15,7 @@ export default function FAQSection() {
 
   return (
     <section className="relative py-20 md:py-28 overflow-hidden">
-      <div className="absolute inset-0 bg-navy-radial opacity-50 pointer-events-none" />
+      <div className="absolute inset-0 bg-wine-radial opacity-50 pointer-events-none" />
 
       <div className="relative z-10 max-w-3xl mx-auto px-6">
         <ScrollReveal>
@@ -28,7 +28,7 @@ export default function FAQSection() {
         <div className="flex flex-col gap-4">
           {faqItems.map((item, index) => (
             <ScrollReveal key={index} delay={index * 0.1}>
-              <div className="rounded-lg bg-white/[0.03] backdrop-blur-sm border border-navy/20 hover:border-navy/40 transition-colors duration-300">
+              <div className="rounded-lg bg-white/[0.03] backdrop-blur-sm border border-wine/20 hover:border-wine/40 transition-colors duration-300">
                 <button
                   onClick={() => toggle(index)}
                   className="w-full flex items-center justify-between px-6 py-5 text-left cursor-pointer"

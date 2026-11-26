@@ -58,7 +58,7 @@ export default function HeroSection() {
         />
         <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-transparent to-background" />
         <div className="absolute inset-0 bg-gradient-to-r from-background/30 via-transparent to-background/30" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(26,26,94,0.12)_0%,_transparent_70%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(112,21,38,0.12)_0%,_transparent_70%)]" />
       </motion.div>
 
       {/* Content - staggered cascade */}

@@ -47,7 +47,7 @@ function AnimatedCounter({
       className="flex flex-col items-center py-8 px-6"
     >
       <div className="relative text-5xl md:text-6xl lg:text-7xl font-serif text-cream font-bold mb-2">
-        <div className="absolute inset-0 blur-2xl bg-navy/20 rounded-full pointer-events-none" />
+        <div className="absolute inset-0 blur-2xl bg-wine/20 rounded-full pointer-events-none" />
         <span className="relative">
           {count}
           <span className="text-gold">{suffix}</span>
@@ -62,9 +62,9 @@ function AnimatedCounter({
 
 export default function StatsSection() {
   return (
-    <section className="relative bg-gradient-to-b from-navy-dark/20 via-surface to-surface py-16 md:py-20 overflow-hidden">
-      {/* Navy Radial Glow */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(26,26,94,0.12)_0%,_transparent_70%)] pointer-events-none" />
+    <section className="relative bg-gradient-to-b from-wine-dark/20 via-surface to-surface py-16 md:py-20 overflow-hidden">
+      {/* Wine Radial Glow */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(112,21,38,0.12)_0%,_transparent_70%)] pointer-events-none" />
 
       <div className="relative z-10 max-w-5xl mx-auto px-6">
         <div className="flex flex-col md:flex-row items-center justify-center md:divide-x md:divide-gold/30">

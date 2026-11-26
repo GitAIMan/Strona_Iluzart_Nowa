@@ -124,7 +124,7 @@ export default async function BlogPostPage({ params }: Props) {
           </div>
         )}
         <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent pointer-events-none" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_rgba(26,26,94,0.12)_0%,_transparent_60%)] pointer-events-none" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_rgba(112,21,38,0.12)_0%,_transparent_60%)] pointer-events-none" />
       </section>
 
       {/* Post content */}
@@ -185,7 +185,7 @@ export default async function BlogPostPage({ params }: Props) {
                     <Link
                       key={related.slug}
                       href={`/blog/${related.slug}`}
-                      className="group card-navy rounded-xl overflow-hidden p-0"
+                      className="group card-wine rounded-xl overflow-hidden p-0"
                     >
                       {related.coverImageUrl ? (
                         <div className="relative aspect-[16/9] overflow-hidden">

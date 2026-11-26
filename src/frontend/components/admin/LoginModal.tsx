@@ -83,7 +83,7 @@ export default function LoginModal({ onClose }: LoginModalProps) {
                   setError(false);
                 }}
                 placeholder="Hasło"
-                className="w-full px-4 py-3 bg-background border border-white/10 rounded-lg text-cream placeholder:text-cream/30 focus:outline-none focus:border-navy-light transition-all"
+                className="w-full px-4 py-3 bg-background border border-white/10 rounded-lg text-cream placeholder:text-cream/30 focus:outline-none focus:border-wine-light transition-all"
                 autoFocus
               />
               {error && (
@@ -96,7 +96,7 @@ export default function LoginModal({ onClose }: LoginModalProps) {
             <button
               type="submit"
               disabled={isLoading || !password}
-              className="w-full py-3 bg-navy hover:bg-navy-light text-cream rounded-lg font-medium transition-all duration-300 disabled:opacity-50"
+              className="w-full py-3 bg-wine hover:bg-wine-light text-cream rounded-lg font-medium transition-all duration-300 disabled:opacity-50"
             >
               {isLoading ? "Logowanie..." : "Zaloguj się"}
             </button>

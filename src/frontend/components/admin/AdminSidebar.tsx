@@ -47,7 +47,7 @@ function SidebarContent({
       <div className="p-6 border-b border-white/5">
         <div className="flex items-center gap-3">
           <span className="text-xl font-serif text-cream">IluzArt</span>
-          <span className="px-2 py-0.5 text-xs font-medium bg-navy/50 text-cream/70 rounded-md border border-navy-light/30">
+          <span className="px-2 py-0.5 text-xs font-medium bg-wine/50 text-cream/70 rounded-md border border-wine-light/30">
             Admin
           </span>
         </div>
@@ -68,7 +68,7 @@ function SidebarContent({
               className={cn(
                 "flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all duration-200",
                 isActive
-                  ? "bg-navy text-cream"
+                  ? "bg-wine text-cream"
                   : "text-cream/50 hover:text-cream hover:bg-white/5"
               )}
             >
@@ -122,7 +122,7 @@ export default function AdminSidebar({ unreadCount = 0 }: { unreadCount?: number
       <div className="md:hidden sticky top-0 z-40 flex items-center justify-between px-4 py-3 bg-surface border-b border-white/5">
         <div className="flex items-center gap-2">
           <span className="text-lg font-serif text-cream">IluzArt</span>
-          <span className="px-2 py-0.5 text-xs font-medium bg-navy/50 text-cream/70 rounded-md border border-navy-light/30">
+          <span className="px-2 py-0.5 text-xs font-medium bg-wine/50 text-cream/70 rounded-md border border-wine-light/30">
             Admin
           </span>
         </div>

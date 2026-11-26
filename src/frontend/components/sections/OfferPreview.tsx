@@ -18,10 +18,10 @@ function ServiceCard({ service }: { service: ServiceData }) {
     >
       <Link
         href={`/oferta/${service.slug}`}
-        className="block card-navy rounded-lg overflow-hidden group"
+        className="block card-wine rounded-lg overflow-hidden group"
       >
-        <div className="relative aspect-[16/9] bg-gradient-to-br from-navy-dark to-navy flex items-center justify-center overflow-hidden">
-          <div className="absolute inset-0 bg-navy-radial opacity-40" />
+        <div className="relative aspect-[16/9] bg-gradient-to-br from-wine-dark to-wine flex items-center justify-center overflow-hidden">
+          <div className="absolute inset-0 bg-wine-radial opacity-40" />
           <ServiceEmoji
             icon={service.icon}
             size={140}
@@ -49,8 +49,8 @@ function ServiceCard({ service }: { service: ServiceData }) {
 export default function OfferPreview() {
   return (
     <section className="relative py-20 md:py-28 overflow-hidden">
-      {/* Navy Mesh Background */}
-      <div className="absolute inset-0 bg-navy-mesh pointer-events-none" />
+      {/* Wine Mesh Background */}
+      <div className="absolute inset-0 bg-wine-mesh pointer-events-none" />
 
       <div className="relative z-10 max-w-6xl mx-auto px-6">
         <ScrollReveal>

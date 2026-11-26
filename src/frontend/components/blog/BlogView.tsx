@@ -29,7 +29,7 @@ export default function BlogView({ posts }: { posts: Post[] }) {
             className={cn(
               "px-4 py-2 text-sm rounded-full transition-colors font-sans",
               view === "drag"
-                ? "bg-navy text-cream"
+                ? "bg-wine text-cream"
                 : "text-cream/50 hover:text-cream"
             )}
           >
@@ -40,7 +40,7 @@ export default function BlogView({ posts }: { posts: Post[] }) {
             className={cn(
               "px-4 py-2 text-sm rounded-full transition-colors font-sans",
               view === "grid"
-                ? "bg-navy text-cream"
+                ? "bg-wine text-cream"
                 : "text-cream/50 hover:text-cream"
             )}
           >

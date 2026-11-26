@@ -33,7 +33,7 @@ export default function MobileCallBar() {
         </a>
         <a
           href={CONTACT.whatsapp}
-          className="flex-1 inline-flex items-center justify-center rounded-lg border border-navy-light text-cream font-sans py-3"
+          className="flex-1 inline-flex items-center justify-center rounded-lg border border-wine-light text-cream font-sans py-3"
         >
           WhatsApp
         </a>

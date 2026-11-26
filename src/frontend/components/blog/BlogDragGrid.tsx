@@ -60,7 +60,7 @@ export default function BlogDragGrid({ posts }: { posts: Post[] }) {
                   draggable={false}
                 />
               ) : (
-                <div className="pointer-events-none absolute inset-0 flex items-center justify-center bg-navy/30 text-cream/40 text-xs font-sans px-2 text-center">
+                <div className="pointer-events-none absolute inset-0 flex items-center justify-center bg-wine/30 text-cream/40 text-xs font-sans px-2 text-center">
                   {post.title}
                 </div>
               )}

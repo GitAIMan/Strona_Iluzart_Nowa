@@ -43,8 +43,8 @@ export default function WarsztatyPage() {
     <PageTransition>
       {/* Hero section */}
       <section className="relative pt-32 pb-20 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-navy-dark via-navy-dark/40 to-background" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(26,26,94,0.15)_0%,_transparent_70%)]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-wine-dark via-wine-dark/40 to-background" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(112,21,38,0.15)_0%,_transparent_70%)]" />
         <div className="relative z-10 max-w-4xl mx-auto px-6">
           <SectionHeading
             title="Warsztaty Magii"

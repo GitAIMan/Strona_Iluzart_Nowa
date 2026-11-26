@@ -7,14 +7,14 @@ import Button from "@frontend/components/ui/Button";
 export default function AboutPreview() {
   return (
     <section className="relative py-20 md:py-28 overflow-hidden">
-      {/* Navy Radial Background */}
-      <div className="absolute inset-0 bg-navy-radial opacity-50 pointer-events-none" />
+      {/* Wine Radial Background */}
+      <div className="absolute inset-0 bg-wine-radial opacity-50 pointer-events-none" />
 
       <div className="relative z-10 max-w-6xl mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center">
           {/* Left Column - Text */}
           <ScrollReveal direction="left">
-            <div className="border-l-2 border-navy-light pl-6">
+            <div className="border-l-2 border-wine-light pl-6">
             <SectionHeading
               title="O mnie"
               subtitle="Mistrz Iluzji"

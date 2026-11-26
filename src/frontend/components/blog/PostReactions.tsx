@@ -82,10 +82,10 @@ export default function PostReactions({ postId }: PostReactionsProps) {
                 relative flex flex-col items-center gap-1 px-3 py-2 rounded-xl transition-all duration-300
                 ${
                   userReaction === key
-                    ? "bg-navy/30 border border-navy/40 scale-105 cursor-default"
+                    ? "bg-wine/30 border border-wine/40 scale-105 cursor-default"
                     : userReaction
                       ? "bg-surface/50 border border-white/5 opacity-40 cursor-default"
-                      : "bg-surface border border-white/5 hover:border-navy/30 hover:bg-navy/10 hover:scale-110 cursor-pointer"
+                      : "bg-surface border border-white/5 hover:border-wine/30 hover:bg-wine/10 hover:scale-110 cursor-pointer"
                 }
               `}
             >

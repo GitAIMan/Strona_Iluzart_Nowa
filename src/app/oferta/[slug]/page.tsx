@@ -46,9 +46,9 @@ export default async function ServiceDetailPage({ params }: Props) {
   return (
     <PageTransition>
       {/* 1. Hero section */}
-      <section className="relative pt-32 pb-24 overflow-hidden bg-navy-spotlight">
-        <div className="absolute inset-0 bg-navy-radial opacity-50" />
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-navy-dark/20 to-background" />
+      <section className="relative pt-32 pb-24 overflow-hidden bg-wine-spotlight">
+        <div className="absolute inset-0 bg-wine-radial opacity-50" />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-wine-dark/20 to-background" />
         <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
           <ScrollReveal>
             <p className="text-gold text-sm uppercase tracking-[0.2em] font-sans font-medium mb-6">
@@ -68,13 +68,13 @@ export default async function ServiceDetailPage({ params }: Props) {
 
             {/* Badges */}
             <div className="flex flex-wrap items-center justify-center gap-3 mb-10">
-              <span className="bg-navy/50 border border-navy-light/30 text-cream/70 text-sm px-4 py-1.5 rounded-full">
+              <span className="bg-wine/50 border border-wine-light/30 text-cream/70 text-sm px-4 py-1.5 rounded-full">
                 {service.audience}
               </span>
-              <span className="bg-navy/50 border border-navy-light/30 text-cream/70 text-sm px-4 py-1.5 rounded-full">
+              <span className="bg-wine/50 border border-wine-light/30 text-cream/70 text-sm px-4 py-1.5 rounded-full">
                 {service.duration}
               </span>
-              <span className="bg-navy/50 border border-navy-light/30 text-gold/80 text-sm px-4 py-1.5 rounded-full">
+              <span className="bg-wine/50 border border-wine-light/30 text-gold/80 text-sm px-4 py-1.5 rounded-full">
                 {service.priceRange}
               </span>
             </div>
@@ -101,7 +101,7 @@ export default async function ServiceDetailPage({ params }: Props) {
       <section className="py-20">
         <div className="max-w-3xl mx-auto px-6">
           <ScrollReveal delay={0.1}>
-            <div className="border-l-2 border-navy-light pl-8">
+            <div className="border-l-2 border-wine-light pl-8">
               <p className="text-lg leading-relaxed text-cream/80 font-sans">
                 {service.details}
               </p>
@@ -111,7 +111,7 @@ export default async function ServiceDetailPage({ params }: Props) {
       </section>
 
       {/* 3. Highlights section */}
-      <section className="relative py-20 bg-navy-mesh">
+      <section className="relative py-20 bg-wine-mesh">
         <div className="absolute inset-0 bg-gradient-to-b from-background via-transparent to-background pointer-events-none" />
         <div className="relative z-10 max-w-4xl mx-auto px-6">
           <ScrollReveal>
@@ -123,7 +123,7 @@ export default async function ServiceDetailPage({ params }: Props) {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {service.highlights.map((highlight, index) => (
               <ScrollReveal key={index} delay={index * 0.1}>
-                <div className="card-navy rounded-xl p-6 flex items-start gap-4">
+                <div className="card-wine rounded-xl p-6 flex items-start gap-4">
                   {/* Gold checkmark */}
                   <span className="flex-shrink-0 mt-0.5 text-gold">
                     <svg
@@ -154,7 +154,7 @@ export default async function ServiceDetailPage({ params }: Props) {
         <div className="max-w-4xl mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <ScrollReveal delay={0}>
-              <div className="glass rounded-xl p-8 text-center bg-gradient-to-br from-navy-dark/60 to-navy/20 border border-navy-light/10">
+              <div className="glass rounded-xl p-8 text-center bg-gradient-to-br from-wine-dark/60 to-wine/20 border border-wine-light/10">
                 <div className="mb-4 text-gold flex justify-center">
                   <svg
                     width="28"
@@ -182,7 +182,7 @@ export default async function ServiceDetailPage({ params }: Props) {
             </ScrollReveal>
 
             <ScrollReveal delay={0.1}>
-              <div className="glass rounded-xl p-8 text-center bg-gradient-to-br from-navy-dark/60 to-navy/20 border border-navy-light/10">
+              <div className="glass rounded-xl p-8 text-center bg-gradient-to-br from-wine-dark/60 to-wine/20 border border-wine-light/10">
                 <div className="mb-4 text-gold flex justify-center">
                   <svg
                     width="28"
@@ -208,7 +208,7 @@ export default async function ServiceDetailPage({ params }: Props) {
             </ScrollReveal>
 
             <ScrollReveal delay={0.2}>
-              <div className="glass rounded-xl p-8 text-center bg-gradient-to-br from-navy-dark/60 to-navy/20 border border-navy-light/10">
+              <div className="glass rounded-xl p-8 text-center bg-gradient-to-br from-wine-dark/60 to-wine/20 border border-wine-light/10">
                 <div className="mb-4 text-gold flex justify-center">
                   <svg
                     width="28"
@@ -238,8 +238,8 @@ export default async function ServiceDetailPage({ params }: Props) {
 
       {/* 5. CTA section */}
       <section className="relative py-20 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-navy-dark via-navy to-navy-dark" />
-        <div className="absolute inset-0 bg-navy-radial opacity-30" />
+        <div className="absolute inset-0 bg-gradient-to-r from-wine-dark via-wine to-wine-dark" />
+        <div className="absolute inset-0 bg-wine-radial opacity-30" />
         <div className="relative z-10 max-w-2xl mx-auto px-6 text-center">
           <ScrollReveal>
             <h2 className="text-2xl md:text-3xl font-serif text-cream mb-4">
@@ -277,8 +277,8 @@ export default async function ServiceDetailPage({ params }: Props) {
                   href={`/oferta/${related.slug}`}
                   className="group block h-full"
                 >
-                  <div className="card-navy rounded-xl p-6 h-full flex flex-col items-center text-center">
-                    <div className="w-12 h-12 rounded-full bg-gradient-to-br from-navy to-navy-dark flex items-center justify-center mb-4 group-hover:shadow-[0_0_20px_rgba(201,168,76,0.15)] transition-shadow duration-500">
+                  <div className="card-wine rounded-xl p-6 h-full flex flex-col items-center text-center">
+                    <div className="w-12 h-12 rounded-full bg-gradient-to-br from-wine to-wine-dark flex items-center justify-center mb-4 group-hover:shadow-[0_0_20px_rgba(201,168,76,0.15)] transition-shadow duration-500">
                       <ServiceEmoji icon={related.icon} size={32} alt={related.name} />
                     </div>
                     <h3 className="text-lg font-serif text-cream group-hover:text-gold transition-colors duration-300 mb-2">

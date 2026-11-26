@@ -114,7 +114,7 @@ export default function ImageCropper({
                 onClick={() => applyAspect(preset.aspect)}
                 className={`px-3 py-1.5 text-sm rounded-lg transition-colors touch-manipulation ${
                   aspect === preset.aspect
-                    ? "bg-navy text-cream"
+                    ? "bg-wine text-cream"
                     : "bg-surface-light text-cream/50 hover:text-cream"
                 }`}
               >
@@ -150,7 +150,7 @@ export default function ImageCropper({
           </button>
           <button
             onClick={handleConfirm}
-            className="px-4 py-2 text-sm bg-navy hover:bg-navy-light text-cream rounded-lg transition-colors"
+            className="px-4 py-2 text-sm bg-wine hover:bg-wine-light text-cream rounded-lg transition-colors"
           >
             Zatwierdź
           </button>

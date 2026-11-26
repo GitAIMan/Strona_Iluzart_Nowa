@@ -17,7 +17,7 @@ const variants = {
   primary:
     "bg-gold-gradient text-background font-semibold hover:shadow-[0_0_30px_rgba(201,168,76,0.3)] active:scale-[0.98]",
   secondary:
-    "bg-transparent border border-navy-light text-cream hover:bg-navy/20 hover:border-navy hover:shadow-[0_0_20px_rgba(26,26,94,0.3)]",
+    "bg-transparent border border-wine-light text-cream hover:bg-wine/20 hover:border-wine hover:shadow-[0_0_20px_rgba(112,21,38,0.3)]",
   ghost:
     "bg-transparent text-cream hover:text-gold",
 };

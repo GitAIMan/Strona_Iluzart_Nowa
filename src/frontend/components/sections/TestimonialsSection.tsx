@@ -5,8 +5,8 @@ import { testimonials } from "@shared/data/testimonials";
 export default function TestimonialsSection() {
   return (
     <section className="relative py-20 md:py-28 overflow-hidden">
-      {/* Navy Spotlight Background */}
-      <div className="absolute inset-0 bg-navy-spotlight pointer-events-none" />
+      {/* Wine Spotlight Background */}
+      <div className="absolute inset-0 bg-wine-spotlight pointer-events-none" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-6">
         <ScrollReveal>
@@ -16,7 +16,7 @@ export default function TestimonialsSection() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
           {testimonials.map((testimonial, index) => (
             <ScrollReveal key={index} delay={index * 0.1}>
-              <div className="rounded-lg p-6 h-full flex flex-col bg-white/[0.03] backdrop-blur-sm border border-navy/20 hover:border-navy/40 hover:shadow-[0_0_25px_rgba(26,26,94,0.2)] transition-all duration-300">
+              <div className="rounded-lg p-6 h-full flex flex-col bg-white/[0.03] backdrop-blur-sm border border-wine/20 hover:border-wine/40 hover:shadow-[0_0_25px_rgba(112,21,38,0.2)] transition-all duration-300">
                 {/* Gold Quote Icon */}
                 <svg
                   width="40"

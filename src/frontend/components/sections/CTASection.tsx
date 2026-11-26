@@ -5,10 +5,10 @@ export default function CTASection() {
   return (
     <section className="relative py-24 md:py-32 overflow-hidden">
       {/* Background Gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-navy-dark via-navy/30 to-background" />
+      <div className="absolute inset-0 bg-gradient-to-b from-wine-dark via-wine/30 to-background" />
 
       {/* Radial Glow */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(26,26,94,0.3)_0%,_transparent_60%)] pointer-events-none" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(112,21,38,0.3)_0%,_transparent_60%)] pointer-events-none" />
 
       <div className="relative z-10 max-w-3xl mx-auto px-6 text-center">
         <ScrollReveal>

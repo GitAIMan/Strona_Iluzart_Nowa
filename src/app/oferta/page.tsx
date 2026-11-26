@@ -16,8 +16,8 @@ export default function OfertaPage() {
   return (
     <PageTransition>
       {/* Hero section */}
-      <section className="relative pt-32 pb-20 overflow-hidden bg-navy-spotlight">
-        <div className="absolute inset-0 bg-navy-radial opacity-40" />
+      <section className="relative pt-32 pb-20 overflow-hidden bg-wine-spotlight">
+        <div className="absolute inset-0 bg-wine-radial opacity-40" />
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background" />
         <div className="relative z-10 max-w-4xl mx-auto px-6">
           <SectionHeading title="Oferta" subtitle="Co mogę dla Ciebie zrobić" />
@@ -42,7 +42,7 @@ export default function OfertaPage() {
       </section>
 
       {/* Services grid */}
-      <section className="relative pb-24 pt-16 bg-navy-mesh">
+      <section className="relative pb-24 pt-16 bg-wine-mesh">
         <div className="absolute inset-0 bg-gradient-to-b from-background via-transparent to-background pointer-events-none" />
         <div className="relative z-10 max-w-6xl mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -52,10 +52,10 @@ export default function OfertaPage() {
                   href={`/oferta/${service.slug}`}
                   className="group block h-full"
                 >
-                  <div className="card-navy rounded-xl overflow-hidden h-full flex flex-col p-6">
+                  <div className="card-wine rounded-xl overflow-hidden h-full flex flex-col p-6">
                     {/* Icon */}
                     <div className="mb-5 flex justify-center">
-                      <div className="w-14 h-14 rounded-full bg-gradient-to-br from-navy to-navy-dark flex items-center justify-center shadow-[0_0_20px_rgba(26,26,94,0.4)] group-hover:shadow-[0_0_30px_rgba(201,168,76,0.2)] transition-shadow duration-500">
+                      <div className="w-14 h-14 rounded-full bg-gradient-to-br from-wine to-wine-dark flex items-center justify-center shadow-[0_0_20px_rgba(112,21,38,0.4)] group-hover:shadow-[0_0_30px_rgba(201,168,76,0.2)] transition-shadow duration-500">
                         <ServiceEmoji icon={service.icon} size={40} alt={service.name} />
                       </div>
                     </div>
@@ -75,10 +75,10 @@ export default function OfertaPage() {
 
                     {/* Badges */}
                     <div className="flex flex-wrap items-center justify-center gap-2 mb-4">
-                      <span className="bg-navy/30 text-cream/60 text-xs px-2 py-1 rounded-full">
+                      <span className="bg-wine/30 text-cream/60 text-xs px-2 py-1 rounded-full">
                         {service.audience}
                       </span>
-                      <span className="bg-navy/30 text-cream/60 text-xs px-2 py-1 rounded-full">
+                      <span className="bg-wine/30 text-cream/60 text-xs px-2 py-1 rounded-full">
                         {service.duration}
                       </span>
                     </div>

@@ -11,7 +11,7 @@
 
   body {
     color: #f5f0e8;
-    background: #0a0a0a;
+    background: #0c0808;
     padding-bottom: env(safe-area-inset-bottom);
   }
 
@@ -26,16 +26,16 @@
   }
 
   ::-webkit-scrollbar-track {
-    background: #0a0a0a;
+    background: #0c0808;
   }
 
   ::-webkit-scrollbar-thumb {
-    background: #1a1a1a;
+    background: #1c1414;
     border-radius: 4px;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: #2a2a7e;
+    background: #8c1d30;
   }
 
   /* Headings default to serif */
@@ -49,8 +49,8 @@
     @apply bg-clip-text text-transparent bg-gold-gradient;
   }
 
-  .text-gradient-navy {
-    @apply bg-clip-text text-transparent bg-navy-gradient;
+  .text-gradient-wine {
+    @apply bg-clip-text text-transparent bg-wine-gradient;
   }
 
   .glass {
@@ -58,43 +58,43 @@
   }
 
   .glass-hover {
-    @apply glass hover:border-navy/50 hover:shadow-[0_0_30px_rgba(26,26,94,0.3)] transition-all duration-500;
+    @apply glass hover:border-wine/50 hover:shadow-[0_0_30px_rgba(112,21,38,0.3)] transition-all duration-500;
   }
 
   .glass-hover:hover,
-  .card-navy:hover {
+  .card-wine:hover {
     will-change: transform, box-shadow;
   }
 
-  /* Navy ambient backgrounds */
-  .bg-navy-radial {
-    background: radial-gradient(ellipse at center, rgba(26,26,94,0.12) 0%, transparent 70%);
+  /* Wine ambient backgrounds */
+  .bg-wine-radial {
+    background: radial-gradient(ellipse at center, rgba(112,21,38,0.12) 0%, transparent 70%);
   }
 
-  .bg-navy-spotlight {
-    background: radial-gradient(ellipse at top center, rgba(26,26,94,0.18) 0%, transparent 60%);
+  .bg-wine-spotlight {
+    background: radial-gradient(ellipse at top center, rgba(112,21,38,0.18) 0%, transparent 60%);
   }
 
-  .bg-navy-mesh {
+  .bg-wine-mesh {
     background:
-      radial-gradient(at 20% 30%, rgba(26,26,94,0.15) 0%, transparent 50%),
-      radial-gradient(at 80% 70%, rgba(18,18,62,0.12) 0%, transparent 50%),
-      radial-gradient(at 50% 50%, rgba(42,42,126,0.06) 0%, transparent 60%);
+      radial-gradient(at 20% 30%, rgba(112,21,38,0.15) 0%, transparent 50%),
+      radial-gradient(at 80% 70%, rgba(58,10,18,0.12) 0%, transparent 50%),
+      radial-gradient(at 50% 50%, rgba(140,29,48,0.06) 0%, transparent 60%);
   }
 
-  /* Navy card with gradient border */
-  .card-navy {
+  /* Wine card with gradient border */
+  .card-wine {
     @apply relative rounded-xl overflow-hidden;
-    background: #111111;
+    background: #130d0d;
   }
 
-  .card-navy::before {
+  .card-wine::before {
     content: '';
     position: absolute;
     inset: 0;
     border-radius: inherit;
     padding: 1px;
-    background: linear-gradient(135deg, rgba(26,26,94,0.4), rgba(42,42,126,0.1), rgba(26,26,94,0.3));
+    background: linear-gradient(135deg, rgba(112,21,38,0.4), rgba(140,29,48,0.1), rgba(112,21,38,0.3));
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
     mask-composite: exclude;
@@ -102,13 +102,13 @@
     transition: all 0.5s ease;
   }
 
-  .card-navy:hover::before {
+  .card-wine:hover::before {
     padding: 1.5px;
-    background: linear-gradient(135deg, rgba(42,42,126,0.8), rgba(26,26,94,0.3), rgba(201,168,76,0.4));
+    background: linear-gradient(135deg, rgba(140,29,48,0.8), rgba(112,21,38,0.3), rgba(201,168,76,0.4));
   }
 
-  .card-navy:hover {
-    box-shadow: 0 0 40px rgba(26,26,94,0.25), 0 0 80px rgba(26,26,94,0.1);
+  .card-wine:hover {
+    box-shadow: 0 0 40px rgba(112,21,38,0.25), 0 0 80px rgba(112,21,38,0.1);
   }
 
   /* Tiptap editor styles */

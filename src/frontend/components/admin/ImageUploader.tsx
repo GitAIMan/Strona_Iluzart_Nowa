@@ -120,7 +120,7 @@ export default function ImageUploader({
           border-2 border-dashed rounded-lg p-6 text-center cursor-pointer transition-all duration-200
           ${
             dragActive
-              ? "border-navy-light bg-navy/10"
+              ? "border-wine-light bg-wine/10"
               : "border-white/10 hover:border-white/20"
           }
           ${isUploading ? "pointer-events-none opacity-50" : ""}

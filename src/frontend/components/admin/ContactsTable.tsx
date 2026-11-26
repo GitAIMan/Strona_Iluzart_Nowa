@@ -83,7 +83,7 @@ export default function ContactsTable({ submissions }: ContactsTableProps) {
                   expandedId === sub.id
                     ? "bg-white/[0.03]"
                     : "hover:bg-white/[0.02]",
-                  !sub.isRead && "bg-navy/5"
+                  !sub.isRead && "bg-wine/5"
                 )}
               >
                 <td className="px-6 py-4">
@@ -151,7 +151,7 @@ export default function ContactsTable({ submissions }: ContactsTableProps) {
                             e.stopPropagation();
                             handleMarkAsRead(sub.id, true);
                           }}
-                          className="mt-2 px-4 py-2 text-sm bg-navy hover:bg-navy-light text-cream rounded-lg transition-colors"
+                          className="mt-2 px-4 py-2 text-sm bg-wine hover:bg-wine-light text-cream rounded-lg transition-colors"
                         >
                           Oznacz jako przeczytane
                         </button>

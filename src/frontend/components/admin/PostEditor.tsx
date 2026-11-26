@@ -283,7 +283,7 @@ function ToolbarButton({
       className={cn(
         "p-2 rounded-md text-sm transition-colors",
         active
-          ? "bg-navy text-cream"
+          ? "bg-wine text-cream"
           : "text-cream/50 hover:text-cream hover:bg-white/5"
       )}
     >

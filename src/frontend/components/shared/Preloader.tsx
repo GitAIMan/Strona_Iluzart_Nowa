@@ -108,7 +108,7 @@ function CurtainPanel({ side }: { side: "left" | "right" }) {
         }`}
         viewBox={side === "left" ? "80 0 40 800" : "-20 0 40 800"}
         preserveAspectRatio="none"
-        fill="#0a0a0a"
+        fill="#0c0808"
       >
         <motion.path
           d={edgePath}
@@ -332,7 +332,7 @@ export default function Preloader() {
                 <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
                   <motion.circle
                     cx="40" cy="40" r="30"
-                    stroke="rgba(26,26,94,0.5)"
+                    stroke="rgba(112,21,38,0.5)"
                     strokeWidth="1"
                     strokeDasharray="188"
                     initial={{ strokeDashoffset: 188 }}
