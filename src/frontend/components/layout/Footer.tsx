@@ -27,7 +27,7 @@ export default function Footer() {
               <span className="text-2xl font-serif text-gold">Art</span>
             </Link>
             <p className="text-cream/50 text-sm leading-relaxed">
-              Tworzę magiczne doświadczenia, które zapierają dech w piersiach
+              Iluzja ze standupem. Katowice, Śląsk i cała Polska.
             </p>
           </div>
 

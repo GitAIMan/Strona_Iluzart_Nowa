@@ -12,7 +12,7 @@ export const faqItems = [
   {
     question: "Czym się wyróżniasz od innych iluzjonistów?",
     answer:
-      "Łączę iluzję ze standup comedy. Moje pokazy mają humor, tempo i energię, a nie tylko sztuczki. Dekada na scenie, występy w Bajce Pana Kleksa, Nibylandii i na Strefie Bajtla dały mi doświadczenie, które trudno skopiować.",
+      "Łączę iluzję ze standup comedy. Dużo rozmawiam z publicznością i sporo się śmiejemy, a sztuczki dzieją się gdzieś pomiędzy. Występuję od ponad dekady, między innymi w Nibylandii i na Strefie Bajtla, więc wiem, jak dopasować pokaz do sali.",
   },
   {
     question: "Dla ilu osób mogę zamówić pokaz?",

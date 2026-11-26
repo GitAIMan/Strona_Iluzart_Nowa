@@ -7,7 +7,7 @@ import AboutVideoSwitcher from "@frontend/components/shared/AboutVideoSwitcher";
 export const metadata = generatePageMetadata({
   title: "O mnie | Iluzjonista Katowice Grzegorz Pawleta",
   description:
-    "Grzegorz Pawleta, iluzjonista z Katowic łączący magię ze standup comedy. Dekada na scenie, od Bajki Pana Kleksa po wesela na Śląsku.",
+    "Grzegorz Pawleta, iluzjonista z Katowic, który łączy magię ze standup comedy. Na scenie od ponad dekady: wesela, eventy firmowe i pokazy dla dzieci na Śląsku.",
 });
 
 export default function OmniePage() {
@@ -101,7 +101,7 @@ export default function OmniePage() {
               {
                 icon: "🎬",
                 title: "Sprawdzone na dużej scenie",
-                text: "Bajka Pana Kleksa, Nibylandia, Strefa Bajtla. To nie tylko nazwy, to doświadczenie, które przekłada się na każdy pokaz.",
+                text: "Nibylandia, Strefa Bajtla, duże festyny. Tam publiczność jest głośna i łatwo ją stracić. Nauczyłem się, jak ją utrzymać.",
               },
               {
                 icon: "🎯",

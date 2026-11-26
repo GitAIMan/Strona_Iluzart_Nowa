@@ -109,9 +109,9 @@ export default function HeroSection() {
           transition={{ delay: CASCADE_START + 0.3, duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
           className="text-cream/60 font-sans text-base md:text-lg max-w-3xl mx-auto mb-10 leading-relaxed"
         >
-          Występowałem od Bajki Pana Kleksa po kameralne wesela na Śląsku.
-          Łączę iluzję ze standup comedy i tworzę pokazy, o których Twoi
-          goście będą opowiadać jeszcze długo po wydarzeniu.
+          Od ponad dziesięciu lat występuję na weselach, eventach i festynach
+          na Śląsku. Łączę iluzję ze standup comedy, więc goście najpierw
+          się śmieją, a chwilę później nie wierzą własnym oczom.
         </motion.p>
 
         <motion.div

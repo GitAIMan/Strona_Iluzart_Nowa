@@ -21,8 +21,8 @@ export default function AboutPreview() {
               align="left"
             />
             <p className="text-cream/70 font-sans leading-relaxed mb-8">
-              Dekada na scenach całego Śląska, od Bajki Pana Kleksa, przez
-              Nibylandię i Strefę Bajtla, po setki wesel i eventów firmowych.
+              Ponad dekada na scenach Śląska: Nibylandia, Strefa Bajtla,
+              setki wesel i eventów firmowych.
               Łączę iluzję z humorem, bo magia nie musi być poważna, żeby
               robiła wrażenie.
             </p>

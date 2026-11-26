@@ -142,7 +142,7 @@ export default function WarsztatyPage() {
         <div className="max-w-4xl mx-auto px-6 text-center">
           <ScrollReveal>
             <p className="text-xl md:text-2xl font-serif text-cream mb-8">
-              Zarezerwuj warsztaty w Katowicach. Wolne terminy znikają szybko
+              Chcesz zorganizować warsztaty? Napisz, jaki termin Ci pasuje.
             </p>
             <Button href="https://wa.me/48882011161" size="lg">
               Zarezerwuj warsztaty

@@ -2,7 +2,7 @@ export const SITE = {
   name: "IluzArt",
   title: "Iluzjonista Katowice | Pokazy Magii i Mentalizmu | IluzArt",
   description:
-    "Iluzjonista Katowice i Śląsk, Grzegorz Pawleta. Dekada doświadczenia, magia połączona ze standup comedy. Pokazy na wesela, eventy firmowe, urodziny. Znany z Bajki Pana Kleksa i Nibylandii. Zadzwoń: +48 882 011 161",
+    "Iluzjonista Katowice i Śląsk, Grzegorz Pawleta. Ponad 10 lat na scenie, magia połączona ze standup comedy. Pokazy na wesela, eventy firmowe i urodziny. Zadzwoń: +48 882 011 161",
   ogTitle: "IluzArt | Iluzjonista Katowice | Magia i Standup Comedy",
   ogDescription:
     "Grzegorz Pawleta, iluzjonista z Katowic łączący magię ze standup comedy. Dekada na scenie, setki wydarzeń na Śląsku. Sprawdź dostępność terminu.",
