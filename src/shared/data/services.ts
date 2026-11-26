@@ -146,3 +146,124 @@ export const SERVICE_EMOJI_HEX: Record<string, string> = {
 
 export const getServiceEmojiUrl = (icon: string) =>
   `https://fonts.gstatic.com/s/e/notoemoji/latest/${SERVICE_EMOJI_HEX[icon] ?? SERVICE_EMOJI_HEX.sparkles}/512.png`;
+
+/* ---------- Dane do Oferty (bilety) i podstron pokazów, od 2026-11-26 ---------- */
+const R2 = "https://pub-461768aab8564907a3f677968018aa28.r2.dev";
+
+export interface ServiceStage {
+  shortName: string;
+  short: string;
+  ticketHighlights: string[];
+  photo: string | null;
+  photoAlt: string;
+  suit: "♠" | "♥" | "♦" | "♣";
+  /** Zastępstwo gdy brak zdjęcia */
+  fallback: "cards" | "smoke";
+  smokeText?: string;
+  lead: string;
+  program: { title: string; text: string }[];
+}
+
+/** Kolejność biletów na /oferta */
+export const OFFER_ORDER = [
+  "iluzja-na-wesela",
+  "eventy-firmowe",
+  "magia-dla-dzieci",
+  "magiczne-urodziny",
+  "close-up-magic",
+  "mroczny-mentalizm",
+] as const;
+
+export const SERVICE_STAGE: Record<string, ServiceStage> = {
+  "iluzja-na-wesela": {
+    shortName: "Iluzja na wesela",
+    short: "Close-up przy stołach, pokaz z Parą Młodą, mentalizm na afterparty.",
+    ticketHighlights: ["Od close-up przy stołach po pokaz sceniczny", "Para Młoda jako gwiazdy pokazu", "Dopasowanie do klimatu wesela"],
+    photo: null,
+    photoAlt: "",
+    suit: "♥",
+    fallback: "cards",
+    lead: "Wesele, o którym goście będą mówić jeszcze na następnym weselu.",
+    program: [
+      { title: "Przy stołach", text: "Close-up magic w trakcie przyjęcia. Podchodzę do stołów i pokazuję magię z bliska." },
+      { title: "Pokaz z Parą Młodą", text: "Sceniczny pokaz, w którym Para Młoda gra główne role. Goście się śmieją, a Wy jesteście w centrum." },
+      { title: "Afterparty", text: "Mentalizm dla tych, którzy zostają do końca. Czytanie myśli, kiedy emocje są już wysoko." },
+    ],
+  },
+  "eventy-firmowe": {
+    shortName: "Eventy firmowe",
+    short: "Magia i standup na jednej scenie. Konferencje, gale, integracje.",
+    ticketHighlights: ["Personalizacja pod markę", "Od kameralnej sali po 500+ osób", "Iluzja + standup w jednym"],
+    photo: "/images/hero_elo.jpeg",
+    photoAlt: "Grzegorz Pawleta z talią kart na tle Katowic",
+    suit: "♠",
+    fallback: "smoke",
+    lead: "Event firmowy, na którym nikt nie patrzy w telefon.",
+    program: [
+      { title: "Ustalamy przekaz", text: "Przed eventem pytam o branżę, firmę i okazję. Mogę wpleść logo, hasło albo przekaz, który chcesz zakomunikować." },
+      { title: "Iluzja i standup", text: "Na scenie łączę magię z humorem dopasowanym do sali. Od kameralnego spotkania po halę na 500+ osób." },
+      { title: "Wspólne emocje", text: "Ludzie śmieją się razem i razem nie wierzą w to, co widzą. To integruje lepiej niż kolejna prezentacja." },
+    ],
+  },
+  "magia-dla-dzieci": {
+    shortName: "Magia dla dzieci",
+    short: "Dzieci nie tylko oglądają. Wchodzą na scenę i pomagają w sztuczkach.",
+    ticketHighlights: ["Dzieci aktywnie w pokazie", "Dopasowane do wieku 4–12 lat", "Każde uczy się prostej sztuczki"],
+    photo: `${R2}/warsztaty-ataa.jpeg`,
+    photoAlt: "Pokaz magii dla dzieci na scenie, chłopiec pomaga w sztuczce",
+    suit: "♦",
+    fallback: "smoke",
+    lead: "Dzieci to najtrudniejsza publiczność. I najlepsza.",
+    program: [
+      { title: "Pokaz z humorem", text: "Iluzja i żarty od pierwszej minuty. Dzieci reagują, podpowiadają i śmieją się." },
+      { title: "Dzieci na scenie", text: "Ochotnicy wchodzą na scenę i pomagają w sztuczkach. Nikt nie siedzi biernie." },
+      { title: "Sztuczka na wynos", text: "Na koniec każde dziecko uczy się prostej sztuczki, którą pokaże rodzicom." },
+    ],
+  },
+  "magiczne-urodziny": {
+    shortName: "Magiczne urodziny",
+    short: "Jubilat w roli głównej, sztuczka na wynos dla każdego.",
+    ticketHighlights: ["Jubilat/ka jako gwiazda", "Bawi się każdy, od 4-latka po dziadka", "Sztuczka na wynos"],
+    photo: "/images/oferta-urodziny.jpeg",
+    photoAlt: "Pokaz magii na urodzinach dziecka w sali zabaw",
+    suit: "♣",
+    fallback: "smoke",
+    lead: "Urodziny, po których jubilat jest bohaterem klasy.",
+    program: [
+      { title: "Jubilat w roli głównej", text: "Jubilatka lub jubilat dostaje specjalną rolę w pokazie. To jego dzień i wszyscy to widzą." },
+      { title: "Wszyscy w pokazie", text: "Każde dziecko jest częścią pokazu. Dziadkowie też nie mogą uwierzyć w to, co widzą." },
+      { title: "Sztuczki do szkoły", text: "Na koniec wszyscy uczą się sztuczek, które mogą pokazać kolegom w szkole." },
+    ],
+  },
+  "close-up-magic": {
+    shortName: "Close-up na festiwale",
+    short: "Chodzę między gośćmi. Karty i monety centymetry od Twoich oczu.",
+    ticketHighlights: ["Iluzja z odległości centymetrów", "Nie potrzebuję sceny", "Kontakt z każdym gościem"],
+    photo: "/images/oferta-closeup.jpeg",
+    photoAlt: "Close-up magic przy stoliku z gośćmi",
+    suit: "♠",
+    fallback: "smoke",
+    lead: "Magia na wyciągnięcie ręki, tam gdzie są ludzie.",
+    program: [
+      { title: "Bez sceny", text: "Nie potrzebuję sceny ani nagłośnienia. Przychodzę tam, gdzie są goście." },
+      { title: "Między gośćmi", text: "Podchodzę do małych grup i pokazuję magię z odległości centymetrów." },
+      { title: "Codzienne przedmioty", text: "Karty znikają, monety przenikają przez stół. Wszystko tuż przed oczami widzów." },
+    ],
+  },
+  "mroczny-mentalizm": {
+    shortName: "Mroczny mentalizm",
+    short: "Czytanie myśli i przewidywanie wyborów. Na poważnie (prawie).",
+    ticketHighlights: ["Czytanie myśli", "Atmosfera tajemnicy z humorem", "Na ekskluzywne wydarzenia"],
+    photo: null,
+    photoAlt: "",
+    suit: "♦",
+    fallback: "smoke",
+    smokeText: "czytam\nw myślach",
+    lead: "Zaczniesz wątpić we własną percepcję.",
+    program: [
+      { title: "Atmosfera", text: "Budujemy napięcie. Tu jest mniej żartów niż zwykle. No dobra, kilka zostaje." },
+      { title: "Przewidywanie wyborów", text: "Widzowie wybierają, a ja wiem, co wybiorą, zanim to zrobią." },
+      { title: "Czytanie myśli", text: "Granica między możliwym a niemożliwym się zaciera. Dla dorosłej publiczności." },
+    ],
+  },
+};

@@ -2,7 +2,7 @@ import Link from "next/link";
 import { generatePageMetadata } from "@shared/metadata";
 import PageTransition from "@frontend/components/layout/PageTransition";
 import OfferTickets, { type Ticket } from "@frontend/components/offer/OfferTickets";
-import { services } from "@shared/data/services";
+import { services, SERVICE_STAGE, OFFER_ORDER } from "@shared/data/services";
 
 export const metadata = generatePageMetadata({
   title: "Pokazy Iluzji Katowice | Wesela, Eventy, Urodziny",
@@ -11,80 +11,19 @@ export const metadata = generatePageMetadata({
 });
 
 const WRAP = "max-w-7xl mx-auto px-5 sm:px-8 lg:px-10";
-const R2 = "https://pub-461768aab8564907a3f677968018aa28.r2.dev";
-
-/* Kolejność biletów + krótkie teksty i zdjęcia. Cena, czas i odbiorcy z services.ts */
-const TICKETS: {
-  slug: string;
-  name: string;
-  short: string;
-  highlights: string[];
-  photo: string | null;
-  suit: string;
-  atmosphere: Ticket["atmosphere"];
-}[] = [
-  {
-    slug: "iluzja-na-wesela",
-    name: "Iluzja na wesela",
-    short: "Close-up przy stołach, pokaz z Parą Młodą, mentalizm na afterparty.",
-    highlights: ["Od close-up przy stołach po pokaz sceniczny", "Para Młoda jako gwiazdy pokazu", "Dopasowanie do klimatu wesela"],
-    photo: null,
-    suit: "♥",
-    atmosphere: "bg-velvet",
-  },
-  {
-    slug: "eventy-firmowe",
-    name: "Eventy firmowe",
-    short: "Magia i standup na jednej scenie. Konferencje, gale, integracje.",
-    highlights: ["Personalizacja pod markę", "Od kameralnej sali po 500+ osób", "Iluzja + standup w jednym"],
-    photo: "/images/hero_elo.jpeg",
-    suit: "♠",
-    atmosphere: "bg-smoke",
-  },
-  {
-    slug: "magia-dla-dzieci",
-    name: "Magia dla dzieci",
-    short: "Dzieci nie tylko oglądają. Wchodzą na scenę i pomagają w sztuczkach.",
-    highlights: ["Dzieci aktywnie w pokazie", "Dopasowane do wieku 4–12 lat", "Każde uczy się prostej sztuczki"],
-    photo: `${R2}/warsztaty-ataa.jpeg`,
-    suit: "♦",
-    atmosphere: "bg-smoke",
-  },
-  {
-    slug: "magiczne-urodziny",
-    name: "Magiczne urodziny",
-    short: "Jubilat w roli głównej, sztuczka na wynos dla każdego.",
-    highlights: ["Jubilat/ka jako gwiazda", "Bawi się każdy, od 4-latka po dziadka", "Sztuczka na wynos"],
-    photo: "/images/oferta-urodziny.jpeg",
-    suit: "♣",
-    atmosphere: "bg-smoke",
-  },
-  {
-    slug: "close-up-magic",
-    name: "Close-up na festiwale",
-    short: "Chodzę między gośćmi. Karty i monety centymetry od Twoich oczu.",
-    highlights: ["Iluzja z odległości centymetrów", "Nie potrzebuję sceny", "Kontakt z każdym gościem"],
-    photo: "/images/oferta-closeup.jpeg",
-    suit: "♠",
-    atmosphere: "bg-smoke",
-  },
-  {
-    slug: "mroczny-mentalizm",
-    name: "Mroczny mentalizm",
-    short: "Czytanie myśli i przewidywanie wyborów. Na poważnie (prawie).",
-    highlights: ["Czytanie myśli", "Atmosfera tajemnicy z humorem", "Na ekskluzywne wydarzenia"],
-    photo: null,
-    suit: "♦",
-    atmosphere: "bg-smoke",
-  },
-];
-
-const tickets: Ticket[] = TICKETS.flatMap((t) => {
-  const s = services.find((x) => x.slug === t.slug);
-  if (!s) return [];
+const tickets: Ticket[] = OFFER_ORDER.flatMap((slug) => {
+  const s = services.find((x) => x.slug === slug);
+  const st = SERVICE_STAGE[slug];
+  if (!s || !st) return [];
   return [
     {
-      ...t,
+      slug,
+      name: st.shortName,
+      short: st.short,
+      highlights: st.ticketHighlights,
+      photo: st.photo,
+      suit: st.suit,
+      atmosphere: slug === "iluzja-na-wesela" ? "bg-velvet" : "bg-smoke",
       audience: s.audience,
       price: s.priceRange,
       duration: s.duration.replace("-", "–"),

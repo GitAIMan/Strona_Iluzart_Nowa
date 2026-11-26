@@ -306,3 +306,29 @@ li:hover > .mini-card { transform: rotate(-6deg) translateY(-4px); }
 .ticket-tear { border-top: 2px dashed rgba(201,168,76,0.3); }
 @media (max-width: 520px) { .ticket { grid-template-columns: minmax(0,1fr) 104px; } }
 @media (prefers-reduced-motion: reduce) { .ticket { transition: none; } .ticket:hover { transform: none; } }
+
+/* ---------- Podstrona pokazu /oferta/[slug] (od 2026-11-26) ---------- */
+.show-frame::before {
+  content: ""; position: absolute; inset: 0; border: 1px solid rgba(201,168,76,0.55); border-radius: 6px;
+  transform: translate(14px, 14px); transition: transform .5s cubic-bezier(.2,.7,.2,1); pointer-events: none;
+}
+.show-frame > div { box-shadow: 0 30px 70px rgba(0,0,0,0.6); }
+.show-frame:hover::before { transform: translate(8px, 8px); }
+.show-suit {
+  position: absolute; left: -22px; bottom: -22px; width: 56px; height: 56px; border-radius: 50%;
+  display: grid; place-items: center; background: #0c0808; border: 1px solid rgba(201,168,76,0.6);
+  color: #c9a84c; font-size: 26px; font-family: var(--font-playfair), Georgia, serif;
+}
+.show-act {
+  font-family: var(--font-playfair), Georgia, serif; font-style: italic; font-size: 88px; line-height: .9;
+  color: transparent; -webkit-text-stroke: 1px rgba(201,168,76,0.7); transition: color .4s ease;
+}
+li:hover > .show-act { color: rgba(201,168,76,0.18); }
+.show-row { position: relative; isolation: isolate; }
+.show-row::before {
+  content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(90deg, #3a0a12, #701526 60%, #3a0a12);
+  transform: scaleY(0); transform-origin: bottom; transition: transform .4s cubic-bezier(.2,.7,.2,1);
+}
+.show-row:hover::before, .show-row:focus-visible::before { transform: scaleY(1); }
+@media (max-width: 767px) { .show-suit { left: auto; right: -8px; } }
+@media (prefers-reduced-motion: reduce) { .show-frame::before, .show-act, .show-row::before { transition: none; } }

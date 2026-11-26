@@ -1,300 +1,238 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
+import Image from "next/image";
 import Link from "next/link";
 import PageTransition from "@frontend/components/layout/PageTransition";
-import Button from "@frontend/components/ui/Button";
-import ScrollReveal from "@frontend/components/shared/ScrollReveal";
-import ServiceEmoji from "@frontend/components/ui/ServiceEmoji";
-import { services } from "@shared/data/services";
+import { services, SERVICE_STAGE, OFFER_ORDER } from "@shared/data/services";
+import { CONTACT } from "@shared/constants";
 
 interface Props {
   params: Promise<{ slug: string }>;
 }
 
+const WRAP = "max-w-7xl mx-auto px-5 sm:px-8 lg:px-10";
+const ACTS = ["I", "II", "III"];
+const KIND = { Dzieci: "Dla dzieci", Dorośli: "Dla dorosłych", Wszyscy: "Dla wszystkich" } as const;
+const TEL = CONTACT.phone.replace(/\s/g, "");
+const TEL_SHORT = CONTACT.phone.replace("+48 ", "");
+
 export function generateStaticParams() {
-  return services.map((service) => ({
-    slug: service.slug,
-  }));
+  return services.map((service) => ({ slug: service.slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const service = services.find((s) => s.slug === slug);
-
-  if (!service) {
-    return { title: "Usługa nie znaleziona" };
-  }
-
+  if (!service) return { title: "Usługa nie znaleziona" };
   return {
-    title: `${service.name} | Iluzjonista Śląsk`,
+    title: `${service.name} | Iluzjonista Katowice i Śląsk`,
     description: `${service.description} Iluzjonista Katowice i Śląsk. ${service.audience}, czas trwania: ${service.duration}.`,
   };
+}
+
+function CheckDateLink() {
+  return (
+    <Link
+      href="/#termin"
+      className="inline-flex items-center justify-center rounded-md bg-gold px-6 py-3 font-sans font-semibold text-background transition-colors hover:bg-gold-light"
+    >
+      Sprawdź wolny termin
+    </Link>
+  );
 }
 
 export default async function ServiceDetailPage({ params }: Props) {
   const { slug } = await params;
   const service = services.find((s) => s.slug === slug);
+  const stage = SERVICE_STAGE[slug];
+  if (!service || !stage) notFound();
 
-  if (!service) {
-    notFound();
-  }
+  const duration = service.duration.replace("-", "–");
+  const others = OFFER_ORDER.filter((s) => s !== slug).flatMap((s) => {
+    const sv = services.find((x) => x.slug === s);
+    const st = SERVICE_STAGE[s];
+    return sv && st ? [{ slug: s, name: st.shortName, short: st.short, price: sv.priceRange, suit: st.suit }] : [];
+  });
 
-  const relatedServices = services
-    .filter((s) => s.slug !== slug)
-    .slice(0, 3);
+  const facts = [
+    ["Cena", service.priceRange],
+    ["Czas", duration],
+    ["Dla kogo", KIND[service.audience]],
+  ];
 
   return (
     <PageTransition>
-      {/* 1. Hero section */}
-      <section className="relative pt-32 pb-24 overflow-hidden bg-wine-spotlight">
-        <div className="absolute inset-0 bg-wine-radial opacity-50" />
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-wine-dark/20 to-background" />
-        <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
-          <ScrollReveal>
-            <p className="text-gold text-sm uppercase tracking-[0.2em] font-sans font-medium mb-6">
-              Oferta
-            </p>
-
-            {/* Icon in gold circle */}
-            <div className="mb-8 flex justify-center">
-              <div className="w-20 h-20 rounded-full bg-gradient-to-br from-gold/20 to-gold/5 border border-gold/30 flex items-center justify-center shadow-[0_0_40px_rgba(201,168,76,0.15)]">
-                <ServiceEmoji icon={service.icon} size={56} alt={service.name} />
-              </div>
-            </div>
-
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif text-cream leading-tight mb-8">
-              {service.name}
+      {/* 1. Góra: tytuł + zdjęcie w ramie */}
+      <section className="grain bg-spot overflow-hidden">
+        <div className={`${WRAP} pt-28 md:pt-32 pb-16 md:pb-24 grid md:grid-cols-12 gap-12 md:gap-10 items-center`}>
+          <div className="md:col-span-7">
+            <Link
+              href="/oferta"
+              className="inline-flex items-center gap-2 font-sans text-sm text-cream/55 hover:text-gold transition-colors mb-8"
+            >
+              <span aria-hidden>←</span> Wszystkie pokazy
+            </Link>
+            <h1 className="font-serif text-cream text-4xl sm:text-5xl lg:text-7xl leading-[1.04] mb-6 max-w-[14ch]">
+              {service.name.charAt(0) + service.name.slice(1).toLowerCase()}
             </h1>
-
-            {/* Badges */}
-            <div className="flex flex-wrap items-center justify-center gap-3 mb-10">
-              <span className="bg-wine/50 border border-wine-light/30 text-cream/70 text-sm px-4 py-1.5 rounded-full">
-                {service.audience}
-              </span>
-              <span className="bg-wine/50 border border-wine-light/30 text-cream/70 text-sm px-4 py-1.5 rounded-full">
-                {service.duration}
-              </span>
-              <span className="bg-wine/50 border border-wine-light/30 text-gold/80 text-sm px-4 py-1.5 rounded-full">
-                {service.priceRange}
-              </span>
-            </div>
-
-            {/* Scroll indicator */}
-            <div className="animate-bounce text-cream/30">
-              <svg
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                className="mx-auto"
-              >
-                <path d="M12 5v14M5 12l7 7 7-7" />
-              </svg>
-            </div>
-          </ScrollReveal>
-        </div>
-      </section>
-
-      {/* 2. Description section */}
-      <section className="py-20">
-        <div className="max-w-3xl mx-auto px-6">
-          <ScrollReveal delay={0.1}>
-            <div className="border-l-2 border-wine-light pl-8">
-              <p className="text-lg leading-relaxed text-cream/80 font-sans">
-                {service.details}
-              </p>
-            </div>
-          </ScrollReveal>
-        </div>
-      </section>
-
-      {/* 3. Highlights section */}
-      <section className="relative py-20 bg-wine-mesh">
-        <div className="absolute inset-0 bg-gradient-to-b from-background via-transparent to-background pointer-events-none" />
-        <div className="relative z-10 max-w-4xl mx-auto px-6">
-          <ScrollReveal>
-            <h2 className="text-2xl md:text-3xl font-serif text-cream text-center mb-4">
-              Co wyróżnia ten pokaz
-            </h2>
-            <div className="w-12 h-0.5 bg-gold-gradient mx-auto mb-12" />
-          </ScrollReveal>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {service.highlights.map((highlight, index) => (
-              <ScrollReveal key={index} delay={index * 0.1}>
-                <div className="card-wine rounded-xl p-6 flex items-start gap-4">
-                  {/* Gold checkmark */}
-                  <span className="flex-shrink-0 mt-0.5 text-gold">
-                    <svg
-                      width="20"
-                      height="20"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <path d="M20 6L9 17l-5-5" />
-                    </svg>
-                  </span>
-                  <p className="text-cream/80 font-sans leading-relaxed">
-                    {highlight}
-                  </p>
-                </div>
-              </ScrollReveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* 4. Details cards */}
-      <section className="py-20">
-        <div className="max-w-4xl mx-auto px-6">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <ScrollReveal delay={0}>
-              <div className="glass rounded-xl p-8 text-center bg-gradient-to-br from-wine-dark/60 to-wine/20 border border-wine-light/10">
-                <div className="mb-4 text-gold flex justify-center">
-                  <svg
-                    width="28"
-                    height="28"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2" />
-                    <circle cx="9" cy="7" r="4" />
-                    <path d="M22 21v-2a4 4 0 00-3-3.87" />
-                    <path d="M16 3.13a4 4 0 010 7.75" />
-                  </svg>
-                </div>
-                <p className="text-xs uppercase tracking-widest text-cream/40 font-sans mb-2">
-                  Dla kogo
-                </p>
-                <p className="text-lg font-semibold text-cream font-sans">
-                  {service.audience}
-                </p>
-              </div>
-            </ScrollReveal>
-
-            <ScrollReveal delay={0.1}>
-              <div className="glass rounded-xl p-8 text-center bg-gradient-to-br from-wine-dark/60 to-wine/20 border border-wine-light/10">
-                <div className="mb-4 text-gold flex justify-center">
-                  <svg
-                    width="28"
-                    height="28"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <circle cx="12" cy="12" r="10" />
-                    <polyline points="12 6 12 12 16 14" />
-                  </svg>
-                </div>
-                <p className="text-xs uppercase tracking-widest text-cream/40 font-sans mb-2">
-                  Czas trwania
-                </p>
-                <p className="text-lg font-semibold text-cream font-sans">
-                  {service.duration}
-                </p>
-              </div>
-            </ScrollReveal>
-
-            <ScrollReveal delay={0.2}>
-              <div className="glass rounded-xl p-8 text-center bg-gradient-to-br from-wine-dark/60 to-wine/20 border border-wine-light/10">
-                <div className="mb-4 text-gold flex justify-center">
-                  <svg
-                    width="28"
-                    height="28"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <line x1="12" y1="1" x2="12" y2="23" />
-                    <path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6" />
-                  </svg>
-                </div>
-                <p className="text-xs uppercase tracking-widest text-cream/40 font-sans mb-2">
-                  Orientacyjna cena
-                </p>
-                <p className="text-lg font-semibold text-cream font-sans">
-                  {service.priceRange}
-                </p>
-              </div>
-            </ScrollReveal>
-          </div>
-        </div>
-      </section>
-
-      {/* 5. CTA section */}
-      <section className="relative py-20 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-wine-dark via-wine to-wine-dark" />
-        <div className="absolute inset-0 bg-wine-radial opacity-30" />
-        <div className="relative z-10 max-w-2xl mx-auto px-6 text-center">
-          <ScrollReveal>
-            <h2 className="text-2xl md:text-3xl font-serif text-cream mb-4">
-              Zarezerwuj ten pokaz
-            </h2>
-            <p className="text-cream/60 font-sans mb-8 leading-relaxed">
-              Skontaktuj się ze mną, aby omówić szczegóły i zarezerwować termin
-              na Twoje wydarzenie.
+            <p className="font-serif italic text-gold text-xl md:text-2xl leading-snug max-w-xl mb-10">
+              {stage.lead}
             </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Button href="https://wa.me/48882011161" size="lg">
-                Napisz na WhatsApp
-              </Button>
-              <Button href="/kontakt" variant="secondary" size="lg">
-                Strona kontaktowa
-              </Button>
+            <dl className="grid grid-cols-3 max-w-lg border-y border-white/10 mb-10">
+              {facts.map(([k, v], i) => (
+                <div key={k} className={`py-4 ${i > 0 ? "pl-4 sm:pl-6 border-l border-white/10" : ""}`}>
+                  <dt className="font-sans text-[11px] uppercase tracking-[0.18em] text-cream/45 mb-1">{k}</dt>
+                  <dd className={`font-sans font-semibold ${i === 0 ? "text-gold" : "text-cream"}`}>{v}</dd>
+                </div>
+              ))}
+            </dl>
+            <div className="flex flex-wrap items-center gap-x-7 gap-y-4">
+              <CheckDateLink />
+              <a
+                href={`tel:${TEL}`}
+                className="font-sans text-cream border-b border-cream/40 pb-0.5 hover:border-gold transition-colors"
+              >
+                Zadzwoń: {TEL_SHORT}
+              </a>
             </div>
-          </ScrollReveal>
+          </div>
+
+          <div className="md:col-span-5 flex justify-center md:justify-end">
+            <div className="show-frame relative w-full max-w-[400px]">
+              <div
+                className={`relative aspect-[4/5] overflow-hidden rounded-md grid place-items-center ${
+                  stage.photo ? "bg-surface" : stage.fallback === "cards" ? "bg-stage grain fan-trigger" : "bg-smoke grain"
+                }`}
+              >
+                {stage.photo ? (
+                  <Image
+                    src={stage.photo}
+                    alt={stage.photoAlt}
+                    fill
+                    priority
+                    sizes="(max-width: 768px) 100vw, 400px"
+                    quality={85}
+                    className="object-cover"
+                  />
+                ) : stage.fallback === "cards" ? (
+                  <div className="card-fan" aria-hidden>
+                    <div className="playing-card pc-1" data-rank="K">♥</div>
+                    <div className="playing-card pc-2" data-rank="Q">♥</div>
+                    <div className="playing-card is-back pc-3" />
+                  </div>
+                ) : (
+                  <span className="relative font-serif italic text-cream/90 text-5xl md:text-6xl leading-none text-center whitespace-pre-line [text-shadow:0_2px_24px_#000]">
+                    {stage.smokeText}
+                  </span>
+                )}
+              </div>
+              <span className="show-suit" aria-hidden>{stage.suit}</span>
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* 6. Related services */}
-      <section className="py-20">
-        <div className="max-w-5xl mx-auto px-6">
-          <ScrollReveal>
-            <h2 className="text-2xl md:text-3xl font-serif text-cream text-center mb-4">
-              Może Cię również zainteresować
-            </h2>
-            <div className="w-12 h-0.5 bg-gold-gradient mx-auto mb-12" />
-          </ScrollReveal>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {relatedServices.map((related, index) => (
-              <ScrollReveal key={related.slug} delay={index * 0.1}>
-                <Link
-                  href={`/oferta/${related.slug}`}
-                  className="group block h-full"
-                >
-                  <div className="card-wine rounded-xl p-6 h-full flex flex-col items-center text-center">
-                    <div className="w-12 h-12 rounded-full bg-gradient-to-br from-wine to-wine-dark flex items-center justify-center mb-4 group-hover:shadow-[0_0_20px_rgba(201,168,76,0.15)] transition-shadow duration-500">
-                      <ServiceEmoji icon={related.icon} size={32} alt={related.name} />
-                    </div>
-                    <h3 className="text-lg font-serif text-cream group-hover:text-gold transition-colors duration-300 mb-2">
-                      {related.name}
-                    </h3>
-                    <p className="text-sm text-cream/50 font-sans line-clamp-2 mb-4 flex-grow">
-                      {related.description}
-                    </p>
-                    <span className="text-gold text-sm font-medium group-hover:translate-x-1 transition-transform duration-300">
-                      Zobacz &rarr;
-                    </span>
-                  </div>
-                </Link>
-              </ScrollReveal>
-            ))}
+      {/* 2. O pokazie */}
+      <section className="grain bg-lvl2">
+        <div className={`${WRAP} py-20 md:py-28 grid md:grid-cols-12 gap-10`}>
+          <h2 className="md:col-span-4 font-serif text-cream text-3xl md:text-5xl leading-[1.1]">
+            O pokazie
+          </h2>
+          <div className="md:col-span-8">
+            <p className="font-sans text-cream/80 text-lg md:text-xl leading-relaxed max-w-3xl">
+              {service.details}
+            </p>
+            <ul className="mt-12 grid sm:grid-cols-2 gap-x-10 max-w-3xl">
+              {service.highlights.map((h) => (
+                <li key={h} className="flex gap-3 items-baseline border-t border-gold/20 py-4 font-sans text-cream">
+                  <span className="text-gold text-sm" aria-hidden>✦</span>
+                  {h}
+                </li>
+              ))}
+            </ul>
           </div>
+        </div>
+      </section>
+
+      {/* 3. Program w trzech aktach */}
+      <section className="bg-suits">
+        <div className={`${WRAP} py-20 md:py-28`}>
+          <h2 className="font-serif text-cream text-3xl md:text-5xl leading-[1.1] mb-14">
+            Jak to wygląda
+          </h2>
+          <ol className="grid md:grid-cols-3 gap-12 md:gap-10">
+            {stage.program.map((step, i) => (
+              <li key={step.title} className="group">
+                <span className="show-act block mb-4" aria-hidden>
+                  {ACTS[i]}
+                </span>
+                <span className="block font-sans text-[11px] uppercase tracking-[0.2em] text-gold mb-2">
+                  Akt {ACTS[i]}
+                </span>
+                <h3 className="font-serif text-cream text-2xl md:text-[1.75rem] leading-tight mb-3">
+                  {step.title}
+                </h3>
+                <p className="font-sans text-cream/65 leading-relaxed max-w-sm">{step.text}</p>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+
+      {/* 4. Rezerwacja na kurtynie */}
+      <section className="grain bg-velvet">
+        <div className={`${WRAP} py-20 md:py-28 grid md:grid-cols-12 gap-10 items-end`}>
+          <div className="md:col-span-7">
+            <h2 className="font-serif text-cream text-3xl md:text-5xl leading-[1.12] max-w-2xl">
+              Chcesz ten pokaz na <em className="text-gold">swoim</em> wydarzeniu?
+            </h2>
+            <p className="mt-5 font-sans text-cream/75 text-lg max-w-xl">
+              Podaj datę i miejsce. Wycenę dostajesz tego samego dnia.
+            </p>
+          </div>
+          <div className="md:col-span-5 md:justify-self-end flex flex-col gap-5 md:items-end">
+            <a href={`tel:${TEL}`} className="font-serif text-cream text-4xl md:text-5xl hover:text-gold transition-colors">
+              {TEL_SHORT}
+            </a>
+            <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
+              <CheckDateLink />
+              <a
+                href={CONTACT.whatsapp}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-sans text-cream border-b border-cream/40 pb-0.5 hover:border-gold transition-colors"
+              >
+                Napisz na WhatsApp
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 5. Inne pokazy */}
+      <section className="grain bg-lvl3">
+        <div className={`${WRAP} py-16 md:py-24`}>
+          <h2 className="font-serif text-cream text-2xl md:text-4xl mb-8">Inne pokazy</h2>
+          <ul className="border-t border-white/10">
+            {others.map((o) => (
+              <li key={o.slug} className="border-b border-white/10">
+                <Link
+                  href={`/oferta/${o.slug}`}
+                  className="show-row group grid grid-cols-[28px_minmax(0,1fr)_auto] sm:grid-cols-[40px_minmax(0,1fr)_120px_24px] gap-4 items-center py-5 px-2 sm:px-4"
+                >
+                  <span className="text-gold text-xl text-center" aria-hidden>{o.suit}</span>
+                  <span className="min-w-0">
+                    <b className="block font-serif font-normal text-cream text-xl md:text-2xl leading-tight transition-transform duration-300 group-hover:translate-x-2">
+                      {o.name}
+                    </b>
+                    <span className="block font-sans text-sm text-cream/50 mt-1 truncate">{o.short}</span>
+                  </span>
+                  <span className="font-sans text-sm font-semibold text-gold text-right whitespace-nowrap">{o.price}</span>
+                  <span className="hidden sm:block text-cream/40 group-hover:text-gold transition-colors text-right" aria-hidden>→</span>
+                </Link>
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
     </PageTransition>
