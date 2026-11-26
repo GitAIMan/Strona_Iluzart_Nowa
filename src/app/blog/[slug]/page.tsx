@@ -5,9 +5,6 @@ import Link from "next/link";
 import { prisma } from "@backend/lib/prisma";
 import { formatDate, readingTime } from "@shared/utils";
 import PageTransition from "@frontend/components/layout/PageTransition";
-import ScrollReveal from "@frontend/components/shared/ScrollReveal";
-import ImagePlaceholder from "@frontend/components/ui/ImagePlaceholder";
-import Button from "@frontend/components/ui/Button";
 import PostReactions from "@frontend/components/blog/PostReactions";
 import ShareButton from "@frontend/components/blog/ShareButton";
 import { generateHTML } from "@tiptap/html";
@@ -19,55 +16,52 @@ interface Props {
   params: Promise<{ slug: string }>;
 }
 
+const WRAP = "max-w-7xl mx-auto px-5 sm:px-8 lg:px-10";
+
 async function getPost(slug: string) {
   try {
-    return await prisma.post.findFirst({
-      where: { slug, isPublished: true },
-    });
+    return await prisma.post.findFirst({ where: { slug, isPublished: true } });
   } catch {
     return null;
   }
 }
 
-async function getRelatedPosts(currentSlug: string) {
+/* Poprzedni (starszy) i następny (nowszy) wpis */
+async function getNeighbours(publishedAt: Date | null, id: string) {
+  if (!publishedAt) return { prev: null, next: null };
   try {
-    return await prisma.post.findMany({
-      where: { isPublished: true, slug: { not: currentSlug } },
-      orderBy: { publishedAt: "desc" },
-      take: 3,
-      select: {
-        title: true,
-        slug: true,
-        excerpt: true,
-        coverImageUrl: true,
-        publishedAt: true,
-      },
-    });
+    const select = { title: true, slug: true };
+    const [prev, next] = await Promise.all([
+      prisma.post.findFirst({
+        where: { isPublished: true, id: { not: id }, publishedAt: { lt: publishedAt } },
+        orderBy: { publishedAt: "desc" },
+        select,
+      }),
+      prisma.post.findFirst({
+        where: { isPublished: true, id: { not: id }, publishedAt: { gt: publishedAt } },
+        orderBy: { publishedAt: "asc" },
+        select,
+      }),
+    ]);
+    return { prev, next };
   } catch {
-    return [];
+    return { prev: null, next: null };
   }
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const post = await getPost(slug);
-
-  if (!post) {
-    return { title: "Wpis nie znaleziony" };
-  }
-
+  if (!post) return { title: "Wpis nie znaleziony" };
   return {
-    title: `${post.title} | Blog`,
+    title: `${post.title} | Blog IluzArt`,
     description: post.excerpt || undefined,
   };
 }
 
 export async function generateStaticParams() {
   try {
-    const posts = await prisma.post.findMany({
-      where: { isPublished: true },
-      select: { slug: true },
-    });
+    const posts = await prisma.post.findMany({ where: { isPublished: true }, select: { slug: true } });
     return posts.map((p) => ({ slug: p.slug }));
   } catch {
     return [];
@@ -79,8 +73,7 @@ export const revalidate = 60;
 
 function renderContent(content: string): string {
   try {
-    const json = JSON.parse(content);
-    return generateHTML(json, [StarterKit, TiptapImage, TiptapLink]);
+    return generateHTML(JSON.parse(content), [StarterKit, TiptapImage, TiptapLink]);
   } catch {
     return content;
   }
@@ -89,148 +82,102 @@ function renderContent(content: string): string {
 export default async function BlogPostPage({ params }: Props) {
   const { slug } = await params;
   const post = await getPost(slug);
-
-  if (!post) {
-    notFound();
-  }
+  if (!post) notFound();
 
   const html = renderContent(post.content);
   const minutes = readingTime(post.content);
-  const relatedPosts = await getRelatedPosts(slug);
+  const { prev, next } = await getNeighbours(post.publishedAt, post.id);
   const postUrl = `${process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"}/blog/${slug}`;
 
   return (
     <PageTransition>
-      {/* Cover image banner */}
-      <section className="relative w-full overflow-hidden bg-surface">
-        {post.coverImageUrl ? (
-          <div className="relative w-full max-w-5xl mx-auto">
-            <div className="relative w-full" style={{ aspectRatio: "16/9", maxHeight: "400px" }}>
-              <Image
-                src={post.coverImageUrl}
-                alt={post.title}
-                fill
-                className="object-contain"
-                priority
-              />
-            </div>
-          </div>
-        ) : (
-          <div className="relative w-full h-[30vh] min-h-[200px]">
-            <ImagePlaceholder
-              aspectRatio="auto"
-              className="absolute inset-0 h-full rounded-none"
-            />
-          </div>
-        )}
-        <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent pointer-events-none" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_rgba(112,21,38,0.12)_0%,_transparent_60%)] pointer-events-none" />
-      </section>
-
-      {/* Post content */}
-      <section className="relative pb-16 pt-10">
-        <div className="max-w-3xl mx-auto px-6">
-          <ScrollReveal>
-            <header className="mb-12">
-              <h1 className="text-3xl md:text-4xl lg:text-5xl font-serif text-cream leading-tight mb-4">
-                {post.title}
-              </h1>
-              <div className="flex items-center flex-wrap gap-3 text-sm text-cream/40 font-sans">
+      {/* 1. Tytuł + okładka w ramie */}
+      <section className="grain bg-spot overflow-hidden">
+        <div className={`${WRAP} pt-28 md:pt-32 pb-16 md:pb-20`}>
+          <Link href="/blog" className="inline-flex items-center gap-2 font-sans text-sm text-cream/55 hover:text-gold transition-colors">
+            <span aria-hidden>←</span> Wszystkie wpisy
+          </Link>
+          <div className={`mt-8 grid gap-12 items-center ${post.coverImageUrl ? "md:grid-cols-12" : ""}`}>
+            <div className={post.coverImageUrl ? "md:col-span-7" : "max-w-4xl"}>
+              <h1 className="font-serif text-cream text-4xl sm:text-5xl lg:text-6xl leading-[1.06]">{post.title}</h1>
+              {post.excerpt && (
+                <p className="mt-5 font-serif italic text-gold text-xl md:text-2xl leading-snug max-w-2xl">{post.excerpt}</p>
+              )}
+              <dl className="mt-8 flex flex-wrap border-y border-white/10 max-w-xl">
                 {post.publishedAt && (
-                  <span>{formatDate(post.publishedAt)}</span>
+                  <div className="py-3 pr-5 mr-5 border-r border-white/10">
+                    <dt className="font-sans text-[11px] uppercase tracking-[0.18em] text-cream/45">Data</dt>
+                    <dd className="font-sans text-sm font-semibold text-cream">{formatDate(post.publishedAt)}</dd>
+                  </div>
                 )}
-                <span className="text-cream/20">|</span>
-                <span>{minutes} min czytania</span>
-                <span className="text-cream/20">|</span>
-                <ShareButton url={postUrl} />
-              </div>
-            </header>
-          </ScrollReveal>
-
-          <ScrollReveal delay={0.1}>
-            <article
-              className="tiptap-content"
-              dangerouslySetInnerHTML={{ __html: html }}
-            />
-          </ScrollReveal>
-
-          {/* Reactions */}
-          <ScrollReveal delay={0.15}>
-            <div className="mt-12 border-t border-white/5 pt-2">
-              <PostReactions postId={post.id} />
+                <div className="py-3 pr-5 mr-5 border-r border-white/10">
+                  <dt className="font-sans text-[11px] uppercase tracking-[0.18em] text-cream/45">Czytanie</dt>
+                  <dd className="font-sans text-sm font-semibold text-cream">{minutes} min</dd>
+                </div>
+                <div className="py-3">
+                  <dt className="font-sans text-[11px] uppercase tracking-[0.18em] text-cream/45">Udostępnij</dt>
+                  <dd className="font-sans text-sm text-cream"><ShareButton url={postUrl} /></dd>
+                </div>
+              </dl>
             </div>
-          </ScrollReveal>
-
-          {/* Back link */}
-          <ScrollReveal delay={0.2}>
-            <div className="pt-4 border-t border-white/5">
-              <Link
-                href="/blog"
-                className="text-cream/60 hover:text-gold transition-colors duration-300 font-sans"
-              >
-                &larr; Wróć do bloga
-              </Link>
-            </div>
-          </ScrollReveal>
-
-          {/* Related posts */}
-          {relatedPosts.length > 0 && (
-            <ScrollReveal delay={0.25}>
-              <div className="mt-16">
-                <h2 className="text-2xl font-serif text-cream mb-8">
-                  Przeczytaj również
-                </h2>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                  {relatedPosts.map((related) => (
-                    <Link
-                      key={related.slug}
-                      href={`/blog/${related.slug}`}
-                      className="group card-wine rounded-xl overflow-hidden p-0"
-                    >
-                      {related.coverImageUrl ? (
-                        <div className="relative aspect-[16/9] overflow-hidden">
-                          <img
-                            src={related.coverImageUrl}
-                            alt={related.title}
-                            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                          />
-                        </div>
-                      ) : (
-                        <ImagePlaceholder aspectRatio="16/9" />
-                      )}
-                      <div className="p-4">
-                        <h3 className="text-sm font-serif text-cream line-clamp-2 group-hover:text-gold transition-colors">
-                          {related.title}
-                        </h3>
-                        {related.publishedAt && (
-                          <p className="text-xs text-cream/30 mt-2">
-                            {formatDate(related.publishedAt)}
-                          </p>
-                        )}
-                      </div>
-                    </Link>
-                  ))}
+            {post.coverImageUrl && (
+              <div className="md:col-span-5 flex justify-center md:justify-end">
+                <div className="show-frame relative w-full max-w-[420px]">
+                  <div className="relative aspect-[4/5] overflow-hidden rounded-md bg-surface">
+                    <Image src={post.coverImageUrl} alt={post.title} fill priority sizes="(max-width: 768px) 100vw, 420px" quality={85} className="object-cover" />
+                  </div>
                 </div>
               </div>
-            </ScrollReveal>
-          )}
-
-          {/* CTA section */}
-          <ScrollReveal delay={0.3}>
-            <div className="mt-16 glass rounded-2xl p-8 md:p-12 text-center space-y-6">
-              <h2 className="text-2xl md:text-3xl font-serif text-cream">
-                Chcesz zobaczyć magię na żywo?
-              </h2>
-              <p className="text-cream/60 font-sans max-w-md mx-auto">
-                Zarezerwuj pokaz iluzji lub warsztaty na swoje wydarzenie.
-              </p>
-              <Button href="/kontakt" size="lg">
-                Skontaktuj się
-              </Button>
-            </div>
-          </ScrollReveal>
+            )}
+          </div>
         </div>
       </section>
+
+      {/* 2. Treść + boczna ramka */}
+      <section className="grain bg-lvl2">
+        <div className={`${WRAP} py-16 md:py-20 grid lg:grid-cols-[minmax(0,1fr)_280px] gap-14`}>
+          <article className="tiptap-content blog-prose min-w-0" dangerouslySetInnerHTML={{ __html: html }} />
+          <aside className="lg:sticky lg:top-28 self-start grid gap-8">
+            <div className="rounded-lg border border-gold/30 bg-lvl3 p-6">
+              <p className="font-sans text-xs uppercase tracking-[0.2em] text-gold">
+                Masz wydarzenie?
+              </p>
+              <h2 className="font-serif text-cream text-2xl leading-tight mt-2 mb-2">Sprawdź, czy jestem wolny</h2>
+              <p className="font-sans text-sm text-cream/60 mb-5">Podaj datę i miejsce. Odpowiadam tego samego dnia.</p>
+              <Link
+                href="/#termin"
+                className="inline-flex items-center justify-center rounded-md bg-gold px-5 py-3 font-sans font-semibold text-background transition-colors hover:bg-gold-light"
+              >
+                Sprawdź wolny termin
+              </Link>
+            </div>
+            <div>
+              <p className="font-sans text-xs uppercase tracking-[0.2em] text-gold mb-1">Jak Ci się podobało?</p>
+              <PostReactions postId={post.id} compact />
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      {/* 3. Poprzedni / następny */}
+      {(prev || next) && (
+        <section className="bg-background">
+          <div className={`${WRAP} py-14 md:py-20 grid sm:grid-cols-2 gap-5`}>
+            {prev ? (
+              <Link href={`/blog/${prev.slug}`} className="group block rounded-md bg-lvl2 p-6 hover:bg-wine-dark transition-colors">
+                <small className="font-sans text-xs uppercase tracking-[0.16em] text-gold">← Poprzedni</small>
+                <b className="block font-serif font-normal text-cream text-2xl mt-1.5 leading-tight">{prev.title}</b>
+              </Link>
+            ) : <span />}
+            {next && (
+              <Link href={`/blog/${next.slug}`} className="group block rounded-md bg-lvl2 p-6 hover:bg-wine-dark transition-colors sm:text-right">
+                <small className="font-sans text-xs uppercase tracking-[0.16em] text-gold">Następny →</small>
+                <b className="block font-serif font-normal text-cream text-2xl mt-1.5 leading-tight">{next.title}</b>
+              </Link>
+            )}
+          </div>
+        </section>
+      )}
     </PageTransition>
   );
 }

@@ -94,7 +94,7 @@ export default function Footer() {
             {...tripleClickProps}
             className="text-xs text-cream/20 cursor-default select-none"
           >
-            &copy; 2025 IluzArt. Wszelkie prawa zastrzeżone.
+            &copy; {new Date().getFullYear()} IluzArt. Wszelkie prawa zastrzeżone.
           </span>
         </div>
       </div>

@@ -1,18 +1,22 @@
 import { generatePageMetadata } from "@shared/metadata";
 import PageTransition from "@frontend/components/layout/PageTransition";
-import SectionHeading from "@frontend/components/ui/SectionHeading";
-import BlogView from "@frontend/components/blog/BlogView";
+import BlogDeck, { type DeckPost } from "@frontend/components/blog/BlogDeck";
 import { prisma } from "@backend/lib/prisma";
+import { readingTime } from "@shared/utils";
 
 export const metadata = generatePageMetadata({
-  title: "Blog",
+  title: "Blog | Iluzjonista Katowice",
+  description:
+    "Blog iluzjonisty z Katowic: kulisy pokazów, porady przed weselem i urodzinami, sztuczki do zrobienia w domu.",
 });
 
 export const revalidate = 60;
 
-async function getPosts() {
+const WRAP = "max-w-7xl mx-auto px-5 sm:px-8 lg:px-10";
+
+async function getPosts(): Promise<DeckPost[]> {
   try {
-    return await prisma.post.findMany({
+    const posts = await prisma.post.findMany({
       where: { isPublished: true },
       orderBy: { publishedAt: "desc" },
       select: {
@@ -22,8 +26,10 @@ async function getPosts() {
         excerpt: true,
         coverImageUrl: true,
         publishedAt: true,
+        content: true,
       },
     });
+    return posts.map(({ content, ...p }) => ({ ...p, minutes: readingTime(content) }));
   } catch {
     return [];
   }
@@ -34,45 +40,24 @@ export default async function BlogPage() {
 
   return (
     <PageTransition>
-      {/* Hero section */}
-      <section className="relative pt-32 pb-20 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-wine-dark via-wine-dark/40 to-background" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(112,21,38,0.15)_0%,_transparent_70%)]" />
-        <div className="relative z-10 max-w-4xl mx-auto px-6">
-          <SectionHeading title="Blog" subtitle="Najnowsze wpisy" />
-        </div>
-      </section>
-
-      {/* Posts */}
-      <section className="pb-24">
-        {posts.length === 0 ? (
-          <div className="max-w-6xl mx-auto px-6 text-center py-20">
-            <svg
-              width="64"
-              height="64"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1"
-              className="text-cream/20 mx-auto mb-6"
-            >
-              <path d="M15 4V2" />
-              <path d="M15 16v-2" />
-              <path d="M8 9h2" />
-              <path d="M20 9h2" />
-              <path d="M17.8 11.8 19 13" />
-              <path d="M15 9h0" />
-              <path d="M17.8 6.2 19 5" />
-              <path d="m3 21 9-9" />
-              <path d="M12.2 6.2 11 5" />
-            </svg>
-            <p className="text-cream/40 text-lg font-sans">
-              Wkrótce pojawią się nowe wpisy
+      <section className="grain bg-suits min-h-[70vh]">
+        <div className={`${WRAP} pt-32 pb-24`}>
+          <div className="mb-10">
+            <h1 className="font-serif text-cream text-5xl sm:text-6xl lg:text-[5.25rem] leading-[1]">
+              Wyciągnij <em className="text-gold">kartę</em>
+            </h1>
+            <p className="mt-4 font-sans text-cream/60 text-lg max-w-xl">
+              Każda karta to jeden wpis. Kulisy pokazów, porady przed weselem i
+              sztuczki do zrobienia w domu.
             </p>
           </div>
-        ) : (
-          <BlogView posts={posts} />
-        )}
+
+          {posts.length === 0 ? (
+            <p className="font-sans text-cream/50 text-lg py-16">Wkrótce pojawią się pierwsze wpisy.</p>
+          ) : (
+            <BlogDeck posts={posts} />
+          )}
+        </div>
       </section>
     </PageTransition>
   );

@@ -14,9 +14,11 @@ const REACTIONS = [
 
 interface PostReactionsProps {
   postId: string;
+  /** Wersja do bocznej ramki: bez napisu, do lewej */
+  compact?: boolean;
 }
 
-export default function PostReactions({ postId }: PostReactionsProps) {
+export default function PostReactions({ postId, compact = false }: PostReactionsProps) {
   const [counts, setCounts] = useState<Record<string, number>>({});
   const [userReaction, setUserReaction] = useState<string | null>(null);
   const [animating, setAnimating] = useState<string | null>(null);
@@ -67,11 +69,13 @@ export default function PostReactions({ postId }: PostReactionsProps) {
   );
 
   return (
-    <div className="flex flex-col items-center gap-3 py-8">
-      <p className="text-sm text-cream/40 font-sans">
-        Jak oceniasz ten wpis?
-      </p>
-      <div className="flex items-center gap-3">
+    <div className={compact ? "pt-2" : "flex flex-col items-center gap-3 py-8"}>
+      {!compact && (
+        <p className="text-sm text-cream/40 font-sans">
+          Jak oceniasz ten wpis?
+        </p>
+      )}
+      <div className={compact ? "flex flex-wrap items-center gap-2" : "flex items-center gap-3"}>
         {REACTIONS.map(({ key, emoji, label }) => (
           <div key={key} className="relative">
             <button
