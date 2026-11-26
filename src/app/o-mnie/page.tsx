@@ -88,24 +88,26 @@ export default function OmniePage() {
         </div>
       </section>
 
-      {/* Rozdział 2: kurtyna */}
-      <section className="grain bg-velvet">
-        <div className={`${WRAP} py-20 md:py-28 flex flex-col md:items-end md:text-right`}>
-          <div className="flex items-center gap-4 text-gold mb-6" aria-hidden>
-            <span className="h-px w-16 bg-gradient-to-r from-transparent to-gold" />
-            ✦
-            <span className="h-px w-16 bg-gradient-to-r from-gold to-transparent" />
+      {/* Rozdział 2: cytat. To samo tło co wyżej, wagę robi duży złoty cudzysłów i złota linia */}
+      <section className="grain bg-lvl2">
+        <div className={`${WRAP} pt-4 pb-24 md:pb-28`}>
+          <div className="max-w-5xl mx-auto grid gap-4 md:grid-cols-[120px_minmax(0,1fr)] md:gap-10">
+            <span className="block self-start h-[56px] md:h-[110px] overflow-hidden font-serif text-gold text-[110px] md:text-[190px] leading-[0.95] md:leading-[0.9] select-none" aria-hidden>
+              &rdquo;
+            </span>
+            <div className="border-l border-gold/50 pl-6 md:pl-9">
+              <p className="font-serif text-cream text-3xl md:text-[2.75rem] leading-[1.15]">
+                Najważniejszy moment pokazu dzieje się{" "}
+                <em className="text-gold">sekundę po tym</em>, jak coś znika.
+              </p>
+              <p className="mt-5 font-sans text-cream/70 text-base md:text-lg leading-relaxed max-w-2xl">
+                Po ponad dekadzie na scenie wiem, że iluzja to nie tylko
+                sztuczki. To opowieść, tempo, kontakt z ludźmi. Kiedy widzowie
+                patrzą na siebie nawzajem i próbują zrozumieć, co się właśnie stało.
+                Dla tego jednego spojrzenia warto wychodzić na scenę.
+              </p>
+            </div>
           </div>
-          <p className="font-serif text-cream text-3xl md:text-5xl leading-[1.12] max-w-3xl">
-            Najważniejszy moment pokazu dzieje się{" "}
-            <em className="text-gold">sekundę po tym</em>, jak coś znika.
-          </p>
-          <p className="mt-6 font-sans text-cream/80 text-base md:text-lg leading-relaxed max-w-2xl">
-            Po ponad dekadzie na scenie wiem, że iluzja to nie tylko
-            sztuczki. To opowieść, tempo, kontakt z ludźmi. Kiedy widzowie
-            patrzą na siebie nawzajem i próbują zrozumieć, co się właśnie stało.
-            Dla tego jednego spojrzenia warto wychodzić na scenę.
-          </p>
         </div>
       </section>
 

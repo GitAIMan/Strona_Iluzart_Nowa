@@ -15,40 +15,13 @@ function CurtainPanel({ side }: { side: "left" | "right" }) {
       {/* Base deep red */}
       <div className="absolute inset-0" style={{ background: "#2a0606" }} />
 
-      {/* Velvet folds - multiple layered gradients for 3D depth */}
+      {/* Aksamit: zdjęcie kurtyny (od 2026-11-27). Lewa połowa bierze lewą część zdjęcia, prawa prawą */}
       <div
         className="absolute inset-0"
         style={{
-          background: `
-            repeating-linear-gradient(
-              90deg,
-              transparent 0px,
-              rgba(120,20,20,0.4) 8px,
-              rgba(80,10,10,0.7) 18px,
-              rgba(140,30,30,0.3) 24px,
-              rgba(60,8,8,0.8) 34px,
-              rgba(100,18,18,0.5) 40px,
-              transparent 50px
-            )
-          `,
-        }}
-      />
-
-      {/* Radial highlights on each fold - simulates light hitting convex surfaces */}
-      <div
-        className="absolute inset-0"
-        style={{
-          background: `
-            repeating-linear-gradient(
-              90deg,
-              transparent 0px,
-              transparent 10px,
-              rgba(180,50,50,0.12) 16px,
-              rgba(200,70,70,0.08) 20px,
-              transparent 26px,
-              transparent 50px
-            )
-          `,
+          backgroundImage: "url(/images/kurtyna.jpg)",
+          backgroundSize: "cover",
+          backgroundPosition: side === "left" ? "left center" : "right center",
         }}
       />
 
@@ -146,7 +119,7 @@ function RopeElement() {
         initial={{ opacity: 0 }}
         animate={{ opacity: [0, 1, 1, 0.5, 1] }}
         transition={{ delay: 0.8, duration: 2, repeat: Infinity }}
-        className="mt-5 text-xs text-cream/40 tracking-[0.25em] uppercase font-sans"
+        className="mt-5 text-xs font-semibold text-gold-light [text-shadow:0_1px_8px_rgba(0,0,0,0.9)] tracking-[0.25em] uppercase font-sans"
       >
         Pociągnij w dół
       </motion.p>

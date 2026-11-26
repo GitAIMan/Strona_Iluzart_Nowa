@@ -135,17 +135,23 @@ export default function WarsztatyPage() {
         </div>
       </section>
 
-      {/* 5. Rezerwacja */}
-      <section className="grain bg-velvet">
-        <div className={`${WRAP} py-20 md:py-24 flex flex-wrap items-end justify-between gap-8`}>
-          <h2 className="font-serif text-cream text-3xl md:text-5xl leading-[1.12] max-w-[18ch]">
-            Twoje dziecko chce zostać magikiem? Daj mu 2 godziny.
+      {/* 5. Rezerwacja: tapeta w karty ciągnie się z sekcji wyżej, bez pasa koloru */}
+      <section className="grain bg-suits">
+        <div className={`${WRAP} pt-4 pb-24 md:pb-28 text-center`}>
+          <div className="flex items-center justify-center gap-4 text-gold tracking-[0.4em] mb-6" aria-hidden>
+            <span className="h-px w-16 md:w-20 bg-gold/55" />
+            ♠ ♥ ♦ ♣
+            <span className="h-px w-16 md:w-20 bg-gold/55" />
+          </div>
+          <h2 className="font-serif text-cream text-4xl md:text-6xl leading-[1.08] max-w-4xl mx-auto">
+            Twoje dziecko chce zostać magikiem? <em className="text-gold">Daj mu 2 godziny.</em>
           </h2>
-          <div className="flex flex-col gap-4 md:items-end">
-            <a href={`tel:${TEL}`} className="font-serif text-cream text-4xl md:text-5xl hover:text-gold transition-colors">
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-x-7 gap-y-4">
+            <AskLink />
+            <span className="font-sans text-sm text-cream/45">albo zadzwoń</span>
+            <a href={`tel:${TEL}`} className="font-serif text-cream text-3xl md:text-4xl hover:text-gold transition-colors">
               {TEL_SHORT}
             </a>
-            <AskLink />
           </div>
         </div>
       </section>
