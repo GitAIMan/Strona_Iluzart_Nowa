@@ -246,3 +246,42 @@
 .mini-card::before { content: attr(data-rank); position: absolute; top: 5px; left: 7px; font-size: 12px; }
 li:hover > .mini-card { transform: rotate(-6deg) translateY(-4px); }
 @media (prefers-reduced-motion: reduce) { .playing-card, .mini-card { transition: none; } }
+
+/* ===== O mnie (2026-11-26) ===== */
+.about-dropcap::first-letter {
+  float: left; font-family: var(--font-playfair), Georgia, serif; font-size: 4.6rem; line-height: 0.8;
+  padding: 0.4rem 0.6rem 0 0; color: #c9a84c;
+}
+.about-coin {
+  display: inline-grid; place-items: center; width: 58px; height: 58px; border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #f0d998, #c9a84c 45%, #8a6d27); color: #5c4512;
+  font-family: var(--font-playfair), Georgia, serif; font-weight: 700; font-size: 20px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.5), inset 0 0 0 3px #a88a3a; transition: transform 0.5s ease;
+}
+.about-chap:hover .about-coin { transform: rotateY(180deg); }
+.about-flow li { position: relative; }
+.about-flow li::before {
+  content: ""; position: absolute; top: -5px; left: 0; width: 9px; height: 9px; border-radius: 50%;
+  background: #c9a84c; box-shadow: 0 0 12px rgba(201,168,76,0.6);
+}
+.about-flow li:last-child::after { content: "✦"; position: absolute; top: -12px; right: 0; color: #c9a84c; font-size: 16px; }
+
+/* Talia faktów: karta odwraca się po najechaniu lub fokusie */
+.fact-card { perspective: 900px; aspect-ratio: 5 / 7; cursor: pointer; outline: none; }
+.fact-card .fact-in { position: relative; width: 100%; height: 100%; transform-style: preserve-3d; transition: transform 0.6s cubic-bezier(0.25, 0.1, 0.25, 1); }
+.fact-card:hover .fact-in, .fact-card:focus-visible .fact-in { transform: rotateY(180deg); }
+.fact-card:focus-visible { outline: 2px solid #c9a84c; outline-offset: 4px; border-radius: 10px; }
+.fact-face { position: absolute; inset: 0; border-radius: 10px; backface-visibility: hidden; -webkit-backface-visibility: hidden; box-shadow: 0 12px 30px rgba(0,0,0,0.5); }
+.fact-front {
+  background: #f5f0e8; color: #701526; display: grid; place-items: center;
+  font-family: var(--font-playfair), Georgia, serif; font-size: 48px;
+}
+.fact-front.is-black { color: #1d1111; }
+.fact-front::before, .fact-front::after { content: attr(data-rank); position: absolute; font-size: 17px; line-height: 1; }
+.fact-front::before { top: 10px; left: 11px; }
+.fact-front::after { bottom: 10px; right: 11px; transform: rotate(180deg); }
+.fact-back {
+  transform: rotateY(180deg); background: #701526; border: 4px solid #f5f0e8; padding: 14px 12px;
+  display: flex; flex-direction: column; justify-content: center; gap: 6px; text-align: center;
+}
+@media (prefers-reduced-motion: reduce) { .fact-card .fact-in, .about-coin { transition: none; } }
