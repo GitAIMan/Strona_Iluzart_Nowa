@@ -78,7 +78,7 @@ export default function ContactLetter() {
       { who: "me", text: letterText(form) },
       { who: "him", text: `Dzięki, ${name}! Twoja prośba do mnie dotarła.` },
       { who: "him", text: `Sprawdzę kalendarz na ${plDate(form.eventDate)}.` },
-      { who: "him", text: "Jeśli sprawa jest pilna, śmiało zadzwoń. Jeśli nie odbieram, jestem na scenie. Oddzwonię w ciągu 2 dni." },
+      { who: "him", text: "Jeśli sprawa jest pilna, śmiało zadzwoń. Jeśli nie odbieram, jestem na scenie. Oddzwonię w ciągu 2 dni 😊" },
     ];
     const timers: ReturnType<typeof setTimeout>[] = [];
     let t = 300;
