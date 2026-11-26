@@ -10,7 +10,7 @@ export async function POST(request: NextRequest) {
     const submission = await prisma.contactSubmission.create({
       data: {
         name: validated.name,
-        email: validated.email,
+        email: validated.email || "",
         phone: validated.phone || null,
         message: validated.message,
         eventType: validated.eventType || null,

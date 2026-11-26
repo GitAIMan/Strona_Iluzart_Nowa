@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { NAV_LINKS, CONTACT } from "@shared/constants";
+import { NAV_LINKS } from "@shared/constants";
 import Button from "@frontend/components/ui/Button";
 
 interface MobileMenuProps {
@@ -42,8 +42,8 @@ export default function MobileMenu({ onClose }: MobileMenuProps) {
           transition={{ delay: 0.3, duration: 0.3 }}
           className="mt-4"
         >
-          <Button variant="primary" size="lg" href={CONTACT.whatsapp}>
-            Sprawdź dostępność
+          <Button variant="primary" size="lg" href="/#termin">
+            Sprawdź termin
           </Button>
         </motion.div>
       </div>

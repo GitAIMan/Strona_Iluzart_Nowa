@@ -1,13 +1,21 @@
 import { z } from "zod";
 
-export const contactFormSchema = z.object({
-  name: z.string().min(1, "Imię jest wymagane"),
-  email: z.string().min(1, "Email jest wymagany").email("Nieprawidłowy adres email"),
-  phone: z.string().optional(),
-  message: z.string().min(1, "Wiadomość jest wymagana").min(10, "Wiadomość musi mieć co najmniej 10 znaków"),
-  eventType: z.string().optional(),
-  eventDate: z.string().optional(),
-});
+export const contactFormSchema = z
+  .object({
+    name: z.string().min(1, "Imię jest wymagane"),
+    email: z
+      .string()
+      .optional()
+      .refine((v) => !v || /^[^s@]+@[^s@]+.[^s@]+$/.test(v), "Nieprawidłowy adres email"),
+    phone: z.string().optional(),
+    message: z.string().min(1, "Wiadomość jest wymagana").min(10, "Wiadomość musi mieć co najmniej 10 znaków"),
+    eventType: z.string().optional(),
+    eventDate: z.string().optional(),
+  })
+  .refine((d) => Boolean(d.email?.trim() || d.phone?.trim()), {
+    message: "Podaj e-mail lub telefon",
+    path: ["email"],
+  });
 
 export type ContactFormData = z.infer<typeof contactFormSchema>;
 

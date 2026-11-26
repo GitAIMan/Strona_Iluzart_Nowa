@@ -1,89 +1,52 @@
 "use client";
 
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import ScrollReveal from "@frontend/components/shared/ScrollReveal";
-import SectionHeading from "@frontend/components/ui/SectionHeading";
 import { faqItems } from "@shared/data/faq";
 
 export default function FAQSection() {
-  const [openIndex, setOpenIndex] = useState<number | null>(null);
-
-  const toggle = (index: number) => {
-    setOpenIndex(openIndex === index ? null : index);
-  };
+  const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <section className="relative py-20 md:py-28 overflow-hidden">
-      <div className="absolute inset-0 bg-wine-radial opacity-50 pointer-events-none" />
-
-      <div className="relative z-10 max-w-3xl mx-auto px-6">
-        <ScrollReveal>
-          <SectionHeading
-            title="Najczęściej zadawane pytania"
-            subtitle="Pytania i odpowiedzi"
-          />
-        </ScrollReveal>
-
-        <div className="flex flex-col gap-4">
-          {faqItems.map((item, index) => (
-            <ScrollReveal key={index} delay={index * 0.1}>
-              <div className="rounded-lg bg-white/[0.03] backdrop-blur-sm border border-wine/20 hover:border-wine/40 transition-colors duration-300">
-                <button
-                  onClick={() => toggle(index)}
-                  className="w-full flex items-center justify-between px-6 py-5 text-left cursor-pointer"
-                >
-                  <span className="text-cream font-sans font-medium text-base md:text-lg pr-4">
-                    {item.question}
-                  </span>
-                  <motion.svg
-                    animate={{ rotate: openIndex === index ? 180 : 0 }}
-                    transition={{
-                      duration: 0.3,
-                      ease: [0.25, 0.1, 0.25, 1],
-                    }}
-                    width="20"
-                    height="20"
-                    viewBox="0 0 20 20"
-                    fill="none"
-                    className="text-gold flex-shrink-0"
-                  >
-                    <path
-                      d="M5 7.5L10 12.5L15 7.5"
-                      stroke="currentColor"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </motion.svg>
-                </button>
-
-                <AnimatePresence initial={false}>
-                  {openIndex === index && (
-                    <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: "auto", opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{
-                        height: {
-                          duration: 0.4,
-                          ease: [0.25, 0.1, 0.25, 1],
-                        },
-                        opacity: { duration: 0.3, ease: "easeInOut" },
-                      }}
-                      className="overflow-hidden"
-                    >
-                      <p className="px-6 pb-5 text-cream/60 font-sans text-sm md:text-base leading-relaxed">
-                        {item.answer}
-                      </p>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
-            </ScrollReveal>
-          ))}
-        </div>
+    <section className="grain bg-lvl3"><div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10 py-20 md:py-28 grid md:grid-cols-12 gap-8 md:gap-12">
+      <div className="md:col-span-4">
+        <h2 className="font-serif text-cream text-3xl md:text-4xl leading-tight">
+          Zanim zapytasz
+        </h2>
+        <p className="mt-4 font-sans text-cream/55 max-w-xs">
+          Najczęstsze pytania o ceny, czas i dojazd.
+        </p>
       </div>
-    </section>
+      <div className="md:col-span-8 border-t border-white/10">
+        {faqItems.map((item, index) => {
+          const open = openIndex === index;
+          return (
+            <div key={item.question} className="border-b border-white/10">
+              <button
+                onClick={() => setOpenIndex(open ? null : index)}
+                aria-expanded={open}
+                className="w-full flex items-center justify-between gap-6 py-5 text-left"
+              >
+                <span className="font-sans font-medium text-cream text-base md:text-lg">
+                  {item.question}
+                </span>
+                <span
+                  aria-hidden
+                  className={`text-gold text-2xl leading-none transition-transform duration-200 ${open ? "rotate-45" : ""}`}
+                >
+                  +
+                </span>
+              </button>
+              <div
+                className={`grid transition-[grid-template-rows] duration-200 ease-out ${open ? "grid-rows-[1fr]" : "grid-rows-[0fr]"}`}
+              >
+                <p className="overflow-hidden font-sans text-cream/60 leading-relaxed max-w-2xl">
+                  <span className="block pb-5">{item.answer}</span>
+                </p>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div></section>
   );
 }

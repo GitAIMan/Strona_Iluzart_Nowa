@@ -189,3 +189,60 @@
     height: 32px !important;
   }
 }
+
+/* ===== Strona główna: faktura i światło (2026-11-26) ===== */
+.grain { position: relative; isolation: isolate; }
+.grain::before {
+  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  opacity: 0.07; mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 .55 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+.bg-lvl2 { background-color: #150b0c; }
+.bg-lvl3 { background-color: #1e0d10; }
+.bg-spot { background: radial-gradient(ellipse 60% 70% at 30% 0%, rgba(201,168,76,0.14) 0%, transparent 60%), #0c0808; }
+.bg-velvet {
+  background:
+    linear-gradient(180deg, rgba(12,8,8,0) 0%, rgba(12,8,8,0.8) 100%),
+    repeating-linear-gradient(90deg, #3a0a12 0 18px, #5c1520 18px 30px, #45101a 30px 44px, #2a070d 44px 60px);
+}
+.bg-smoke {
+  background:
+    radial-gradient(ellipse 50% 40% at 30% 60%, rgba(140,29,48,0.33) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 50% at 70% 35%, rgba(201,168,76,0.12) 0%, transparent 70%),
+    #0e0808;
+}
+.bg-stage {
+  background: radial-gradient(ellipse 45% 65% at 50% 8%, rgba(245,230,184,0.25) 0%, rgba(201,168,76,0.1) 35%, transparent 70%), #2a070d;
+}
+.bg-suits {
+  background-color: #0c0808;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='96' height='96'><g fill='%23c9a84c' fill-opacity='.07' font-family='serif' font-size='22'><text x='8' y='30'>♠</text><text x='56' y='30'>♥</text><text x='32' y='78'>♦</text><text x='80' y='78'>♣</text></g></svg>");
+}
+
+/* Karty do gry: wachlarz rozkłada się po najechaniu */
+.card-fan { position: relative; width: 240px; height: 230px; }
+.playing-card {
+  position: absolute; left: 50%; top: 50%; width: 118px; height: 165px; margin: -82px 0 0 -59px;
+  border-radius: 9px; background: #f5f0e8; color: #701526; box-shadow: 0 12px 32px rgba(0,0,0,0.55);
+  display: grid; place-items: center; font-family: var(--font-playfair), Georgia, serif; font-size: 46px;
+  transition: transform 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+.playing-card::before, .playing-card::after { content: attr(data-rank); position: absolute; font-size: 16px; line-height: 1; }
+.playing-card::before { top: 9px; left: 10px; }
+.playing-card::after { bottom: 9px; right: 10px; transform: rotate(180deg); }
+.playing-card.is-back { background: repeating-linear-gradient(45deg, #701526 0 6px, #8c1d30 6px 12px); border: 5px solid #f5f0e8; }
+.playing-card.is-back::before, .playing-card.is-back::after { content: none; }
+.card-fan .pc-1 { transform: rotate(-16deg) translateX(-48px); }
+.card-fan .pc-2 { transform: translateY(-10px); }
+.card-fan .pc-3 { transform: rotate(16deg) translateX(48px); }
+.fan-trigger:hover .pc-1, .fan-trigger:focus-within .pc-1 { transform: rotate(-26deg) translateX(-78px) translateY(6px); }
+.fan-trigger:hover .pc-2, .fan-trigger:focus-within .pc-2 { transform: translateY(-26px); }
+.fan-trigger:hover .pc-3, .fan-trigger:focus-within .pc-3 { transform: rotate(26deg) translateX(78px) translateY(6px); }
+.mini-card {
+  position: relative; width: 60px; height: 84px; border-radius: 6px; background: #f5f0e8; color: #701526;
+  display: grid; place-items: center; font-size: 26px; box-shadow: 0 6px 16px rgba(0,0,0,0.45);
+  font-family: var(--font-playfair), Georgia, serif; transition: transform 0.3s ease;
+}
+.mini-card::before { content: attr(data-rank); position: absolute; top: 5px; left: 7px; font-size: 12px; }
+li:hover > .mini-card { transform: rotate(-6deg) translateY(-4px); }
+@media (prefers-reduced-motion: reduce) { .playing-card, .mini-card { transition: none; } }

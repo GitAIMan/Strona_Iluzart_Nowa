@@ -1,24 +1,21 @@
 import dynamic from "next/dynamic";
 import { prisma } from "@backend/lib/prisma";
 import HeroSection from "@frontend/components/sections/HeroSection";
-import MarqueeSection from "@frontend/components/sections/MarqueeSection";
-import SectionDivider from "@frontend/components/ui/SectionDivider";
+import {
+  ProofStrip,
+  ShowreelSection,
+  AudiencePaths,
+  QuoteSteps,
+} from "@frontend/components/sections/HomeSections";
+import AvailabilitySection from "@frontend/components/sections/AvailabilitySection";
 import SectionSkeleton from "@frontend/components/ui/SectionSkeleton";
 
-const OfferPreview = dynamic(
-  () => import("@frontend/components/sections/OfferPreview"),
-  { loading: () => <SectionSkeleton /> }
-);
 const FAQSection = dynamic(
   () => import("@frontend/components/sections/FAQSection"),
   { loading: () => <SectionSkeleton /> }
 );
 const BlogPreview = dynamic(
   () => import("@frontend/components/sections/BlogPreview"),
-  { loading: () => <SectionSkeleton /> }
-);
-const CTASection = dynamic(
-  () => import("@frontend/components/sections/CTASection"),
   { loading: () => <SectionSkeleton /> }
 );
 
@@ -48,15 +45,13 @@ export default async function HomePage() {
   return (
     <>
       <HeroSection />
-      <MarqueeSection />
-      <SectionDivider variant="glow" />
-      <OfferPreview />
-      <SectionDivider variant="line" />
+      <ProofStrip />
+      <ShowreelSection />
+      <AudiencePaths />
+      <QuoteSteps />
+      <AvailabilitySection />
       <FAQSection />
-      <SectionDivider variant="glow" />
-      <BlogPreview posts={posts} />
-      <SectionDivider variant="glow" />
-      <CTASection />
+      {posts.length > 0 && <BlogPreview posts={posts} />}
     </>
   );
 }

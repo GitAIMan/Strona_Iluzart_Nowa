@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@shared/utils";
-import { NAV_LINKS, CONTACT } from "@shared/constants";
+import { NAV_LINKS } from "@shared/constants";
 import Button from "@frontend/components/ui/Button";
 import MobileMenu from "./MobileMenu";
 
@@ -71,9 +71,9 @@ export default function Navbar() {
             <Button
               variant="primary"
               size="sm"
-              href={CONTACT.whatsapp}
+              href="/#termin"
             >
-              Sprawdź dostępność
+              Sprawdź termin
             </Button>
           </div>
 
