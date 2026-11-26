@@ -1,176 +1,48 @@
 import { generatePageMetadata } from "@shared/metadata";
 import PageTransition from "@frontend/components/layout/PageTransition";
-import SectionHeading from "@frontend/components/ui/SectionHeading";
-import ScrollReveal from "@frontend/components/shared/ScrollReveal";
-import ContactForm from "@frontend/components/contact/ContactForm";
+import ContactLetter from "@frontend/components/contact/ContactLetter";
 import { CONTACT } from "@shared/constants";
 
 export const metadata = generatePageMetadata({
   title: "Kontakt | Zarezerwuj Iluzjonistę Katowice",
   description:
-    "Zarezerwuj pokaz magii w Katowicach i na Śląsku. Zadzwoń, napisz lub wypełnij formularz. Odpowiadam tego samego dnia.",
+    "Zarezerwuj pokaz magii w Katowicach i na Śląsku. Zadzwoń, napisz na WhatsApp albo wypełnij krótki list. Oddzwaniam w ciągu 2 dni.",
 });
 
-const steps = [
-  {
-    number: "1",
-    title: "Napisz lub zadzwoń",
-    description: "WhatsApp, telefon, e-mail lub formularz obok, jak Ci wygodnie.",
-  },
-  {
-    number: "2",
-    title: "Ustalamy szczegóły",
-    description:
-      "Typ pokazu, termin, miejsce, liczba gości. Dopasuję ofertę do Twojego wydarzenia.",
-  },
-  {
-    number: "3",
-    title: "Ty się bawisz, ja czaruję",
-    description:
-      "Resztą zajmę się sam. Ty skupiasz się na gościach i dobrej zabawie.",
-  },
-];
-
-function PhoneIcon() {
-  return (
-    <svg
-      width="20"
-      height="20"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className="text-gold"
-    >
-      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
-    </svg>
-  );
-}
-
-function EmailIcon() {
-  return (
-    <svg
-      width="20"
-      height="20"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className="text-gold"
-    >
-      <rect width="20" height="16" x="2" y="4" rx="2" />
-      <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
-    </svg>
-  );
-}
-
-function LocationIcon() {
-  return (
-    <svg
-      width="20"
-      height="20"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className="text-gold"
-    >
-      <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
-      <circle cx="12" cy="10" r="3" />
-    </svg>
-  );
-}
+const WRAP = "max-w-7xl mx-auto px-5 sm:px-8 lg:px-10";
+const tel = `tel:${CONTACT.phone.replace(/\s/g, "")}`;
 
 export default function KontaktPage() {
   return (
     <PageTransition>
-      {/* Hero section */}
-      <section className="relative pt-32 pb-20 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-wine-dark via-wine-dark/40 to-background" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(112,21,38,0.15)_0%,_transparent_70%)]" />
-        <div className="relative z-10" />
+      {/* 1. Tytuł + list-zaproszenie (po wysłaniu zamienia się w rozmowę) */}
+      <section className="grain bg-suits">
+        <div className={`${WRAP} pt-32 pb-20 md:pb-24`}>
+          <p className="font-sans text-xs uppercase tracking-[0.2em] text-gold">Kontakt</p>
+          <h1 className="mt-4 font-serif text-cream text-5xl sm:text-6xl lg:text-[4.75rem] leading-[1.02] max-w-3xl">
+            Zaproś mnie na <em className="text-gold">swoje wydarzenie</em>
+          </h1>
+          <p className="mt-5 font-sans text-cream/60 text-lg max-w-xl">
+            Uzupełnij luki w liście. Oddzwonię w ciągu 2 dni i powiem, czy termin jest wolny.
+          </p>
+
+          <div className="mt-14">
+            <ContactLetter />
+          </div>
+        </div>
       </section>
 
-      {/* Content */}
-      <section className="pb-24">
-        <div className="max-w-6xl mx-auto px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
-            {/* Left column */}
-            <ScrollReveal direction="left">
-              <div className="space-y-10">
-                <SectionHeading
-                  title="Zarezerwuj swój termin"
-                  subtitle="Kontakt"
-                  align="left"
-                />
-
-                <div>
-                  <h3 className="text-xl font-serif text-cream mb-8">
-                    Jak zamówić pokaz lub warsztaty?
-                  </h3>
-
-                  <div className="space-y-8">
-                    {steps.map((step) => (
-                      <div key={step.number} className="flex gap-5">
-                        <div className="flex-shrink-0 w-10 h-10 rounded-full bg-gold-gradient flex items-center justify-center">
-                          <span className="text-background font-bold font-sans text-lg">
-                            {step.number}
-                          </span>
-                        </div>
-                        <div>
-                          <h4 className="text-lg font-serif text-cream mb-1">
-                            {step.title}
-                          </h4>
-                          <p className="text-cream/60 font-sans">
-                            {step.description}
-                          </p>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Contact info */}
-                <div className="space-y-4 pt-4">
-                  <div className="flex items-center gap-4">
-                    <PhoneIcon />
-                    <a
-                      href={`tel:${CONTACT.phone.replace(/\s/g, "")}`}
-                      className="text-cream/80 hover:text-gold transition-colors font-sans"
-                    >
-                      {CONTACT.phone}
-                    </a>
-                  </div>
-                  <div className="flex items-center gap-4">
-                    <EmailIcon />
-                    <a
-                      href={`mailto:${CONTACT.email}`}
-                      className="text-cream/80 hover:text-gold transition-colors font-sans"
-                    >
-                      {CONTACT.email}
-                    </a>
-                  </div>
-                  <div className="flex items-center gap-4">
-                    <LocationIcon />
-                    <span className="text-cream/80 font-sans">
-                      {CONTACT.address}
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </ScrollReveal>
-
-            {/* Right column */}
-            <ScrollReveal direction="right" delay={0.2}>
-              <ContactForm />
-            </ScrollReveal>
-          </div>
+      {/* 2. Kurtyna z telefonem */}
+      <section className="grain bg-velvet">
+        <div className={`${WRAP} py-20 text-center`}>
+          <h2 className="font-serif text-cream text-4xl md:text-5xl leading-tight">Soboty w sezonie znikają szybko</h2>
+          <p className="mt-3 mb-7 font-sans text-cream/65">Najszybciej sprawdzisz termin przez telefon.</p>
+          <a
+            href={tel}
+            className="inline-flex items-center justify-center rounded-md bg-gold px-7 py-4 font-sans font-semibold text-background transition-colors hover:bg-gold-light"
+          >
+            Zadzwoń: 882 011 161
+          </a>
         </div>
       </section>
     </PageTransition>
