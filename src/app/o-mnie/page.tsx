@@ -22,10 +22,10 @@ const venues = [
 ];
 
 const facts = [
-  { rank: "A", suit: "♠", black: true, label: "Na scenie", text: "od 2016 roku" },
-  { rank: "K", suit: "♥", black: false, label: "Początek", text: "moneta za uchem w telewizji" },
-  { rank: "Q", suit: "♦", black: false, label: "Najtrudniejsza publiczność", text: "dzieci. I najlepsza." },
-  { rank: "J", suit: "♣", black: true, label: "Mój styl", text: "magia i standup w jednym" },
+  { rank: "A", suit: "♠", black: true, q: "Od kiedy na scenie?", a: "Od 2016 roku" },
+  { rank: "K", suit: "♥", black: false, q: "Jak to się zaczęło?", a: "Moneta za uchem w telewizji" },
+  { rank: "Q", suit: "♦", black: false, q: "Najtrudniejsza publiczność?", a: "Dzieci. I najlepsza." },
+  { rank: "J", suit: "♣", black: true, q: "Jaki styl?", a: "Magia i standup w jednym" },
 ];
 
 const flow = [
@@ -40,15 +40,6 @@ const never = [
   ["królika z kapelusza", "Wolę rzeczy, które dzieją się centymetry od Twoich oczu."],
 ];
 
-function ChapterNum({ n }: { n: number }) {
-  return (
-    <div className="md:col-span-3 font-serif text-gold text-sm tracking-wide">
-      Rozdział
-      <span className="block text-6xl md:text-7xl leading-[0.9] text-gold/35 font-medium">{n}</span>
-    </div>
-  );
-}
-
 export default function OmniePage() {
   return (
     <PageTransition>
@@ -56,9 +47,6 @@ export default function OmniePage() {
       <section className="grain bg-spot">
         <div className={`${WRAP} pt-32 pb-16 md:pb-20 grid md:grid-cols-12 gap-10 items-end`}>
           <div className="md:col-span-7">
-            <p className="font-sans text-xs uppercase tracking-[0.2em] text-gold mb-4">
-              O mnie · iluzjonista Katowice
-            </p>
             <h1 className="font-serif text-cream text-5xl sm:text-6xl lg:text-8xl leading-[0.98] mb-6">
               Grzegorz Pawleta
               <span className="block text-gold italic font-medium">od 2016 na scenie</span>
@@ -81,9 +69,8 @@ export default function OmniePage() {
 
       {/* 2. Rozdział 1 */}
       <section className="grain bg-lvl2">
-        <div className={`${WRAP} py-20 md:py-24 grid md:grid-cols-12 gap-8 about-chap`}>
-          <ChapterNum n={1} />
-          <div className="md:col-span-9">
+        <div className={`${WRAP} py-20 md:py-24 about-chap grid md:grid-cols-12 gap-10 items-center`}>
+          <div className="md:col-span-8">
             <h2 className="font-serif text-cream text-3xl md:text-5xl leading-[1.1] mb-6">Moneta za uchem</h2>
             <p className="about-dropcap font-sans text-cream/80 text-lg leading-relaxed max-w-2xl">
               Jako dziecko zobaczyłem w telewizji iluzjonistę, który sprawił, że
@@ -92,14 +79,18 @@ export default function OmniePage() {
               działa inaczej, niż mi się wydawało. Od tamtej chwili chciałem
               robić to samo dla innych.
             </p>
-            <span className="about-coin mt-6" aria-hidden>5</span>
+          </div>
+          <div className="md:col-span-4 flex md:justify-center">
+            <span className="inline-block origin-left md:origin-center scale-100 md:scale-[2.4]" aria-hidden>
+              <span className="about-coin">5</span>
+            </span>
           </div>
         </div>
       </section>
 
       {/* Rozdział 2: kurtyna */}
       <section className="grain bg-velvet">
-        <div className={`${WRAP} py-20 md:py-28`}>
+        <div className={`${WRAP} py-20 md:py-28 flex flex-col md:items-end md:text-right`}>
           <div className="flex items-center gap-4 text-gold mb-6" aria-hidden>
             <span className="h-px w-16 bg-gradient-to-r from-transparent to-gold" />
             ✦
@@ -110,7 +101,7 @@ export default function OmniePage() {
             <em className="text-gold">sekundę po tym</em>, jak coś znika.
           </p>
           <p className="mt-6 font-sans text-cream/80 text-base md:text-lg leading-relaxed max-w-2xl">
-            Rozdział 2. Po ponad dekadzie na scenie wiem, że iluzja to nie tylko
+            Po ponad dekadzie na scenie wiem, że iluzja to nie tylko
             sztuczki. To opowieść, tempo, kontakt z ludźmi. Kiedy widzowie
             patrzą na siebie nawzajem i próbują zrozumieć, co się właśnie stało.
             Dla tego jednego spojrzenia warto wychodzić na scenę.
@@ -120,9 +111,8 @@ export default function OmniePage() {
 
       {/* Rozdział 3 */}
       <section className="grain bg-lvl3">
-        <div className={`${WRAP} py-20 md:py-24 grid md:grid-cols-12 gap-8`}>
-          <ChapterNum n={3} />
-          <div className="md:col-span-9">
+        <div className={`${WRAP} py-20 md:py-24`}>
+          <div>
             <h2 className="font-serif text-cream text-3xl md:text-5xl leading-[1.1] mb-6">
               Najpierw śmiech, potem niedowierzanie
             </h2>
@@ -147,11 +137,10 @@ export default function OmniePage() {
 
       {/* Rozdział 4 */}
       <section className="grain bg-lvl2">
-        <div className={`${WRAP} py-20 md:py-24 grid md:grid-cols-12 gap-8`}>
-          <ChapterNum n={4} />
-          <div className="md:col-span-9">
+        <div className={`${WRAP} py-20 md:py-24`}>
+          <div className="md:ml-auto md:max-w-3xl md:text-right">
             <h2 className="font-serif text-cream text-3xl md:text-5xl leading-[1.1] mb-6">Każdy pokaz osobno</h2>
-            <p className="font-sans text-cream/80 text-lg leading-relaxed max-w-2xl">
+            <p className="font-sans text-cream/80 text-lg leading-relaxed max-w-2xl md:ml-auto">
               Inaczej pracuję na weselu, inaczej na evencie firmowym, a jeszcze
               inaczej przy kameralnych urodzinach. Zawsze zależy mi na jednym:
               żeby po pokazie ktoś podszedł i powiedział: &bdquo;to było
@@ -163,7 +152,7 @@ export default function OmniePage() {
                 ["Firma", "pod branżę, logo, przekaz"],
                 ["Urodziny", "dzieci na scenie, jubilat w roli głównej"],
               ].map(([t, d]) => (
-                <div key={t} className="py-4 pr-5 border-b border-white/10">
+                <div key={t} className="py-4 pr-5 md:pr-0 md:pl-5 border-b border-white/10">
                   <b className="block font-serif text-cream text-xl mb-1">{t}</b>
                   <span className="font-sans text-sm text-cream/55">{d}</span>
                 </div>
@@ -175,7 +164,7 @@ export default function OmniePage() {
 
       {/* 3. Afisz */}
       <section className="grid md:grid-cols-2 min-h-[440px]">
-        <div className="relative min-h-[280px] bg-surface">
+        <div className="relative min-h-[280px] bg-surface md:order-2">
           <Image
             src={`${R2}/warsztaty-ataa.jpeg`}
             alt="Pokaz magii dla dzieci na scenie, chłopiec pomaga w sztuczce"
@@ -186,8 +175,7 @@ export default function OmniePage() {
           />
         </div>
         <div className="grain bg-lvl3 flex flex-col justify-center px-5 sm:px-8 lg:px-14 py-14">
-          <p className="font-sans text-xs uppercase tracking-[0.2em] text-gold">Gdzie mnie widzieliście</p>
-          <h2 className="font-serif text-cream text-3xl md:text-4xl mt-3 mb-6">Afisz</h2>
+          <h2 className="font-serif text-cream text-3xl md:text-4xl mb-6">Afisz</h2>
           <ul className="border-t border-white/10">
             {venues.map(([n, d]) => (
               <li key={n} className="flex justify-between gap-4 py-3.5 border-b border-white/10">
@@ -202,18 +190,18 @@ export default function OmniePage() {
       {/* 4. Talia faktów */}
       <section className="bg-suits">
         <div className={`${WRAP} py-20 md:py-24`}>
-          <p className="font-sans text-xs uppercase tracking-[0.2em] text-gold">Talia faktów</p>
-          <h2 className="font-serif text-cream text-3xl md:text-4xl mt-3 mb-10">Pomyśl o karcie i najedź</h2>
+          <h2 className="font-serif text-cream text-3xl md:text-4xl mb-10">Pomyśl o karcie i najedź</h2>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 md:gap-6 max-w-4xl">
             {facts.map((f) => (
-              <div key={f.rank} className="fact-card" tabIndex={0} aria-label={`${f.label}: ${f.text}`}>
+              <div key={f.rank} className="fact-card" tabIndex={0} aria-label={`${f.q} ${f.a}`}>
                 <div className="fact-in">
                   <div className={`fact-face fact-front ${f.black ? "is-black" : ""}`} data-rank={f.rank} aria-hidden>
                     {f.suit}
                   </div>
                   <div className="fact-face fact-back">
-                    <small className="font-sans text-[10.5px] uppercase tracking-[0.14em] text-gold-light">{f.label}</small>
-                    <b className="font-serif font-medium text-cream text-base leading-tight">{f.text}</b>
+                    <span className="font-sans text-xs md:text-sm italic text-gold-light leading-snug">{f.q}</span>
+                    <span className="mx-auto my-2 h-px w-10 bg-gold/60" aria-hidden />
+                    <b className="font-serif font-semibold text-cream text-lg md:text-xl leading-tight">{f.a}</b>
                   </div>
                 </div>
               </div>
@@ -225,15 +213,17 @@ export default function OmniePage() {
       {/* 5. Czego u mnie nie będzie */}
       <section className="grain bg-lvl2">
         <div className={`${WRAP} py-20 md:py-28 text-center`}>
-          <p className="font-sans text-xs uppercase tracking-[0.2em] text-gold">Krótko i szczerze</p>
-          <h2 className="font-serif text-cream text-4xl md:text-5xl mt-3 mb-12">Czego u&nbsp;mnie nie będzie:</h2>
+          <h2 className="font-serif text-cream text-4xl md:text-5xl mb-12">Czego u&nbsp;mnie nie będzie:</h2>
           <div className="grid md:grid-cols-3 max-w-5xl mx-auto md:divide-x divide-gold/25">
             {never.map(([t, d], i) => (
-              <div key={t} className={`px-6 py-6 md:py-2 ${i > 0 ? "border-t md:border-t-0 border-gold/25" : ""}`}>
-                <s className="flex items-center justify-center md:min-h-[2.4em] font-serif italic text-cream/85 text-2xl md:text-3xl leading-tight decoration-wine-light decoration-[3px] mb-4">
+              <div key={t} className={`px-6 py-8 md:py-2 ${i > 0 ? "border-t md:border-t-0 border-gold/25" : ""}`}>
+                <span className="mx-auto mb-4 grid h-10 w-10 place-items-center rounded-full border border-wine-light text-wine-light text-lg" aria-hidden>✕</span>
+                <s className="flex items-center justify-center md:min-h-[2.4em] font-serif italic text-cream/85 text-2xl md:text-3xl leading-tight decoration-wine-light decoration-[3px]">
                   {t}
                 </s>
-                <p className="font-sans text-cream/60">{d}</p>
+                <span className="mx-auto my-5 block h-px w-12 bg-gold/50" aria-hidden />
+                <p className="font-sans text-xs uppercase tracking-[0.18em] text-gold mb-2">Zamiast tego</p>
+                <p className="font-sans text-cream/80 text-base">{d}</p>
               </div>
             ))}
           </div>
@@ -242,12 +232,12 @@ export default function OmniePage() {
 
       {/* 6. Na koniec */}
       <section className="grain bg-spot">
-        <div className={`${WRAP} py-20 md:py-24 flex flex-wrap items-end justify-between gap-8`}>
-          <h2 className="font-serif text-cream text-4xl md:text-6xl leading-[1.05] max-w-xl">
+        <div className={`${WRAP} py-20 md:py-28 flex flex-col items-center text-center gap-8`}>
+          <h2 className="font-serif text-cream text-4xl md:text-6xl leading-[1.05] max-w-2xl">
             Chcesz zobaczyć to na żywo?
           </h2>
-          <div>
-            <a href="tel:+48882011161" className="block font-serif text-cream text-3xl md:text-4xl mb-4 hover:text-gold transition-colors">
+          <div className="flex flex-col items-center gap-4">
+            <a href="tel:+48882011161" className="block font-serif text-cream text-3xl md:text-4xl hover:text-gold transition-colors">
               882 011 161
             </a>
             <Link
