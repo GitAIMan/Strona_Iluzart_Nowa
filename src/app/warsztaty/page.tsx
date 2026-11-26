@@ -1,153 +1,152 @@
 import Image from "next/image";
+import Link from "next/link";
 import { generatePageMetadata } from "@shared/metadata";
 import PageTransition from "@frontend/components/layout/PageTransition";
-import SectionHeading from "@frontend/components/ui/SectionHeading";
-import Button from "@frontend/components/ui/Button";
-import ScrollReveal from "@frontend/components/shared/ScrollReveal";
+import WorkshopDial from "@frontend/components/workshop/WorkshopDial";
+import { CONTACT } from "@shared/constants";
 
 export const metadata = generatePageMetadata({
   title: "Warsztaty Magii dla Dzieci Katowice",
   description:
-    "Warsztaty iluzji dla dzieci w Katowicach i na Śląsku. 2 godziny zabawy, nauki sztuczek i efektu WOW. Prowadzi iluzjonista znany ze Strefy Bajtla i Nibylandii.",
+    "Warsztaty iluzji dla dzieci w Katowicach i na Śląsku. Około 2 godzin nauki sztuczek krok po kroku, na koniec pokaz dla rodziców. Przedszkola, szkoły, domy kultury, urodziny.",
 });
 
-const benefits = [
-  "2 godziny, bo dobra magia potrzebuje czasu",
-  "Każde dziecko wychodzi z własnymi sztuczkami",
-  "Sprawdzone na Strefie Bajtla i w Nibylandii",
-  "Śmiech gwarantowany, nauka przez zabawę",
+const WRAP = "max-w-7xl mx-auto px-5 sm:px-8 lg:px-10";
+const R2 = "https://pub-461768aab8564907a3f677968018aa28.r2.dev";
+const TEL = CONTACT.phone.replace(/\s/g, "");
+const TEL_SHORT = CONTACT.phone.replace("+48 ", "");
+
+const stairs = [
+  { n: "I", title: "Uczeń", text: "Ogląda kilka sztuczek z bliska i próbuje zgadnąć, jak to działa.", items: ["Pierwszy trik z kartą"] },
+  { n: "II", title: "Asystent", text: "Ćwiczy w parach, pomaga mi na scenie, poprawia ruchy rąk.", items: ["Karty i monety", "Motoryka mała"] },
+  { n: "III", title: "Magik", text: "Pokazuje swój repertuar rodzicom. Pierwsze brawa, własne.", items: ["Gotowy pokaz", "Pewność siebie"] },
 ];
 
-function GoldCheckmark() {
+const skills = [
+  ["♠", "Sztuczki z kartami", "Od najprostszych trików po takie, które zaskoczą dorosłych."],
+  ["♦", "Monety i codzienne przedmioty", "Magia z rzeczy, które ma w kieszeni."],
+  ["♣", "Sprawne ręce", "Ćwiczy motorykę małą, nawet o tym nie wiedząc."],
+  ["♥", "Występ przed ludźmi", "Na koniec pokazuje sztuczki rodzicom. Pewność siebie rośnie."],
+];
+
+function AskLink() {
   return (
-    <svg
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      className="text-gold flex-shrink-0 mt-0.5"
+    <Link
+      href="/#termin"
+      className="inline-flex items-center justify-center rounded-md bg-gold px-6 py-3 font-sans font-semibold text-background transition-colors hover:bg-gold-light"
     >
-      <path
-        d="M20 6L9 17L4 12"
-        stroke="currentColor"
-        strokeWidth="2.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
+      Zapytaj o termin
+    </Link>
   );
 }
 
 export default function WarsztatyPage() {
   return (
     <PageTransition>
-      {/* Hero section */}
-      <section className="relative pt-32 pb-20 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-wine-dark via-wine-dark/40 to-background" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(112,21,38,0.15)_0%,_transparent_70%)]" />
-        <div className="relative z-10 max-w-4xl mx-auto px-6">
-          <SectionHeading
-            title="Warsztaty Magii"
-            subtitle="Warsztaty magii dla dzieci w Katowicach"
+      {/* 1. Wstęp + zegar */}
+      <section className="grain bg-spot overflow-hidden">
+        <div className={`${WRAP} pt-32 pb-20 md:pb-28`}>
+          <WorkshopDial
+            intro={
+              <>
+                <p className="font-sans text-xs uppercase tracking-[0.2em] text-gold mb-4">
+                  Warsztaty magii dla dzieci
+                </p>
+                <h1 className="font-serif text-cream text-5xl sm:text-6xl lg:text-[5.25rem] leading-[1] max-w-[13ch]">
+                  Dwie godziny, <em className="text-gold">które zostają</em> na lata.
+                </h1>
+                <p className="mt-6 font-sans text-cream/65 text-lg leading-relaxed max-w-xl">
+                  Dzieci uczą się sztuczek krok po kroku, od prostych trików z kartami
+                  po efekty, które robią wrażenie na rodzicach. Na koniec mają gotowy pokaz.
+                </p>
+              </>
+            }
+            actions={
+              <div className="mt-8 flex flex-wrap items-center gap-x-7 gap-y-4">
+                <AskLink />
+                <a href={`tel:${TEL}`} className="font-sans text-cream border-b border-cream/40 pb-0.5 hover:border-gold transition-colors">
+                  Zadzwoń: {TEL_SHORT}
+                </a>
+              </div>
+            }
           />
         </div>
       </section>
 
-      {/* Intro + benefits */}
-      <section className="pb-16">
-        <div className="max-w-4xl mx-auto px-6">
-          <ScrollReveal>
-            <p className="text-2xl md:text-3xl font-serif text-cream text-center mb-12">
-              Twoje dziecko chce zostać magikiem? Daj mu 2 godziny i zobaczysz.
-            </p>
-          </ScrollReveal>
+      {/* 2. Trzy stopnie */}
+      <section className="grain bg-lvl2">
+        <div className={`${WRAP} py-20 md:py-28`}>
+          <h2 className="font-serif text-cream text-3xl md:text-5xl leading-[1.1] mb-20">
+            Trzy stopnie w dwie godziny
+          </h2>
+          <ol className="grid md:grid-cols-3 gap-16 md:gap-6 items-end">
+            {stairs.map((s, i) => (
+              <li key={s.n} className={`ws-stair ws-stair-${i + 1}`}>
+                <span className="ws-seal" aria-hidden>{s.n}</span>
+                <h3 className="font-serif text-cream text-[1.75rem] mb-1.5">{s.title}</h3>
+                <p className="font-sans text-cream/75 text-[15px]">{s.text}</p>
+                <ul className="mt-3.5 grid gap-1 font-sans text-sm text-cream/60">
+                  {s.items.map((it) => (
+                    <li key={it}><span className="text-gold">✦ </span>{it}</li>
+                  ))}
+                </ul>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-            <ScrollReveal delay={0.1}>
-              <ul className="space-y-6">
-                {benefits.map((benefit) => (
-                  <li key={benefit} className="flex items-start gap-4">
-                    <GoldCheckmark />
-                    <span className="text-lg text-cream/80 font-sans">
-                      {benefit}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            </ScrollReveal>
-
-            <ScrollReveal delay={0.2}>
-              <div className="relative overflow-hidden rounded-lg" style={{ aspectRatio: "4/3" }}>
-                <Image
-                  src="https://pub-461768aab8564907a3f677968018aa28.r2.dev/warsztaty-ataa.jpeg"
-                  alt="Warsztaty magii dla dzieci Katowice"
-                  fill
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                  quality={90}
-                  loading="lazy"
-                  className="object-cover"
-                />
-              </div>
-            </ScrollReveal>
+      {/* 3. Przed i po */}
+      <section className="relative grid md:grid-cols-2" aria-label="Przed i po warsztacie">
+        <div className="ws-half ws-before relative min-h-[340px] md:min-h-[460px] flex items-end p-7">
+          <Image src={`${R2}/warsztaty-1-uyt.jpeg`} alt="Dzieci w klasie oglądają pokaz magii" fill sizes="(max-width: 768px) 100vw, 50vw" quality={80} className="object-cover" />
+          <div className="relative z-[1]">
+            <small className="font-sans text-xs uppercase tracking-[0.2em] text-gold">Na początku</small>
+            <b className="block font-serif font-normal text-cream text-3xl md:text-4xl">Patrzy i nie wierzy</b>
           </div>
         </div>
+        <div className="ws-half relative min-h-[340px] md:min-h-[460px] flex items-end p-7">
+          <Image src={`${R2}/warsztaty-bara.jpeg`} alt="Chłopiec uczy się sztuczki z piłeczką na warsztatach" fill sizes="(max-width: 768px) 100vw, 50vw" quality={85} className="object-cover" />
+          <div className="relative z-[1]">
+            <small className="font-sans text-xs uppercase tracking-[0.2em] text-gold">Po 2 godzinach</small>
+            <b className="block font-serif font-normal text-cream text-3xl md:text-4xl">Robi to sam</b>
+          </div>
+        </div>
+        <span className="ws-arrow" aria-hidden>→</span>
       </section>
 
-      {/* Why me section */}
-      <section className="py-16">
-        <div className="max-w-4xl mx-auto px-6">
-          <ScrollReveal>
-            <div className="glass rounded-2xl p-8 md:p-12 space-y-6">
-              <h2 className="text-2xl md:text-3xl font-serif text-cream">
-                Dlaczego akurat ja?
-              </h2>
-              <p className="text-lg text-cream/80 leading-relaxed font-sans">
-                Dekada doświadczenia z dziećmi, od Strefy Bajtla i Nibylandii
-                po setki prywatnych imprez w Katowicach. Wiem, co bawi
-                4-latka, a co robi wrażenie na 12-latku. Uczyłem się magii
-                latami metodą prób i błędów. Dziś pokażę Twojemu dziecku
-                skróty, które sam chciałbym znać na początku.
-              </p>
-              <p className="text-lg text-cream/80 leading-relaxed font-sans">
-                To nie tylko nauka trików. To pewność siebie, zaskakiwanie
-                kolegów w szkole i umiejętność, która zostaje na lata. A przy
-                okazji świetna zabawa.
-              </p>
-            </div>
-          </ScrollReveal>
+      {/* 4. Czego się nauczy */}
+      <section className="grain bg-suits">
+        <div className={`${WRAP} py-20 md:py-28 grid md:grid-cols-12 gap-10`}>
+          <h2 className="md:col-span-4 font-serif text-cream text-3xl md:text-5xl leading-[1.1]">
+            Czego nauczy się Twoje dziecko
+          </h2>
+          <ul className="md:col-span-8 grid sm:grid-cols-2 gap-x-10">
+            {skills.map(([suit, t, d]) => (
+              <li key={t} className="grid grid-cols-[40px_minmax(0,1fr)] gap-3 border-t border-white/10 py-5">
+                <span className="text-gold text-2xl text-center" aria-hidden>{suit}</span>
+                <div>
+                  <b className="block font-sans font-semibold text-cream">{t}</b>
+                  <span className="font-sans text-sm text-cream/60">{d}</span>
+                </div>
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 
-      {/* Second image */}
-      <section className="pb-16">
-        <div className="max-w-4xl mx-auto px-6">
-          <ScrollReveal>
-            <div className="relative overflow-hidden rounded-lg" style={{ aspectRatio: "16/9" }}>
-              <Image
-                src="https://pub-461768aab8564907a3f677968018aa28.r2.dev/warsztaty-bara.jpeg"
-                alt="Warsztaty magii, indywidualna nauka"
-                fill
-                sizes="(max-width: 768px) 100vw, 800px"
-                quality={90}
-                loading="lazy"
-                className="object-cover"
-              />
-            </div>
-          </ScrollReveal>
-        </div>
-      </section>
-
-      {/* CTA */}
-      <section className="pb-24">
-        <div className="max-w-4xl mx-auto px-6 text-center">
-          <ScrollReveal>
-            <p className="text-xl md:text-2xl font-serif text-cream mb-8">
-              Chcesz zorganizować warsztaty? Napisz, jaki termin Ci pasuje.
-            </p>
-            <Button href="https://wa.me/48882011161" size="lg">
-              Zarezerwuj warsztaty
-            </Button>
-          </ScrollReveal>
+      {/* 5. Rezerwacja */}
+      <section className="grain bg-velvet">
+        <div className={`${WRAP} py-20 md:py-24 flex flex-wrap items-end justify-between gap-8`}>
+          <h2 className="font-serif text-cream text-3xl md:text-5xl leading-[1.12] max-w-[18ch]">
+            Twoje dziecko chce zostać magikiem? Daj mu 2 godziny.
+          </h2>
+          <div className="flex flex-col gap-4 md:items-end">
+            <a href={`tel:${TEL}`} className="font-serif text-cream text-4xl md:text-5xl hover:text-gold transition-colors">
+              {TEL_SHORT}
+            </a>
+            <AskLink />
+          </div>
         </div>
       </section>
     </PageTransition>

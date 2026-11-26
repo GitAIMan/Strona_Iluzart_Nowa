@@ -332,3 +332,41 @@ li:hover > .show-act { color: rgba(201,168,76,0.18); }
 .show-row:hover::before, .show-row:focus-visible::before { transform: scaleY(1); }
 @media (max-width: 767px) { .show-suit { left: auto; right: -8px; } }
 @media (prefers-reduced-motion: reduce) { .show-frame::before, .show-act, .show-row::before { transition: none; } }
+
+/* ---------- Warsztaty (od 2026-11-26) ---------- */
+.ws-dial { position: relative; width: min(100%, 500px); aspect-ratio: 1; margin-inline: auto; }
+.ws-dial svg { width: 100%; height: 100%; overflow: visible; }
+.ws-seg { cursor: pointer; transform-origin: 260px 260px; transition: transform .3s ease; outline: none; }
+.ws-seg path { stroke: #0c0808; stroke-width: 4; transition: opacity .3s ease; }
+.ws-seg:not(.is-on) path { opacity: .55; }
+.ws-seg:hover, .ws-seg.is-on, .ws-seg:focus-visible { transform: scale(1.03); }
+.ws-seg:focus-visible path { stroke: #c9a84c; }
+.ws-seg text { font-family: var(--font-inter), system-ui, sans-serif; font-size: 13px; pointer-events: none; }
+.ws-center {
+  position: absolute; inset: 28%; border-radius: 50%; display: grid; place-items: center; text-align: center;
+  background: radial-gradient(circle at 40% 35%, #24100f, #0c0808); border: 1px solid rgba(201,168,76,0.4);
+}
+.ws-center b { display: block; font-family: var(--font-playfair), Georgia, serif; font-weight: 400; font-size: clamp(40px, 6vw, 64px); line-height: 1; color: #c9a84c; font-variant-numeric: tabular-nums; }
+.ws-center span { display: block; margin-top: 6px; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: rgba(245,240,232,0.6); }
+.ws-hand { position: absolute; left: 50%; top: 50%; width: 2px; height: 46%; margin-left: -1px; background: linear-gradient(#c9a84c, transparent); transform-origin: top center; transition: transform .6s cubic-bezier(.2,.7,.2,1); pointer-events: none; }
+
+.ws-stair { position: relative; background: #1e0d10; border-top: 2px solid #c9a84c; padding: 28px 26px; }
+.ws-stair-1 { min-height: 240px; } .ws-stair-2 { min-height: 300px; }
+.ws-stair-3 { min-height: 360px; background: linear-gradient(180deg, #701526, #3a0a12); }
+@media (max-width: 767px) { .ws-stair { min-height: 0 !important; } }
+.ws-seal {
+  display: grid; place-items: center; width: 62px; height: 62px; border-radius: 50%; margin: -60px 0 18px;
+  background: radial-gradient(circle at 35% 30%, #a32a3e, #5c1520 70%); color: #d4b96a;
+  font-family: var(--font-playfair), Georgia, serif; font-size: 24px;
+  box-shadow: 0 0 0 4px rgba(92,21,32,0.4), 0 8px 18px rgba(0,0,0,0.5);
+}
+.ws-stair-3 .ws-seal { background: radial-gradient(circle at 35% 30%, #f0d998, #c9a84c 50%, #8a6d27); color: #5c4512; }
+
+.ws-half::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 30%, rgba(12,8,8,0.92)); }
+.ws-before img { filter: grayscale(.85) brightness(.8); }
+.ws-arrow {
+  position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); z-index: 2; width: 74px; height: 74px; border-radius: 50%;
+  display: grid; place-items: center; background: #c9a84c; color: #0c0808; font-size: 28px; box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+}
+@media (max-width: 767px) { .ws-arrow { transform: translate(-50%, -50%) rotate(90deg); } }
+@media (prefers-reduced-motion: reduce) { .ws-seg, .ws-seg path, .ws-hand { transition: none; } }
